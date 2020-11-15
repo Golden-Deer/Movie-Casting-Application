@@ -3,6 +3,8 @@ import {AuthContext} from "../auth/Auth";
 import { Redirect } from "react-router-dom";
 import '../App.css';
 import db , { provider2 } from "../base"
+import logo from '../images/logo.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = ({history}) => {
 
@@ -42,23 +44,22 @@ const Login = ({history}) => {
     }
 
     return(
-        <div className="centered">
-            <div className="row">
-            <h1>Log In</h1>
-            <form onSubmit={handleLogin} >
-                <label>
-                    Email
-                    <input name="email" type="email" placeholder="Email" />
-                </label>
-                <label>
-                    Password
-                    <input name="password" type="password" placeholder="Password" />
-                </label>
-                <button type="submit">Log In</button>
-            </form>
-            <button onClick={handleLoginWithGoogle}>Log In with Google</button>
-            <button onClick={redirectSignUp}>Sign Up</button>
-            </div>
+        <div className='center'>
+            <form onSubmit={handleLogin} id='login_form'></form>
+            <table class='center'>
+                <tr class='center'>
+                        <img class='center' src={logo} width="300" height="300" />
+                </tr>
+                <tr class='center'>
+                    <td><input style={{marginRight: 15 + 'px'}} name="email" type="email" placeholder="Email" form='login_form'/></td>
+                    <td><input style={{marginLeft: 15 + 'px'}} name="password" type="password" placeholder="Password" form='login_form'/></td>
+                </tr>
+                <tr class='center' style={{marginTop: 25 + 'px'}}><button class="btn btn-primary" variant="primary" form='login_form'>Log In</button></tr>
+                <tr class='center' style={{marginTop: 60 + 'px'}}>
+                    <label >Don't have an account?&nbsp;</label>
+                    <button class='button' onClick={redirectSignUp}> Sign up here.</button>
+                </tr>
+            </table>
         </div>
     );
 };

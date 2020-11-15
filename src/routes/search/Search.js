@@ -1,5 +1,6 @@
 import db from "../../base";
-import "../../App.css";
+import "../../App.js";
+import React from 'react';
 import { useHistory } from "react-router-dom";
 
 const Search = () => {

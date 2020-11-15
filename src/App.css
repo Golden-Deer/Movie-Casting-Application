@@ -1,0 +1,27 @@
+  .center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+  div.center{
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  table.center{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+.button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color: #1453aa;
+  cursor: pointer;
+}
