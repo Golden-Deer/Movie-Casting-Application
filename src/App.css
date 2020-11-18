@@ -1,22 +1,22 @@
-  .center{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-  }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
 
-  div.center{
-    height: 85vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+div.center {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  table.center{
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
+table.center{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
 .button {
   background: none!important;
@@ -24,4 +24,29 @@
   padding: 0!important;
   color: #1453aa;
   cursor: pointer;
+}
+
+/* Project Page */
+#my-projects {
+  cursor: pointer;
+  float:left;
+  padding:1% 1% 1% 1% ;
+  margin: 0% 0% 2% 0%;
+}
+
+#your-account {
+  background-color: #ffcb00;
+  float:right;
+  margin: 1% 2% 0% 0%;
+  padding:0.1% 3% 0.1% 3% ;
+  textAlign:right;
+}
+
+.project-attributes {
+  clear: both;
+  cursor: default;
+  font-size: 150%;
+  margin: 3% 0% 3% 3%;
+  text-decoration: underline;
+  text-underline-offset: 10px;
 }
