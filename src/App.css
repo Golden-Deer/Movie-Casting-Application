@@ -26,6 +26,21 @@ table.center{
   cursor: pointer;
 }
 
+/* Navbar */
+.navbar {
+  display: block;
+  text-align: center;
+}
+
+.navbar ul {
+  text-align: center;
+  justify-content: center;
+}
+
+.navbar h1 {
+  margin-bottom: 1rem;
+}
+
 /* Project Page */
 #my-projects {
   cursor: pointer;
@@ -50,3 +65,4 @@ table.center{
   text-decoration: underline;
   text-underline-offset: 10px;
 }
+
