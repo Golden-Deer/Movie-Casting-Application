@@ -50,11 +50,18 @@ table.center{
 }
 
 #your-account {
-  background-color: #ffcb00;
+  background-color: lightgray;
   float:right;
   margin: 1% 2% 0% 0%;
-  padding:0.1% 3% 0.1% 3% ;
-  textAlign:right;
+  padding:0.4% 3% 0.4% 3%;
+  border: none;
+  opacity: 0.85;
+  border-radius: 8px;
+  color: white;
+}
+
+button#your-account:hover {
+  opacity: 1
 }
 
 .project-attributes {
@@ -65,4 +72,42 @@ table.center{
   text-decoration: underline;
   text-underline-offset: 10px;
 }
+
+/* Home Page */
+.jumbotron {
+  background-image: url('./images/HomePic.png');
+  height: 550px;
+}
+
+.jumbotron h1 {
+  text-align: center;
+  color: white;
+  margin: 7% 50% 10% 40%;
+}
+
+.app-logo {
+  width: 100px;
+  height: 100px;
+}
+
+/* Role Page */
+header {
+  padding: 20px 0;
+}
+
+.back-to-project {
+  cursor: pointer;
+  padding: 1.5% 1% ;
+  color: whitesmoke;
+  background-color: lightgrey;
+}
+
+.role-info {
+  background-color: brown;
+}
+
+
+
+
+
 
