@@ -43,6 +43,10 @@ const Login = ({history}) => {
         history.push("/signup")
     }
 
+    const redirectPasswordRecovery = () => {
+        history.push('/passwordrecovery')
+    }
+
     return(
         <div className='center'>
             <form onSubmit={handleLogin} id='login_form'></form>
@@ -51,13 +55,19 @@ const Login = ({history}) => {
                         <img class='center' src={logo} width="300" height="300" />
                 </tr>
                 <tr class='center'>
-                    <td><input style={{marginRight: 15 + 'px'}} name="email" type="email" placeholder="Email" form='login_form'/></td>
-                    <td><input style={{marginLeft: 15 + 'px'}} name="password" type="password" placeholder="Password" form='login_form'/></td>
+                    <td class='center'><input name="email" type="email" placeholder="Email" form='login_form'/></td>
+                </tr>
+                <tr class='center'>
+                    <td class='center'><input name="password" type="password" placeholder="Password" form='login_form'/></td>
                 </tr>
                 <tr class='center' style={{marginTop: 25 + 'px'}}><button class="btn btn-primary" variant="primary" form='login_form'>Log In</button></tr>
                 <tr class='center' style={{marginTop: 60 + 'px'}}>
                     <label >Don't have an account?&nbsp;</label>
                     <button class='button' onClick={redirectSignUp}> Sign up here.</button>
+                </tr>
+                <tr class='center'>
+                    <label >Forgot your password?&nbsp;</label>
+                    <button class='button' onClick={redirectPasswordRecovery}> Reset it here.</button>
                 </tr>
             </table>
         </div>

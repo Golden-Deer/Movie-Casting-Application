@@ -9,7 +9,7 @@ const Discover = () => {
             <>
                 <h1>Discover</h1>
                 <button onClick={() => history.push("/")}>Home</button>
-                <button onClick={() => history.push("/searchr")}>Search</button>
+                <button onClick={() => history.push("/search")}>Search</button>
             </>
         )
 }

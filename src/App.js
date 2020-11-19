@@ -6,6 +6,7 @@ import { AuthProvider } from "./auth/Auth";
 import Home from "./routes/Home";
 import Login from "./routes/Login";
 import SignUp from "./routes/SignUp";
+import passwordRecovery from './routes/passwordRecovery';
 import Discover from "./routes/discover/Discover"
 import Search from "./routes/search/Search"
 
@@ -17,6 +18,7 @@ function App() {
                 <PrivateRoute exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={SignUp} />
+                <Route exact path='/passwordrecovery' component={passwordRecovery}/>
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/discover" component={Discover} />
             </div>
