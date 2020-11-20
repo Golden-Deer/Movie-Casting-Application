@@ -10,14 +10,40 @@ const Search = () => {
             <>
 
                     <div className="s-navbar">
-                            <img src={logo} className="app-logo"/>
-                            <h1 onClick={() => history.push("/")}>My Project</h1>
-                            <button id={"your-account"}>Your Account</button>
+                            {/*<img src={logo} className="app-logo"/>*/}
+                            <h1 onClick={() => history.push("/")}>
+                                My Project <a>Showing result for Role1</a> {/*TODO: change is to new*/}
+                                <button id={"your-account"}>Your Account</button>
+                            </h1>
+                            
                     </div>
+                    <div className="s-main">
+                        <div className="s-sidebar">
+                                <h1>Project list</h1>
+                                <h2> - Project1</h2>
+                                <div id={"mini-project"}>
+                                        <h2>project</h2>
+                                </div>
 
-                    <button onClick={() => history.push("/search")}>Search</button>
-                    <button onClick={() => history.push("/discover")}>Discover</button>
-                    <button onClick={() => db.auth().signOut()}>Sign Out</button>
+                        </div>
+                        <div className= "s-category">
+                                <button>TOP CHIOCE</button>
+                                <button>Key word</button>
+                                <button>Key word</button>
+                        </div>
+                        
+                        <button id={"block"}>Picture</button>
+                        <button id={"block"}>Picture</button>
+                        <button id={"block"}>Picture</button>
+
+                        <br>
+                        </br>
+
+                        <button id={"block"}>Picture</button>
+                        <button id={"block"}>Picture</button>
+                        <button id={"block"}>Picture</button>
+                
+                    </div>
             </>
         )
 }

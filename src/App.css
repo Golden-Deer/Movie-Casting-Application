@@ -44,6 +44,24 @@ image.center{
 }
 
 /* Search Navbar */
+.navbar {
+  display: block;
+  /*text-align: center;*/
+  padding: 8px;
+  background-color: #854442;
+}
+
+.navbar ul {
+  text-align: center;
+  justify-content: center;
+}
+
+.navbar h1 {
+  text-align: left;
+  color: white;
+}
+
+/* Search */
 .s-navbar {
   display: block;
   /*text-align: center;*/
@@ -61,6 +79,66 @@ image.center{
   color: white;
 }
 
+.s-navbar a {
+  text-align: left;
+  color: white;
+  font-size: 15px;
+}
+
+.s-main {
+  display: block;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: #EBEBEB;
+} 
+
+.s-category {
+  display: block;
+  padding: 5px;
+}
+.s-sidebar {
+  float:right;
+  display: block;
+  padding:15px 90px 50px 30px;  /*fixed*/
+  flex-grow: 100;
+  /* padding-right: 8px; */
+  background: white;
+} 
+
+.s-sidebar h1{
+  font-size: 15px;
+  /* padding:15px 50px 50px; */
+} 
+.s-sidebar h2{
+  font-size: 10px;
+  /* padding:15px 50px 50px; */
+} 
+
+#mini-project {
+  display: inline;
+  font-size: 15px;
+  padding:15px 90px 50px 30px;  /*fixed*/
+  flex-grow: 100;
+  /* opacity: 0.85; */
+  background: #C0A59F;
+}
+
+#block {
+  background-color: lightgray;
+  float:left;
+  font-size: 15px;
+  margin: 1% 1% 1% 1%;
+  padding:10% 10% 10% 10%;
+  border: none;
+  /* opacity: 0.85; */
+  border-radius: 1px;
+  color: #B5B5B5;
+}
+
 /* Project Page */
 #my-projects {
   cursor: pointer;
@@ -72,6 +150,7 @@ image.center{
 #your-account {
   background-color: lightgray;
   float:right;
+  font-size: 15px;
   margin: 1% 2% 0% 0%;
   padding:0.4% 3% 0.4% 3%;
   border: none;
