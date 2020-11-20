@@ -27,7 +27,7 @@ const Search = () => {
 
                         </div>
                         <div className= "s-category">
-                                <button>TOP CHIOCE</button>
+                                <button>TOP CHOICE</button>
                                 <button>Key word</button>
                                 <button>Key word</button>
                         </div>
