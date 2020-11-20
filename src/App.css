@@ -19,8 +19,20 @@ table.center{
   display:block;
 }
 
+tr.center{
+  max-width: 550px;
+}
+
 image.center{
   margin-bottom: 20px;
+}
+
+.warning{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  color: red;
 }
 
 .button {

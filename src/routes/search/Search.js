@@ -32,16 +32,15 @@ const Search = () => {
                                         <div id={"mini-project"}>
                                                 <h2>project</h2>
                                         </div>
-
                                 </div>
-                                <div className="s-category">
-                                        <button>TOP CHIOCE</button>
-                                        <button>Key word</button>
-                                        <button>Key word</button>
-                                </div>
-                                <DisplayActor numActor={count} />
-
                         </div>
+                        <div className="s-category">
+                                <button>TOP CHIOCE</button>
+                                <button>Key word</button>
+                                <button>Key word</button>
+                        </div>
+                        <DisplayActor numActor={count} />
+
                 </div>
         )
 }
