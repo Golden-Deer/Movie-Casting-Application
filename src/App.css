@@ -36,11 +36,23 @@ image.center{
   color: red;
 }
 
-.button {
+.closeButton{
+  font-size: 20 + 'px';
+  text-align: right;
+  margin-top: 15px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.invisibleButton{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   background: none!important;
   border: none;
   padding: 0!important;
   color: #1453aa;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -52,7 +64,18 @@ image.center{
 	top: 30%;
   left: 40%;
   width: 450px;
-  height: 350px;
+  height: 370px;
+}
+
+.signUpPopup{
+  z-index: 99;
+	background-color: white;
+	position: absolute;
+	filter: drop-shadow(5px 5px  7px grey);
+	top: 27%;
+  left: 40%;
+  width: 450px;
+  height: 420px;
 }
 
 .popupText{
