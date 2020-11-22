@@ -7,11 +7,9 @@ import DisplayActor from "./DisplayActor"
 
 const Search = () => {
         const history = useHistory();
-        const [count, setCount] = useState(9);
+        const [count, setCount] = useState(6);
         const tags = {
-                age: 20,
-                gender: "male",
-                height: 160
+                gender: "male"
         };
 
         window.onscroll = function (ev) {
@@ -44,7 +42,7 @@ const Search = () => {
                                 <button>Key word</button>
                                 <button>Key word</button>
                         </div>
-                        <DisplayActor tags={tags} />
+                        <DisplayActor tags={tags} numActor={count}/>
 
                 </div>
         )

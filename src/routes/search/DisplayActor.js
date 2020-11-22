@@ -6,7 +6,8 @@ class DisplayActor extends Component {
         super(props);
 
         this.state = {
-            actors: []
+            actors: [],
+            records: []
         };
 
         this.profileRef = db.database().ref("PROFILE");
@@ -35,8 +36,10 @@ class DisplayActor extends Component {
                 }
             }
             this.setState({ actors: newactors });
+            this.setState({ records: this.state.actors.slice(0, this.props.numActor) });
         });
     }
+
     filterGender(actors, gender) {
         for (var i = actors.length - 1; i >= 0; i--) {
             if (actors[i].tag.gender !== gender) {
@@ -77,39 +80,34 @@ class DisplayActor extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.numActor !== prevProps.numActor) // Check if it's a new user, you can also use some unique property, like the ID  (this.props.user.id !== prevProps.user.id)
-        {
-            this.updateNumActor();
+        if (this.props.numActor !== prevProps.numActor) {
+            if (prevProps.numActor < this.state.actors.length) {
+                if (this.props.numActor < this.state.actors.length) {
+                    this.setState({ records: this.state.actors.slice(0, this.props.numActor) });
+                }
+                else {
+                    this.setState({ records: this.state.actors.slice(0, this.state.actors.length) });
+                }
+            }
         }
     }
 
-    updateNumActor() {
-        this.profileRef.orderByChild('name').limitToFirst(this.props.numActor).on('value', dataSnapshot => {
-            let newactors = [];
-            dataSnapshot.forEach(childSnapshot => {
-                let actor = childSnapshot.val();
-                actor['.key'] = childSnapshot.key;
-                newactors.push(actor);
-            });
-            this.setState({ actors: newactors });
-        });
-    }
     componentWillUnmount() {
         this.profileRef.off();
     }
 
     render() {
-        const records = this.state.actors.map(actors =>
-            <button id={"block"} key={actors.name}>
-                <div style={{ width: '80%', textAlign: 'center' }}><img src={actors.profilepic} style={{ width: '300px' }} alt="The Rock" /></div>
-                <h5 style={{ width: '80%', textAlign: 'center' }}>Name: {actors.name}</h5>
-                <h5 style={{ width: '80%', textAlign: 'center' }}>Age: {actors.tag.age} Gender: {actors.tag.gender}</h5>
-                <h5 style={{ width: '80%', textAlign: 'center' }}>Height: {actors.tag.height} Weight: {actors.tag.weight}</h5>
+        const display = this.state.records.map(records =>
+            <button id={"block"} key={records.name}>
+                <div style={{ width: '80%', textAlign: 'center' }}><img src={records.profilepic} style={{ width: '300px' }} alt="The Rock" /></div>
+                <h5 style={{ width: '80%', textAlign: 'center' }}>Name: {records.name}</h5>
+                <h5 style={{ width: '80%', textAlign: 'center' }}>Age: {records.tag.age} Gender: {records.tag.gender}</h5>
+                <h5 style={{ width: '80%', textAlign: 'center' }}>Height: {records.tag.height} Weight: {records.tag.weight}</h5>
             </button>
         );
 
         return (
-            <div>{records}</div>
+            <div>{display}</div>
         );
     }
 }
