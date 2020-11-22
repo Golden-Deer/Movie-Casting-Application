@@ -8,6 +8,11 @@ import DisplayActor from "./DisplayActor"
 const Search = () => {
         const history = useHistory();
         const [count, setCount] = useState(9);
+        const tags = {
+                age: 20,
+                gender: "male",
+                height: 160
+        };
 
         window.onscroll = function (ev) {
                 if (Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
@@ -39,7 +44,7 @@ const Search = () => {
                                 <button>Key word</button>
                                 <button>Key word</button>
                         </div>
-                        <DisplayActor numActor={count} />
+                        <DisplayActor tags={tags} />
 
                 </div>
         )
