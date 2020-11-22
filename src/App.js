@@ -15,8 +15,8 @@ function App() {
     <AuthProvider>
         <Router>
             <div>
-                <PrivateRoute exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={Home} />
+                {/* <Route exact path="/login" component={Login} /> */}
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path='/passwordrecovery' component={passwordRecovery}/>
                 <Route exact path="/search" component={Search} />
