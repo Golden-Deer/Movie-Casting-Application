@@ -3,6 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
+  text-align: center;
 }
 
 div.center {
@@ -45,14 +46,22 @@ image.center{
 }
 
 .invisibleButton{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
   background: none!important;
   border: none;
   padding: 0!important;
   color: #1453aa;
+  cursor: pointer;
+}
+
+.invisibleMiniButton{
+  background: none!important;
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 14px;
+  padding: 0!important;
+  color: #1453aa;
   cursor: pointer;
 }
 
@@ -67,7 +76,7 @@ image.center{
   height: 370px;
 }
 
-.signUpPopup{
+.extendedPopup{
   z-index: 99;
 	background-color: white;
 	position: absolute;
@@ -75,7 +84,27 @@ image.center{
 	top: 27%;
   left: 40%;
   width: 450px;
-  height: 420px;
+  height: 430px;
+}
+
+.largePopup{
+  z-index: 99;
+	background-color: white;
+	position: absolute;
+	filter: drop-shadow(5px 5px  7px grey);
+	top: 25%;
+  left: 40%;
+  width: 500px;
+  height: 550px;
+}
+
+.projectInputField{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: center;
+  width: 400px;
 }
 
 .popupText{
