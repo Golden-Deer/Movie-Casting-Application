@@ -1,10 +1,9 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
-import { useHistory, Redirect } from "react-router-dom";
-import { AuthContext } from "../auth/Auth";
-import db from "../base";
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
+import { AuthContext } from '../auth/Auth';
+import db from '../base';
 import firebase from 'firebase';
-import "../App.css";
-import logo from "../images/logo.png";
+import '../App.css';
 
 const Home = () => {
     const history = useHistory();
@@ -39,14 +38,13 @@ const Home = () => {
             document.getElementById('accountPopup').style = '';
             // blur out main page
             var main = document.getElementById('main');
-            main.style.filter = "blur(8px)";
+            main.style.filter = 'blur(8px)';
             // set account email state (currentUser variable doesn't load immediately)
             setAccountEmail(currentUser.email);
-        }
-        else {
+        } else {
             login();
         }
-    }
+    };
 
     // login functions
     function login() {
@@ -54,7 +52,7 @@ const Home = () => {
         document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
         document.getElementById('loginPopup').style = ''; // show login popup
         document.getElementById('main').style.pointerEvents = 'none'; // disable interaction on main page
-        document.getElementById('main').style.filter = "blur(8px)"; // blur out main page
+        document.getElementById('main').style.filter = 'blur(8px)'; // blur out main page
         setPadding(60);
         setIndicator('');
     }
@@ -63,20 +61,19 @@ const Home = () => {
         setLoginEmail(e.target.value);
         setPadding(60);
         setIndicator('');
-    }
+    };
 
     const changeLoginPassword = (e) => {
         setLoginPassword(e.target.value);
         setPadding(60);
         setIndicator('');
-    }
+    };
 
     const handleLogin = (event) => {
         event.preventDefault();
         const { email, password } = event.target.elements;
         try {
-            db
-                .auth()
+            db.auth()
                 .signInWithEmailAndPassword(email.value, password.value)
                 .then(() => {
                     window.location.reload(); // reload the page
@@ -84,11 +81,11 @@ const Home = () => {
                 .catch(() => {
                     setIndicator('Incorrect Email or Password');
                     setPadding(26);
-                })
+                });
         } catch (error) {
             alert(error);
         }
-    }
+    };
 
     function handleLogout() {
         db.auth().signOut();
@@ -108,25 +105,25 @@ const Home = () => {
         setSignUpEmail(e.target.value);
         setPadding(54);
         setIndicator('');
-    }
+    };
 
     const changeSignUpPassword = (e) => {
         setSignUpPassword(e.target.value);
         setPadding(54);
         setIndicator('');
-    }
+    };
 
     const changeFirstName = (e) => {
         setFirstName(e.target.value);
         setPadding(54);
         setIndicator('');
-    }
+    };
 
     const changeLastName = (e) => {
         setLastName(e.target.value);
         setPadding(54);
         setIndicator('');
-    }
+    };
 
     function handleSignUp(event) {
         event.preventDefault();
@@ -140,13 +137,6 @@ const Home = () => {
                 if (signInMethods.length == 0) {
                     db.auth().createUserWithEmailAndPassword(email.value, password.value)
                         .then((user) => {
-                            var user = db.auth().currentUser;
-                            db.database().ref('USER').child(user.uid).set({
-                                email: email.value,
-                                firstName: firstName,
-                                lastName: lastName,
-                                projects: []
-                            });
                             window.location.reload(); // reload the page
                         })
                         .catch((error) => {
@@ -161,6 +151,17 @@ const Home = () => {
                 }
             })
     }
+
+/*  not working yet
+    function uploadUser(user) {
+        var user = db.auth().currentUser;
+        db.database().ref('USER').set({
+            email: 'db.auth().currentUser.email,',
+            firstName: firstName,
+            lastName: lastName,
+            projects: []
+        });
+    } */
 
     //reset password functions
     function resetPassword() {
@@ -236,11 +237,11 @@ const Home = () => {
     function closePopup(type) {
         document.getElementById(type).style = 'display: none';
         document.getElementById('main').style.pointerEvents = '';
-        document.getElementById('main').style.filter = "blur(0px)";
+        document.getElementById('main').style.filter = 'blur(0px)';
         // reset states
         setLoginEmail('');
         setLoginPassword('');
-        setSignUpEmail('')
+        setSignUpEmail('');
         setSignUpPassword('');
         setFirstName('');
         setLastName('');
@@ -252,78 +253,376 @@ const Home = () => {
         <>
             <form onSubmit={handleLogin} id='login_form'></form>
             <form onSubmit={handleSignUp} id='sign_up_form'></form>
-            <form onSubmit={handlePasswordRecovery} id='password_recovery_form'></form>
+            <form
+                onSubmit={handlePasswordRecovery}
+                id='password_recovery_form'></form>
             <table id='loginPopup' class='popup' style={{ display: 'none' }}>
-                <tr class='center'><p class='closeButton' onClick={() => closePopup('loginPopup')}>x</p></tr>
-                <tr class='center'><p style={{ fontSize: 25 + 'px', textAlign: 'center' }}><b>Login</b></p></tr>
-                <tr class='center' style={{ marginTop: 35 + 'px' }}><input class='center' name="email" type="email" value={loginEmail} placeholder="Email" form='login_form' onChange={changeLoginEmail} /></tr>
-                <tr class='center'><input class='center' name="password" type="password" value={loginPassword} placeholder="Password" form='login_form' onChange={changeLoginPassword} /></tr>
-                <tr class='center'><button class='invisibleMiniButton' onClick={signUp}>New to Golden Cast? Sign up here</button></tr>
-                <tr class='center'><button class='invisibleMiniButton' onClick={resetPassword}>Forgot your password? Reset it here</button></tr>
-                <tr class='center'><p class='warning'>{indicator}</p></tr>
-                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}><button class='btn btn-primary' style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: [indicatorPadding] + 'px' }} form='login_form' disabled={loginEmail.length < 1 || loginPassword.length < 1}>Sign In</button></tr>
+                <tr class='center'>
+                    <p class='closeButton' onClick={() => closePopup('loginPopup')}>
+                        x
+          </p>
+                </tr>
+                <tr class='center'>
+                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                        <b>Login</b>
+                    </p>
+                </tr>
+                <tr class='center' style={{ marginTop: 35 + 'px' }}>
+                    <input
+                        class='center'
+                        name='email'
+                        type='email'
+                        value={loginEmail}
+                        placeholder='Email'
+                        form='login_form'
+                        onChange={changeLoginEmail}
+                    />
+                </tr>
+                <tr class='center'>
+                    <input
+                        class='center'
+                        name='password'
+                        type='password'
+                        value={loginPassword}
+                        placeholder='Password'
+                        form='login_form'
+                        onChange={changeLoginPassword}
+                    />
+                </tr>
+                <tr class='center'>
+                    <button class='invisibleMiniButton' onClick={signUp}>
+                        New to Golden Cast? Sign up here
+          </button>
+                </tr>
+                <tr class='center'>
+                    <button class='invisibleMiniButton' onClick={resetPassword}>
+                        Forgot your password? Reset it here
+          </button>
+                </tr>
+                <tr class='center'>
+                    <p class='warning'>{indicator}</p>
+                </tr>
+                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
+                    <button
+                        class='btn btn-primary'
+                        style={{
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: [indicatorPadding] + 'px',
+                        }}
+                        form='login_form'
+                        disabled={loginEmail.length < 1 || loginPassword.length < 1}>
+                        Sign In
+          </button>
+                </tr>
             </table>
             <table id='signUpPopup' class='extendedPopup' style={{ display: 'none' }}>
-                <tr class='center'><p class='closeButton' onClick={() => closePopup('signUpPopup')}>x</p></tr>
-                <tr class='center'><p style={{ fontSize: 25 + 'px', textAlign: 'center' }}><b>Sign Up</b></p></tr>
-                <tr class='center' style={{ marginTop: 35 + 'px' }}><input class='center' name="email" type="email" value={signUpEmail} placeholder="Email" form='sign_up_form' onChange={changeSignUpEmail} /></tr>
-                <tr class='center'><input class='center' name="password" type="password" value={signUpPassword} placeholder="Password (6+ characters)" form='sign_up_form' onChange={changeSignUpPassword} /></tr>
-                <tr class='center'><input class='center' name="first_name" type="first_name" value={firstName} placeholder="First Name" form='sign_up_form' onChange={changeFirstName} /></tr>
-                <tr class='center'><input class='center' name="last_name" type="last_name" value={lastName} placeholder="Last Name" form='sign_up_form' onChange={changeLastName} /></tr>
-                <tr class='center'><button class='invisibleMiniButton' onClick={login}>Have an account? Log in here</button></tr>
-                <tr class='center'><p class='warning'>{indicator}</p></tr>
-                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}><button class='btn btn-primary' style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: [indicatorPadding] + 'px' }} form='sign_up_form' disabled={signUpEmail.length < 1 || signUpPassword.length < 7 || firstName.length < 1 || lastName.length < 1}>Sign Up</button></tr>
+                <tr class='center'>
+                    <p class='closeButton' onClick={() => closePopup('signUpPopup')}>
+                        x
+          </p>
+                </tr>
+                <tr class='center'>
+                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                        <b>Sign Up</b>
+                    </p>
+                </tr>
+                <tr class='center' style={{ marginTop: 35 + 'px' }}>
+                    <input
+                        class='center'
+                        name='email'
+                        type='email'
+                        value={signUpEmail}
+                        placeholder='Email'
+                        form='sign_up_form'
+                        onChange={changeSignUpEmail}
+                    />
+                </tr>
+                <tr class='center'>
+                    <input
+                        class='center'
+                        name='password'
+                        type='password'
+                        value={signUpPassword}
+                        placeholder='Password (6+ characters)'
+                        form='sign_up_form'
+                        onChange={changeSignUpPassword}
+                    />
+                </tr>
+                <tr class='center'>
+                    <input
+                        class='center'
+                        name='first_name'
+                        type='first_name'
+                        value={firstName}
+                        placeholder='First Name'
+                        form='sign_up_form'
+                        onChange={changeFirstName}
+                    />
+                </tr>
+                <tr class='center'>
+                    <input
+                        class='center'
+                        name='last_name'
+                        type='last_name'
+                        value={lastName}
+                        placeholder='Last Name'
+                        form='sign_up_form'
+                        onChange={changeLastName}
+                    />
+                </tr>
+                <tr class='center'>
+                    <button class='invisibleMiniButton' onClick={login}>
+                        Have an account? Log in here
+          </button>
+                </tr>
+                <tr class='center'>
+                    <p class='warning'>{indicator}</p>
+                </tr>
+                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
+                    <button
+                        class='btn btn-primary'
+                        style={{
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: [indicatorPadding] + 'px',
+                        }}
+                        form='sign_up_form'
+                        disabled={
+                            signUpEmail.length < 1 ||
+                            signUpPassword.length < 7 ||
+                            firstName.length < 1 ||
+                            lastName.length < 1
+                        }>
+                        Sign Up
+          </button>
+                </tr>
             </table>
-            <table id='passwordRecoveryPopup' class='popup' style={{ display: 'none' }}>
-                <tr class='center'><p class='closeButton' onClick={() => closePopup('passwordRecoveryPopup')}>x</p></tr>
-                <tr class='center'><p style={{ fontSize: 25 + 'px', textAlign: 'center' }}><b>Password Recovery</b></p></tr>
-                <tr class='center' style={{ marginTop: 35 + 'px' }}><input class='center' name="email" type="email" value={recoveryEmail} placeholder="Email" form='password_recovery_form' onChange={changeRecoveryEmail} /></tr>
-                <tr class='center'><button class='invisibleMiniButton' onClick={signUp}>New to Golden Cast? Sign up here</button></tr>
-                <tr class='center'><button class='invisibleMiniButton' onClick={login}>Know your password? Login up here</button></tr>
-                <tr class='center'><p class='warning'>{indicator}</p></tr>
-                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}><button class='btn btn-primary' style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: [indicatorPadding] + 'px' }} form='password_recovery_form' disabled={recoveryEmail.length < 1}>Send Email</button></tr>
+            <table
+                id='passwordRecoveryPopup'
+                class='popup'
+                style={{ display: 'none' }}>
+                <tr class='center'>
+                    <p
+                        class='closeButton'
+                        onClick={() => closePopup('passwordRecoveryPopup')}>
+                        x
+          </p>
+                </tr>
+                <tr class='center'>
+                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                        <b>Password Recovery</b>
+                    </p>
+                </tr>
+                <tr class='center' style={{ marginTop: 35 + 'px' }}>
+                    <input
+                        class='center'
+                        name='email'
+                        type='email'
+                        value={recoveryEmail}
+                        placeholder='Email'
+                        form='password_recovery_form'
+                        onChange={changeRecoveryEmail}
+                    />
+                </tr>
+                <tr class='center'>
+                    <button class='invisibleMiniButton' onClick={signUp}>
+                        New to Golden Cast? Sign up here
+          </button>
+                </tr>
+                <tr class='center'>
+                    <button class='invisibleMiniButton' onClick={login}>
+                        Know your password? Login up here
+          </button>
+                </tr>
+                <tr class='center'>
+                    <p class='warning'>{indicator}</p>
+                </tr>
+                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
+                    <button
+                        class='btn btn-primary'
+                        style={{
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: [indicatorPadding] + 'px',
+                        }}
+                        form='password_recovery_form'
+                        disabled={recoveryEmail.length < 1}>
+                        Send Email
+          </button>
+                </tr>
             </table>
             <table id='accountPopup' class='popup' style={{ display: 'none' }}>
-                <tr><p class='closeButton' onClick={() => closePopup('accountPopup')}>x</p></tr>
-                <tr><p style={{ fontSize: 25 + 'px', textAlign: 'center' }}><b>Your Account</b></p></tr>
-                <tr><p class='popupText'>Account Email: {accountEmail}</p></tr>
-                <tr ><button class='btn btn-primary' style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }} onClick={handleLogout}>Sign Out</button></tr>
+                <tr>
+                    <p class='closeButton' onClick={() => closePopup('accountPopup')}>
+                        x
+          </p>
+                </tr>
+                <tr>
+                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                        <b>Your Account</b>
+                    </p>
+                </tr>
+                <tr>
+                    <p class='popupText'>Account Email: {accountEmail}</p>
+                </tr>
+                <tr>
+                    <button
+                        class='btn btn-primary'
+                        style={{
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                        }}
+                        onClick={handleLogout}>
+                        Sign Out
+          </button>
+                </tr>
             </table>
             <table id='projectPopup' class='largePopup' style={{ display: 'none' }}>
-                <tr><p class='closeButton' onClick={() => closePopup('projectPopup')}>x</p></tr>
-                <tr class='center'><p style={{ fontSize: 25 + 'px', textAlign: 'center' }}><b>Create New Project</b></p></tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}><input class='projectInputField' value={projectName} placeholder="Project Name *" form='project_creation_form' onChange={e => setProjectName(e.target.value)} /></tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}><input class='projectInputField' value={projectReleaseDate} placeholder="Projected Release Year *" form='project_creation_form' onChange={changeProjectReleaseDate} /></tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}><input class='projectInputField' value={projectGenre} placeholder="Genre(s)" form='project_creation_form' onChange={e => setProjectGenre(e.target.value)} /></tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}><textarea class='center' cols='41' rows='3' value={projectDescription} placeholder="Brief Description" form='project_creation_form' onChange={e => setProjectDescription(e.target.value)} /></tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}><input class='projectInputField' name="director" value={projectDirector} placeholder="Director(s)" form='project_creation_form' onChange={e => setProjectDirector(e.target.value)} /></tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}><input class='projectInputField' name="producer" value={projectProducer} placeholder="Producer(s)" form='project_creation_form' onChange={e => setProjectProducer(e.target.value)} /></tr>
-                <tr class='center'><label class='center' style={{ fontSize: 12 + 'px' }}>Fields with an asterisk are mandatory</label></tr>
-                <tr class='center'><button class='btn btn-primary' style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: 20 + 'px' }} onClick={createProject} disabled={projectName.length < 1 || projectReleaseDate.length != 4}>Create Project</button></tr>
+                <tr>
+                    <p class='closeButton' onClick={() => closePopup('projectPopup')}>
+                        x
+          </p>
+                </tr>
+                <tr class='center'>
+                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                        <b>Create New Project</b>
+                    </p>
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                    <input
+                        class='projectInputField'
+                        value={projectName}
+                        placeholder='Project Name *'
+                        form='project_creation_form'
+                        onChange={(e) => setProjectName(e.target.value)}
+                    />
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                    <input
+                        class='projectInputField'
+                        value={projectReleaseDate}
+                        placeholder='Projected Release Year *'
+                        form='project_creation_form'
+                        onChange={changeProjectReleaseDate}
+                    />
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                    <input
+                        class='projectInputField'
+                        value={projectGenre}
+                        placeholder='Genre(s)'
+                        form='project_creation_form'
+                        onChange={(e) => setProjectGenre(e.target.value)}
+                    />
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                    <textarea
+                        class='center'
+                        cols='41'
+                        rows='3'
+                        value={projectDescription}
+                        placeholder='Brief Description'
+                        form='project_creation_form'
+                        onChange={(e) => setProjectDescription(e.target.value)}
+                    />
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                    <input
+                        class='projectInputField'
+                        name='director'
+                        value={projectDirector}
+                        placeholder='Director(s)'
+                        form='project_creation_form'
+                        onChange={(e) => setProjectDirector(e.target.value)}
+                    />
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                    <input
+                        class='projectInputField'
+                        name='producer'
+                        value={projectProducer}
+                        placeholder='Producer(s)'
+                        form='project_creation_form'
+                        onChange={(e) => setProjectProducer(e.target.value)}
+                    />
+                </tr>
+                <tr class='center'>
+                    <label class='center' style={{ fontSize: 12 + 'px' }}>
+                        Fields with an asterisk are mandatory
+          </label>
+                </tr>
+                <tr class='center'>
+                    <button
+                        class='btn btn-primary'
+                        style={{
+                            display: 'block',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginTop: 20 + 'px',
+                        }}
+                        onClick={createProject}
+                        disabled={projectName.length < 1 || projectReleaseDate.length != 4}>
+                        Create Project
+          </button>
+                </tr>
             </table>
             <div id='main'>
-                <div className="jumbotron">
-                    <img src={logo} className="app-logo" />
-                    <button id={"your-account"} onClick={viewAccount}>Your Account</button>
-                    <h1 onClick={() => history.push('/discover')}>DISCOVERY</h1>
-                    <button onClick={() => history.push("/search")}>Search</button>
-                    <button onClick={() => history.push("/discover")}>Discover</button>
+                <div className='jumbotron'>
+                    <button id={'your-account'} onClick={viewAccount}>
+                        Your Account
+          </button>
+                    <h1 onClick={() => history.push('/discover')}>About Us</h1>
+                    {/* <button onClick={() => history.push('/search')}>Search</button>
+          <button onClick={() => history.push('/discover')}>Discover</button> */}
                 </div>
-                {currentUser ?
+                {currentUser ? (
                     <table id='projectDisplay'>
-                        <tr><h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}><b>My Projects&nbsp;</b></h2><button class='invisibleButton' onClick={projectPopup}><b>+</b></button></tr>
+                        <tr>
+                            <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
+                                <b>My Projects&nbsp;</b>
+                            </h2>
+                            <button class='invisibleButton' onClick={projectPopup}>
+                                <b>+</b>
+                            </button>
+                        </tr>
                     </table>
-                    :
-                    <table id='genericDisplay'>
-                        <tr><h2 style={{ marginLeft: 30 + 'px' }}><b>Who are We?</b></h2></tr>
-                        <tr><label style={{ marginLeft: 30 + 'px' }}>Golden Cast is a premium service to help your casting crew quickly find the right actors and actresses for your casting roles</label></tr>
-                        <tr><h2 style={{ marginLeft: 30 + 'px', marginTop: 50 + 'px' }}><b>How to get Started</b></h2></tr>
-                        <tr><label style={{ marginLeft: 30 + 'px' }}>Sign up with the Account button to gain access to Golden Cast services. With Golden Cast, you can search for new actors, create and manage your projects, and build your professional network</label></tr>
-                    </table>
-                }
+                ) : (
+                        <table id='genericDisplay'>
+                            <tr>
+                                <h2 style={{ marginLeft: 30 + 'px' }}>
+                                    <b>Who are We?</b>
+                                </h2>
+                            </tr>
+                            <tr>
+                                <label style={{ marginLeft: 30 + 'px' }}>
+                                    Golden Cast is a premium service to help your casting crew
+                                    quickly find the right actors and actresses for your casting
+                                    roles
+              </label>
+                            </tr>
+                            <tr>
+                                <h2 style={{ marginLeft: 30 + 'px', marginTop: 50 + 'px' }}>
+                                    <b>How to get Started</b>
+                                </h2>
+                            </tr>
+                            <tr>
+                                <label style={{ marginLeft: 30 + 'px' }}>
+                                    Sign up with the Account button to gain access to Golden Cast
+                                    services. With Golden Cast, you can search for new actors,
+                                    create and manage your projects, and build your professional
+                                    network
+              </label>
+                            </tr>
+                        </table>
+                    )}
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Home;

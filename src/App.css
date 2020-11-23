@@ -117,21 +117,42 @@ image.center{
 
 /* Search Navbar */
 .navbar {
-  display: block;
-  /*text-align: center;*/
-  padding: 8px;
-  background-color: #854442;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 2rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  border-bottom: solid 1px var(--primary-color);
+  opacity: 0.9;
 }
 
 .navbar ul {
-  text-align: center;
-  justify-content: center;
+  display: flex;
 }
 
-.navbar h1 {
-  text-align: left;
-  color: white;
+.navbar a {
+  color: #fff;
+  padding: 0.30rem;
+  margin: 0 0.03rem;
 }
+
+.navbar a:hover {
+  color: var(--primary-color);
+}
+
+.navbar li {
+  list-style-type: none;
+}
+
+.nav-img {
+  width: 60px;
+  height: 60px;
+}
+
+
 
 /* Search */
 .s-navbar {
