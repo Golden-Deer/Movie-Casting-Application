@@ -4,7 +4,6 @@ import { AuthContext } from '../auth/Auth';
 import db from '../base';
 import firebase from 'firebase';
 import '../App.css';
-import logo from '../images/logo.png';
 
 const Home = () => {
   const history = useHistory();
@@ -557,13 +556,12 @@ const Home = () => {
       </table>
       <div id='main'>
         <div className='jumbotron'>
-          <img src={logo} className='app-logo' />
           <button id={'your-account'} onClick={viewAccount}>
             Your Account
           </button>
           <h1 onClick={() => history.push('/discover')}>About Us</h1>
-          <button onClick={() => history.push('/search')}>Search</button>
-          <button onClick={() => history.push('/discover')}>Discover</button>
+          {/* <button onClick={() => history.push('/search')}>Search</button>
+          <button onClick={() => history.push('/discover')}>Discover</button> */}
         </div>
         {currentUser ? (
           <table id='projectDisplay'>
