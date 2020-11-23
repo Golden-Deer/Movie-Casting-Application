@@ -6,7 +6,7 @@ import { AuthProvider } from './auth/Auth';
 import Home from './routes/Home';
 import Login from './routes/Login';
 import SignUp from './routes/SignUp';
-import passwordRecovery from './routes/passwordRecovery';
+import passwordRecovery from './routes/passwordRecoveryPopup';
 import Discover from './routes/discover/Discover';
 import Search from './routes/search/Search';
 import Navbar from './routes/layout/Navbar';
