@@ -1,6 +1,7 @@
 import { AuthContext } from '../auth/Auth';
 import React, { useContext, useState} from 'react';
 import firebase from 'firebase';
+import ProjectList from './ListProjects';
 
 // The Body component renders the user's projects, or the GC marketing pitch if the user is not logged in
 const Body = () => {
@@ -14,15 +15,13 @@ const Body = () => {
 
     // store project in firebase
     function createProject(e) {
-        var PROJECT = firebase.database().ref("/PROJECT");
-        var projectId = PROJECT.push({ name: projectName, release_date: projectReleaseDate, genre: projectGenre, description: projectDescription, director: projectDirector, producer: projectProducer });
         // add this project to the project list of this user
         firebase.database().ref('USER/' + firebase.auth().currentUser.uid).child('projects').once('value', dataSnapshot => {
             var projects = dataSnapshot.val();
             if (projects === null) {
                 projects = [];
             }
-            projects.push(projectId.key);
+            projects.push({name: projectName, release_date: projectReleaseDate, genre: projectGenre, description: projectDescription, director: projectDirector, producer: projectProducer});
             firebase.database().ref('USER/' + firebase.auth().currentUser.uid).child('projects').set(projects);
         });
         // close project popup
@@ -40,12 +39,10 @@ const Body = () => {
     // project popup
     function projectPopup() {
         document.getElementById('projectPopup').style = ''; // show project popup
-    }
+    }    
 
     function closePopup(type) {
         document.getElementById(type).style = 'display: none';
-        document.getElementById('main').style.pointerEvents = '';
-        document.getElementById('main').style.filter = 'blur(0px)';
     }
 
     return(
@@ -54,7 +51,7 @@ const Body = () => {
                 <tr>
                     <p class='closeButton' onClick={() => closePopup('projectPopup')}>
                         x
-          </p>
+                    </p>
                 </tr>
                 <tr class='center'>
                     <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
@@ -148,6 +145,7 @@ const Body = () => {
                     <button class='invisibleButton' onClick={projectPopup}>
                         <b>+</b>
                     </button>
+                    <ProjectList/>
                 </tr>
             </table>
         ) : (
