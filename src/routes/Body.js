@@ -137,12 +137,12 @@ const Body = () => {
                 </tr>
         </table>
         {currentUser ? (
-            <table id='projectDisplay'>
+            <table id='projectDisplay' style={{width: 100 + '%'}}>
                 <tr>
                     <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
-                        <b>My Projects&nbsp;</b>
+                        <b>My Projects&nbsp;&nbsp;</b>
                     </h2>
-                    <button class='invisibleButton' onClick={projectPopup}>
+                    <button class='invisibleButton' onClick={projectPopup} style={{fontSize: 40 + 'px'}}>
                         <b>+</b>
                     </button>
                     <ProjectList/>
