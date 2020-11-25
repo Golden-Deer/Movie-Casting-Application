@@ -17,7 +17,9 @@ const ProjectList = () => {
       <div className='project-attributes'>Project Name</div>
       <div className='project-attributes'>Description</div>
       <div className='project-attributes'>Logistic</div>
-      <div className='project-attributes'>Role</div>
+      <div className='project-attributes'>
+        <button onClick={() => history.push("/rolepage")}>Role</button>
+        </div>
     </>
   );
 };

@@ -8,6 +8,8 @@ import passwordRecovery from './routes/passwordRecoveryPopup';
 import Discover from './routes/discover/Discover';
 import Search from './routes/search/Search';
 import Navbar from './routes/layout/Navbar';
+import ProjectList from './routes/project/ProjectList';
+import RolePage from './routes/project/RolePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -21,6 +23,9 @@ function App() {
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
+          <Route exact path='/project' component = {ProjectList} />
+          <Route exact path='/rolepage' component = {RolePage} />
+
         </div>
       </Router>
     </AuthProvider>
