@@ -36,15 +36,14 @@ const SignUpPopup = () => {
 
     function handleSignUp(event) {
         event.preventDefault();
-        const { email, password } = event.target.elements;
         db
             .auth()
             //check if the account exists
-            .fetchSignInMethodsForEmail(email.value)
+            .fetchSignInMethodsForEmail(signUpEmail)
             .then((signInMethods) => {
                 // an empty array means the account doesn't exist
                 if (signInMethods.length == 0) {
-                    db.auth().createUserWithEmailAndPassword(email.value, password.value)
+                    db.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
                         .then((user) => {
                             window.location.reload(); // reload the page
                         })

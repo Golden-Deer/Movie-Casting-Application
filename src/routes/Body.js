@@ -38,11 +38,11 @@ const Body = () => {
 
     // project popup
     function projectPopup() {
-        document.getElementById('projectPopup').style = ''; // show project popup
+        document.getElementById('projectPopup').style.display = ''; // show project popup
     }    
 
     function closePopup(type) {
-        document.getElementById(type).style = 'display: none';
+        document.getElementById(type).style.display = 'none';
     }
 
     return(

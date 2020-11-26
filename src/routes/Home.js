@@ -21,7 +21,7 @@ const Home = () => {
     return (
             <div id='main'>
                 <div className='jumbotron'>
-                    <Account/>
+                    {/* <Account/> */}
                     <h1 onClick={() => history.push('/discover')}>About Us</h1>
                 </div>
                 <Body/>

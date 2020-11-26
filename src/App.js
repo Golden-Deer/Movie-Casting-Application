@@ -10,6 +10,7 @@ import Search from './routes/search/Search';
 import Navbar from './routes/layout/Navbar';
 import ProjectList from './routes/project/ProjectList';
 import RolePage from './routes/project/RolePage';
+import About from './routes/About';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route exact path='/discover' component={Discover} />
           <Route exact path='/project' component = {ProjectList} />
           <Route exact path='/rolepage' component = {RolePage} />
+          <Route exact path='/about' component={About}/>
 
         </div>
       </Router>

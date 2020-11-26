@@ -69,34 +69,37 @@ image.center{
 .popup{
 	z-index: 99;
 	background-color: white;
-	position: absolute;
+	position: fixed;
 	filter: drop-shadow(5px 5px  7px grey);
 	top: 30%;
-  left: 40%;
+  left: 38%;
   width: 450px;
-  height: 370px;
+  height: 380px;
+  border-radius: 10px;
 }
 
 .extendedPopup{
   z-index: 99;
 	background-color: white;
-	position: absolute;
+	position: fixed;
 	filter: drop-shadow(5px 5px  7px grey);
 	top: 27%;
-  left: 40%;
+  left: 38%;
   width: 450px;
   height: 430px;
+  border-radius: 10px;
 }
 
 .largePopup{
   z-index: 99;
 	background-color: white;
-	position: absolute;
+	position: fixed;
 	filter: drop-shadow(5px 5px  7px grey);
-	top: 25%;
-  left: 40%;
+	top: 20%;
+  left: 36.5%;
   width: 500px;
-  height: 550px;
+  height: 570px;
+  border-radius: 10px;
 }
 
 .scrollable{
@@ -161,7 +164,6 @@ image.center{
   width: 100%;
   top: 0;
   border-bottom: solid 1px var(--primary-color);
-  opacity: 0.9;
 }
 
 .navbar ul {
@@ -186,8 +188,6 @@ image.center{
   width: 60px;
   height: 60px;
 }
-
-
 
 /* Search */
 .s-navbar {

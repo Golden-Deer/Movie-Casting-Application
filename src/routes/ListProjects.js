@@ -9,27 +9,41 @@ class ProjectList extends Component{
         this.state = {
             projects: [],
             icons: [],
+            projectDictionary: {},  // map index to project name for easy database lookup
             projectName: '',
             projectReleaseDate: '',
             projectGenre: '',
             projectDescription: '',
             projectDirector: '',
             projectProducer: '',
+            selection: '',
         }
-    
+        this.deleteProject = this.deleteProject.bind(this);
     }
-
     viewProject(index) {
         this.setState({projectName: this.state.projects[index]['name']})
         this.setState({projectReleaseDate: this.state.projects[index]['release_date']})
         this.setState({projectGenre: this.state.projects[index]['genre']})
         this.setState({projectDescription: this.state.projects[index]['producer']})
         this.setState({projectDirector: this.state.projects[index]['director']})
-        document.getElementById('editProjectPopup').style = ''; // show project popup
+        this.setState({selection: index});
+        document.getElementById('editProjectPopup').style.display = ''; // show project popup
+    }
+
+    deleteConfirmation(){
+        document.getElementById('deleteProjectPopup').style.display = '';
+    }
+
+    deleteProject(e){
+        let index = this.state.selection;
+        let reference = firebase.database().ref('USER/' + firebase.auth().currentUser.uid +'/projects/' + (index+1));
+        reference.remove();
+        this.closePopup('deleteProjectPopup')
+        this.closePopup('editProjectPopup')
     }
     
     closePopup(type) {
-        document.getElementById(type).style = 'display: none';
+        document.getElementById(type).style.display = 'none';
     }
 
     componentDidMount(){
@@ -37,14 +51,17 @@ class ProjectList extends Component{
             var projects = [];
             var index = 0;
             var temp = [];
+            var dictionary = {};
             dataSnapshot.forEach(childSnapshot => {
                 temp.push(<td><button class='movieButton' onClick={this.viewProject.bind(this, index)}><b>{childSnapshot.val()['name']}</b></button></td>)
                 projects.push(childSnapshot.val());
+                dictionary[index] = childSnapshot.val()['name'];
                 index+=1;
                 if (index % 5 == 0){
                     temp.push(<tr></tr>)
                 }
             })
+            this.setState({projectDictionary: dictionary})
             this.setState({projects: projects, icons: temp})
         })
     }
@@ -59,8 +76,6 @@ class ProjectList extends Component{
         return(
             <>
             {buttons}
-            
-            
             <table id='editProjectPopup' class='largePopup' style={{ display: 'none' }}>
                 <tr>
                     <p class='closeButton' onClick={() => this.closePopup('editProjectPopup')}>
@@ -139,20 +154,80 @@ class ProjectList extends Component{
                         Fields with an asterisk are mandatory
                     </label>
                 </tr>
-                {/* <tr class='center'>
-                    <button
-                        class='btn btn-primary'
-                        style={{
-                            display: 'block',
-                            marginLeft: 'auto',
-                            marginRight: 'auto',
-                            marginTop: 20 + 'px',
-                        }}
-                        // onClick={createProject}
-                        disabled={this.state.projectName.length < 1 || this.state.projectReleaseDate.length != 4}>
-                        Save
-                    </button>
-                </tr> */}
+                <tr class='center'>
+                    <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
+                        <button
+                            class='btn btn-primary'
+                            style={{
+                                textAlign: 'center',
+                                marginTop: 20 + 'px',
+                                marginBottom: 20 + 'px',
+                            }}
+                            // onClick={createProject}
+                            disabled={this.state.projectName.length < 1 || this.state.projectReleaseDate.length != 4}>
+                            Save Changes
+                        </button>
+                    </td>
+                    <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
+                        <button
+                            class='btn btn-danger'
+                            style={{
+                                textAlign: 'center',
+                                marginTop: 20 + 'px',
+                                marginBottom: 20 + 'px',
+                            }}
+                            onClick={this.deleteConfirmation}
+                            >
+                            Delete Project
+                        </button>
+                    </td>
+                    
+                </tr>
+            </table>
+
+            <table id='deleteProjectPopup' class='popup' style={{ display: 'none' }}>
+                <tr>
+                    <p class='closeButton' onClick={() => this.closePopup('deleteProjectPopup')}>
+                        x
+                    </p>
+                </tr>
+                <tr class='center'>
+                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                        <b>Delete Project Confirmation</b>
+                    </p>
+                </tr>
+                <tr class='center' style={{ marginTop: 15 + 'px', padding: 15 + 'px' }}>
+                    <label>Are you sure you want to delete <b>{this.state.projectName}</b>? This operation cannot be undone</label>
+                </tr>
+
+                <tr class='center'>
+                    <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
+                        <button
+                            class='btn btn-danger'
+                            style={{
+                                textAlign: 'center',
+                                marginTop: 20 + 'px',
+                                marginBottom: 20 + 'px',
+                            }}
+                            onClick={this.deleteProject}
+                            >
+                            Delete
+                        </button>
+                    </td>
+                    <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
+                        <button
+                            class='btn btn-primary'
+                            style={{
+                                textAlign: 'center',
+                                marginTop: 20 + 'px',
+                                marginBottom: 20 + 'px',
+                            }}
+                            onClick={()=> this.closePopup('deleteProjectPopup')}>
+                            Cancel
+                        </button>
+                    </td>
+                    
+                </tr>
             </table>
             </>
         )

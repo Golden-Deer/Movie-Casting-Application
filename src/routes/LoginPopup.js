@@ -1,7 +1,6 @@
 import db from '../base';
 import React, { useContext, useState} from 'react';
 import SignUpPopup from './SignUpPopup';
-import passwordRecoveryPopupPoup from './passwordRecoveryPopup';
 import PasswordRecoveryPopup from './passwordRecoveryPopup';
 
 const Login = () => {
@@ -44,23 +43,21 @@ const handleLogin = (event) => {
 
 //reset password functions
 function resetPassword() {
-    document.getElementById('loginPopup').style = 'display: none'; // hide login popup
-    document.getElementById('signUpPopup').style = 'display: none'; // hide sign up popup
+    document.getElementById('loginPopup').style.display = 'none'; // hide login popup
+    document.getElementById('signUpPopup').style.display = 'none'; // hide sign up popup
     document.getElementById('passwordRecoveryPopup').style = ''; // show password recovery popup
     setIndicator('');
 }
 
 function signUp() {
-    document.getElementById('loginPopup').style = 'display: none'; // hide login popup
+    document.getElementById('loginPopup').style.display = 'none'; // hide login popup
     // document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
-    document.getElementById('signUpPopup').style = ''; // show sign up popup
+    document.getElementById('signUpPopup').style.display = ''; // show sign up popup
     setIndicator('');
 }
 
 function closePopup(type) {
-    document.getElementById(type).style = 'display: none';
-    document.getElementById('main').style.pointerEvents = '';
-    document.getElementById('main').style.filter = 'blur(0px)';
+    document.getElementById(type).style.display = 'none';
     // reset states
     setLoginEmail('');
     setLoginPassword('');

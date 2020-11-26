@@ -2,6 +2,7 @@ import { AuthContext } from '../auth/Auth';
 import React, { useContext, useState} from 'react';
 import Login from './LoginPopup'
 import db from '../base';
+import '../App.css';
 
 // The Account component handles login, account, and password recovery popup windows and logistics
 const Account = () => {
@@ -12,20 +13,18 @@ const Account = () => {
         // user is logged in
         if (currentUser) {
             // show account popup
-            document.getElementById('accountPopup').style = '';
+            document.getElementById('accountPopup').style.display = '';
             // set account email state (currentUser variable doesn't load immediately)
             setAccountEmail(currentUser.email);
         } else {
-            document.getElementById('loginPopup').style = ''; // show login popup
+            document.getElementById('loginPopup').style.display = ''; // show login popup
             // setPadding(60);
             // setIndicator('');
         }
     }; 
 
     function closePopup(type) {
-        document.getElementById(type).style = 'display: none';
-        document.getElementById('main').style.pointerEvents = '';
-        document.getElementById('main').style.filter = 'blur(0px)';
+        document.getElementById(type).style.display = 'none';
     }
 
     function handleLogout() {

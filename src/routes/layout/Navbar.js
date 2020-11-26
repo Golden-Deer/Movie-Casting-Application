@@ -22,10 +22,10 @@ export const Navbar = () => {
           <Link to='/project'>Projects</Link>
         </li>
         <li>
-          <Link to='/'>About Us</Link>
+          <Link to='/about'>About Us</Link>
         </li>
         <li>
-          <Account />
+          <Account/>
 
           {/* <Link to='/'>Account</Link> */}
         </li>
