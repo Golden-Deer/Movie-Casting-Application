@@ -3,34 +3,23 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import Account from '../Account';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Navbar, Nav, Form} from 'react-bootstrap'
 
-export const Navbar = () => {
+export const Navbar1 = () => {
   return (
-    <nav className='navbar bg-dark'>
-      <h1>
-        <Link to='/'>
-          <img className='nav-img' alt='Golden Cast' src={logo} />
-        </Link>
-      </h1>
-      <ul>
-        {/* <li>
-          <Link to='/discover'>Discover</Link>
-        </li> */}
-        <li>
-          <Link to='/search'>Search</Link>
-        </li>
-        <li>
-          <Link to='/project'>Projects</Link>
-        </li>
-        <li>
-          <Link to='/about'>About Us</Link>
-        </li>
-        <li>
-          <Account/>
-        </li>
-      </ul>
-    </nav>
+    <Navbar bg="dark" variant="dark">
+    <Navbar.Brand href="/">
+      <img className='nav-img' alt='Golden Cast' src={logo} />
+      Golden Cast
+      </Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="/discover">Discover</Nav.Link>
+      <Nav.Link href="/project">Projects</Nav.Link>
+      <Nav.Link href="/about">About Us</Nav.Link>
+    </Nav>
+    <Account/>
+  </Navbar>
   );
 };
 
-export default Navbar;
+export default Navbar1;
