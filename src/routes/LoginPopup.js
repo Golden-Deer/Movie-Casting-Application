@@ -57,7 +57,7 @@ function signUp() {
     document.getElementById('loginPopup').style.visibility = 'hidden';
     // document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
     document.getElementById('signUpPopup').style.opacity = 100 + '%'; // show sign up popup
-    document.getElementById('signUpPopup').style.visibility = 'visible';
+    document.getElementById('signUpPopup').style = '';
     setIndicator('');
 }
 

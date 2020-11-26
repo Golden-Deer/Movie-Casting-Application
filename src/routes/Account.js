@@ -34,6 +34,21 @@ const Account = () => {
         db.auth().signOut();
         closingPopup('accountPopup');
     }
+
+    function deleteAccount() {
+        if (db.auth().currentUser === null) {
+            alert("Please log in again to delete account.");
+        }
+        else {
+            var user = db.auth().currentUser;
+            user.delete().then(() => {
+                db.database().ref('USER/' + user.uid).remove();
+            }).catch((error) => {
+                alert(error);
+            });
+            closingPopup('accountPopup');
+        }
+    }
     
     return(
         <>
@@ -72,7 +87,7 @@ const Account = () => {
                         style={{
                             textAlign: 'center',
                             marginTop: 20 + 'px',
-                        }}>
+                        }} onClick={deleteAccount}>
                             Delete Account
                         </button>
                     </td>
