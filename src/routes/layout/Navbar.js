@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import Account from '../Account';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Navbar = () => {
   return (
@@ -12,9 +13,9 @@ export const Navbar = () => {
         </Link>
       </h1>
       <ul>
-        <li>
+        {/* <li>
           <Link to='/discover'>Discover</Link>
-        </li>
+        </li> */}
         <li>
           <Link to='/search'>Search</Link>
         </li>
@@ -26,8 +27,6 @@ export const Navbar = () => {
         </li>
         <li>
           <Account/>
-
-          {/* <Link to='/'>Account</Link> */}
         </li>
       </ul>
     </nav>

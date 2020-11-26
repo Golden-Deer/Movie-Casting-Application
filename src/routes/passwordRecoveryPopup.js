@@ -51,7 +51,8 @@ const PasswordRecoveryPopup = () => {
     }
 
     function closePopup(type) {
-        document.getElementById(type).style = 'display: none';
+        console.log("L")
+        document.getElementById(type).style.opacity = 0 + '%';
         setIndicator('');
     }
 

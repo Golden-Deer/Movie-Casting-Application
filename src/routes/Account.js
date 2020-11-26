@@ -13,34 +13,37 @@ const Account = () => {
         // user is logged in
         if (currentUser) {
             // show account popup
-            document.getElementById('accountPopup').style.display = '';
+            document.getElementById('accountPopup').style.opacity = 100 + '%';
+            document.getElementById('accountPopup').style.visibility = 'visible';
             // set account email state (currentUser variable doesn't load immediately)
             setAccountEmail(currentUser.email);
         } else {
-            document.getElementById('loginPopup').style.display = ''; // show login popup
+            document.getElementById('loginPopup').style.opacity = 100 + '%';
+            document.getElementById('loginPopup').style.visibility = 'visible'; // show login popup
             // setPadding(60);
             // setIndicator('');
         }
     }; 
 
-    function closePopup(type) {
-        document.getElementById(type).style.display = 'none';
+    const closingPopup = (type) => {
+        document.getElementById(type).style.opacity = 0 + '%';
+        document.getElementById(type).style.visibility = 'hidden';
     }
 
     function handleLogout() {
         db.auth().signOut();
-        closePopup('accountPopup');
+        closingPopup('accountPopup');
     }
     
     return(
         <>
-        <button id={'your-account'} onClick={viewAccount}>
+        <button class='btn btn-primary' id={'your-account'} onClick={viewAccount}>
             Your Account
         </button>
         <Login/>
-        <table id='accountPopup' class='popup' style={{ display: 'none' }}>
+        <table id='accountPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
-                    <p class='closeButton' onClick={() => closePopup('accountPopup')}>
+                    <p class='closeButton' onClick={()=>closingPopup('accountPopup')}>
                         x
                     </p>
                 </tr>
@@ -52,17 +55,28 @@ const Account = () => {
                 <tr>
                     <p class='popupText'>Account Email: {accountEmail}</p>
                 </tr>
-                <tr>
-                    <button
+                <tr class='center'>
+                    <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 30 + 'px'}}>
+                        <button
                         class='btn btn-primary'
                         style={{
-                            display: 'block',
-                            marginLeft: 'auto',
-                            marginRight: 'auto',
+                            textAlign: 'center',
+                            marginTop: 20 + 'px',
                         }}
                         onClick={handleLogout}>
                         Sign Out
-          </button>
+                        </button>
+                    </td>
+                    <td style={{display: 'inline-block', marginLeft: 30 + 'px', marginRight: 10 + 'px'}}>
+                        <button class='btn btn-danger'
+                        style={{
+                            textAlign: 'center',
+                            marginTop: 20 + 'px',
+                        }}>
+                            Delete Account
+                        </button>
+                    </td>
+                    
                 </tr>
         </table>
         </>

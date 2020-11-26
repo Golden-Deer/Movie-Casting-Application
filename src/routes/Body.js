@@ -24,6 +24,13 @@ const Body = () => {
             projects.push({name: projectName, release_date: projectReleaseDate, genre: projectGenre, description: projectDescription, director: projectDirector, producer: projectProducer});
             firebase.database().ref('USER/' + firebase.auth().currentUser.uid).child('projects').set(projects);
         });
+        // reset states
+        setProjectName('');
+        setProjectReleaseDate('');
+        setProjectGenre('');
+        setProjectDescription('');
+        setProjectDirector('');
+        setProjectProducer('');
         // close project popup
         closePopup('projectPopup');
     }
@@ -38,16 +45,18 @@ const Body = () => {
 
     // project popup
     function projectPopup() {
-        document.getElementById('projectPopup').style.display = ''; // show project popup
+        document.getElementById('projectPopup').style.opacity = 100 + '%'; // show project popup
+        document.getElementById('projectPopup').style.visibility = 'visible'; // show project popup
     }    
 
     function closePopup(type) {
-        document.getElementById(type).style.display = 'none';
+        document.getElementById(type).style.opacity = 0 + '%';
+        document.getElementById(type).style.visibility = 'hidden'; // show project popup
     }
 
     return(
         <>
-        <table id='projectPopup' class='largePopup' style={{ display: 'none' }}>
+        <table id='projectPopup' class='largePopup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => closePopup('projectPopup')}>
                         x
@@ -151,7 +160,7 @@ const Body = () => {
         ) : (
                 <table id='genericDisplay'>
                     <tr>
-                        <h2 style={{ marginLeft: 30 + 'px' }}>
+                        <h2 style={{marginTop: 10 + 'px', marginLeft: 30 + 'px' }}>
                             <b>Who are We?</b>
                         </h2>
                     </tr>

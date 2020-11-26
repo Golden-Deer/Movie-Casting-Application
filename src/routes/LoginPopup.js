@@ -43,21 +43,27 @@ const handleLogin = (event) => {
 
 //reset password functions
 function resetPassword() {
-    document.getElementById('loginPopup').style.display = 'none'; // hide login popup
-    document.getElementById('signUpPopup').style.display = 'none'; // hide sign up popup
+    document.getElementById('loginPopup').style.opacity = 0 + '%'; // hide login popup
+    document.getElementById('loginPopup').style.visibility = 'hidden';
+    document.getElementById('signUpPopup').style.opacity = 0 + '%'; // hide sign up popup
+    document.getElementById('signUpPopup').style.visibility = 'hidden';
     document.getElementById('passwordRecoveryPopup').style = ''; // show password recovery popup
+    document.getElementById('passwordRecoveryPopup').style.visibility = 'visible';
     setIndicator('');
 }
 
 function signUp() {
-    document.getElementById('loginPopup').style.display = 'none'; // hide login popup
+    document.getElementById('loginPopup').style.opacity = 0 + '%'; // hide login popup
+    document.getElementById('loginPopup').style.visibility = 'hidden';
     // document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
-    document.getElementById('signUpPopup').style.display = ''; // show sign up popup
+    document.getElementById('signUpPopup').style.opacity = 100 + '%'; // show sign up popup
+    document.getElementById('signUpPopup').style.visibility = 'visible';
     setIndicator('');
 }
 
 function closePopup(type) {
-    document.getElementById(type).style.display = 'none';
+    document.getElementById(type).style.opacity = 0 + '%';
+    document.getElementById(type).style.visibility = 'hidden';
     // reset states
     setLoginEmail('');
     setLoginPassword('');
@@ -74,7 +80,7 @@ return(
     <SignUpPopup/>
     <PasswordRecoveryPopup/>
     <form onSubmit={handleLogin} id='login_form'></form>
-    <table id='loginPopup' class='popup' style={{ display: 'none' }}>
+    <table id='loginPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
         <tr class='center'>
             <p class='closeButton' onClick={() => closePopup('loginPopup')}>
                 x

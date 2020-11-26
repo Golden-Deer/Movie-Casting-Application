@@ -75,7 +75,8 @@ image.center{
   left: 38%;
   width: 450px;
   height: 380px;
-  border-radius: 10px;
+  border-radius: 15px;
+  transition: visibility 0.4s, opacity 0.4s;
 }
 
 .extendedPopup{
@@ -87,7 +88,8 @@ image.center{
   left: 38%;
   width: 450px;
   height: 430px;
-  border-radius: 10px;
+  border-radius: 15px;
+  transition: visibility 0.4s, opacity 0.4s;
 }
 
 .largePopup{
@@ -99,7 +101,8 @@ image.center{
   left: 36.5%;
   width: 500px;
   height: 570px;
-  border-radius: 10px;
+  border-radius: 15px;
+  transition: visibility 0.4s, opacity 0.4s;
 }
 
 .scrollable{
@@ -125,12 +128,12 @@ image.center{
 }
 
 .movieButton{
-  width: 300px;
-  height: 300px;
+  width: 275px;
+  height: 275px;
   font-size: 23px;
   display: block;
-  border-radius: 4px;
-  margin: 20px 20px 20px 20px;
+  border-radius: 20px;
+  margin: 20px 20px 28px 28px;
   padding: 15px;
   transition-duration: 0.3s;
 }
@@ -172,7 +175,7 @@ image.center{
 
 .navbar a {
   color: #fff;
-  padding: 0.30rem;
+  padding: 1.2rem;
   margin: 0 0.03rem;
 }
 
@@ -256,7 +259,7 @@ image.center{
 }
 
 #block {
-  background-color: lightgray;
+  /* background-color: lightgray; */
   float:left;
   font-size: 15px;
   margin: 1% 1% 1% 1%;
@@ -276,7 +279,7 @@ image.center{
 }
 
 #your-account {
-  background-color: lightgray;
+  /* background-color: lightgray; */
   float:right;
   font-size: 15px;
   margin: 1% 2% 0% 0%;
@@ -300,10 +303,22 @@ button#your-account:hover {
   text-underline-offset: 10px;
 }
 
+.main-title{
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
+  text-align: center;
+  font-size: 180px;
+  user-select: none;
+  opacity: 60%;
+  color: white;
+  text-shadow: 6px 6px 8px rgba(0,0,0,0.8);
+}
+
 /* Home Page */
 .jumbotron {
   background-image: url('./images/HomePic.png');
-  height: 550px;
+  height: 400px;
 }
 
 .jumbotron h1 {

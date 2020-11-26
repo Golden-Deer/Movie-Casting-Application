@@ -24,26 +24,31 @@ class ProjectList extends Component{
         this.setState({projectName: this.state.projects[index]['name']})
         this.setState({projectReleaseDate: this.state.projects[index]['release_date']})
         this.setState({projectGenre: this.state.projects[index]['genre']})
-        this.setState({projectDescription: this.state.projects[index]['producer']})
+        this.setState({projectDescription: this.state.projects[index]['description']})
+        this.setState({projectProducer: this.state.projects[index]['producer']})
         this.setState({projectDirector: this.state.projects[index]['director']})
-        this.setState({selection: index});
-        document.getElementById('editProjectPopup').style.display = ''; // show project popup
+        this.setState({selection: index});    
+        document.getElementById('editProjectPopup').style.opacity = 100 + '%';
+        document.getElementById('editProjectPopup').style.visibility = 'visible'; // show project popup
+        
     }
 
     deleteConfirmation(){
-        document.getElementById('deleteProjectPopup').style.display = '';
+        document.getElementById('deleteProjectPopup').style.opacity = 100 + '%';
+        document.getElementById('deleteProjectPopup').style.visibility = 'visible';
     }
 
-    deleteProject(e){
-        let index = this.state.selection;
-        let reference = firebase.database().ref('USER/' + firebase.auth().currentUser.uid +'/projects/' + (index+1));
+    deleteProject(){
+        let dict = this.state.projectDictionary;
+        let reference = firebase.database().ref('USER/' + firebase.auth().currentUser.uid +'/projects/' + (dict[this.state.selection]));
         reference.remove();
         this.closePopup('deleteProjectPopup')
         this.closePopup('editProjectPopup')
     }
     
-    closePopup(type) {
-        document.getElementById(type).style.display = 'none';
+    closePopup(type) { 
+        document.getElementById(type).style.opacity = 0 + '%';
+        document.getElementById(type).style.visibility = 'hidden';
     }
 
     componentDidMount(){
@@ -55,7 +60,7 @@ class ProjectList extends Component{
             dataSnapshot.forEach(childSnapshot => {
                 temp.push(<td><button class='movieButton' onClick={this.viewProject.bind(this, index)}><b>{childSnapshot.val()['name']}</b></button></td>)
                 projects.push(childSnapshot.val());
-                dictionary[index] = childSnapshot.val()['name'];
+                dictionary[index] = childSnapshot.key;
                 index+=1;
                 if (index % 5 == 0){
                     temp.push(<tr></tr>)
@@ -76,7 +81,7 @@ class ProjectList extends Component{
         return(
             <>
             {buttons}
-            <table id='editProjectPopup' class='largePopup' style={{ display: 'none' }}>
+            <table id='editProjectPopup' class='largePopup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => this.closePopup('editProjectPopup')}>
                         x
@@ -185,7 +190,7 @@ class ProjectList extends Component{
                 </tr>
             </table>
 
-            <table id='deleteProjectPopup' class='popup' style={{ display: 'none' }}>
+            <table id='deleteProjectPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => this.closePopup('deleteProjectPopup')}>
                         x
