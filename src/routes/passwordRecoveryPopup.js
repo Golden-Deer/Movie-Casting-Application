@@ -29,7 +29,11 @@ const PasswordRecoveryPopup = () => {
                         setPadding(30)
                     }
                     else {
-                        setIndicator("Account found (email sending in progress)")
+                        db.auth().sendPasswordResetEmail(email.value).then(function () {
+                            setIndicator("Email sent")
+                        }).catch(function (error) {
+                            setIndicator(error);
+                        });
                         setPadding(30)
                     }
                 })
