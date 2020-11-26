@@ -3,6 +3,7 @@ import React, { useContext, useState} from 'react';
 import Login from './LoginPopup'
 import db from '../base';
 import '../App.css';
+import Button from 'react-bootstrap/Button'
 
 // The Account component handles login, account, and password recovery popup windows and logistics
 const Account = () => {
@@ -52,9 +53,10 @@ const Account = () => {
     
     return(
         <>
-        <button class='btn btn-primary' id={'your-account'} onClick={viewAccount}>
+        <Button variant="primary" onClick={viewAccount} > Your Account </Button>
+        {/* <button class='btn btn-primary' id={'your-account'} onClick={viewAccount}>
             Your Account
-        </button>
+        </button> */}
         <Login/>
         <table id='accountPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>

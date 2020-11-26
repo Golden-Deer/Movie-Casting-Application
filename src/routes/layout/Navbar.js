@@ -1,21 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import Account from '../Account';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Nav, Form} from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 
 export const Navbar1 = () => {
   return (
     <Navbar bg="dark" variant="dark">
     <Navbar.Brand href="/">
-      <img className='nav-img' alt='Golden Cast' src={logo} />
-      Golden Cast
+      <img alt='Golden Cast' className="d-inline-block align-top" 
+      width="45" height="45" src={logo} />
       </Navbar.Brand>
     <Nav className="mr-auto">
-      <Nav.Link href="/discover">Discover</Nav.Link>
       <Nav.Link href="/project">Projects</Nav.Link>
+      <Nav.Link href="/search">Search</Nav.Link>
       <Nav.Link href="/about">About Us</Nav.Link>
+      <Nav.Link href="/discover">Discover</Nav.Link>
     </Nav>
     <Account/>
   </Navbar>
