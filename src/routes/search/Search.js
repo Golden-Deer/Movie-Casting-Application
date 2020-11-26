@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import logo from "../../images/logo.png";
 import DisplayActor from "./DisplayActor"
+import ToggleBar from "./ToggleBar"
 
 const Search = () => {
         const history = useHistory();
@@ -21,10 +22,8 @@ const Search = () => {
         return (
                 <div>
                         <div className="s-navbar">
-                                {/*<img src={logo} className="app-logo"/>*/}
                                 <h1 onClick={() => history.push("/")}>
                                         My Project <a>Showing result for Role1</a> {/*TODO: change is to new*/}
-                                        <button id={"your-account"}>Your Account</button>
                                 </h1>
 
                         </div>
@@ -37,11 +36,7 @@ const Search = () => {
                                         </div>
                                 </div>
                         </div>
-                        <div className="s-category">
-                                <button>TOP CHIOCE</button>
-                                <button>Key word</button>
-                                <button>Key word</button>
-                        </div>
+                        <ToggleBar/>
                         <DisplayActor tags={tags} numActor={count}/>
 
                 </div>
