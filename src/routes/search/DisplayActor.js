@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import db from '../../base'
+import Button from 'react-bootstrap/Button'
 
 class DisplayActor extends Component {
     constructor(props) {
@@ -98,12 +99,12 @@ class DisplayActor extends Component {
 
     render() {
         const display = this.state.records.map(records =>
-            <button id={"block"} key={records.name}>
+            <Button id={"block"} key={records.name}>
                 <div style={{ width: '80%', textAlign: 'center' }}><img src={records.profilepic} style={{ width: '300px' }} alt="The Rock" /></div>
                 <h5 style={{ width: '80%', textAlign: 'center' }}>Name: {records.name}</h5>
                 <h5 style={{ width: '80%', textAlign: 'center' }}>Age: {records.tag.age} Gender: {records.tag.gender}</h5>
                 <h5 style={{ width: '80%', textAlign: 'center' }}>Height: {records.tag.height} Weight: {records.tag.weight}</h5>
-            </button>
+            </Button>
         );
 
         return (

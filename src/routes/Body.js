@@ -2,6 +2,7 @@ import { AuthContext } from '../auth/Auth';
 import React, { useContext, useState} from 'react';
 import firebase from 'firebase';
 import ProjectList from './ListProjects';
+import Button from 'react-bootstrap/Button'
 
 // The Body component renders the user's projects, or the GC marketing pitch if the user is not logged in
 const Body = () => {
@@ -45,13 +46,14 @@ const Body = () => {
 
     // project popup
     function projectPopup() {
-        document.getElementById('projectPopup').style.opacity = 100 + '%'; // show project popup
         document.getElementById('projectPopup').style.visibility = 'visible'; // show project popup
+        document.getElementById('projectPopup').style.opacity = 100 + '%'; // show project popup
+        
     }    
 
     function closePopup(type) {
         document.getElementById(type).style.opacity = 0 + '%';
-        document.getElementById(type).style.visibility = 'hidden'; // show project popup
+        document.getElementById('projectPopup').style.visibility = 'hidden'; // show project popup
     }
 
     return(
@@ -131,8 +133,8 @@ const Body = () => {
           </label>
                 </tr>
                 <tr class='center'>
-                    <button
-                        class='btn btn-primary'
+                    <Button
+                        variant='primary'
                         style={{
                             display: 'block',
                             marginLeft: 'auto',
@@ -142,7 +144,7 @@ const Body = () => {
                         onClick={createProject}
                         disabled={projectName.length < 1 || projectReleaseDate.length != 4}>
                         Create Project
-                    </button>
+                    </Button>
                 </tr>
         </table>
         {currentUser ? (
@@ -151,9 +153,9 @@ const Body = () => {
                     <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
                         <b>My Projects&nbsp;&nbsp;</b>
                     </h2>
-                    <button class='invisibleButton' onClick={projectPopup} style={{fontSize: 40 + 'px'}}>
+                    <label class='invisibleButton' onClick={projectPopup} style={{fontSize: 40 + 'px'}}>
                         <b>+</b>
-                    </button>
+                    </label>
                     <ProjectList/>
                 </tr>
             </table>

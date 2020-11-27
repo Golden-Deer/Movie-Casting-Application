@@ -3,7 +3,10 @@ import React, { useContext, useState} from 'react';
 import Login from './LoginPopup'
 import db from '../base';
 import '../App.css';
+import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
+
 
 // The Account component handles login, account, and password recovery popup windows and logistics
 const Account = () => {
@@ -14,21 +17,19 @@ const Account = () => {
         // user is logged in
         if (currentUser) {
             // show account popup
-            document.getElementById('accountPopup').style.opacity = 100 + '%';
             document.getElementById('accountPopup').style.visibility = 'visible';
-            // set account email state (currentUser variable doesn't load immediately)
+            document.getElementById('accountPopup').style.opacity = 100 + '%';
             setAccountEmail(currentUser.email);
         } else {
             document.getElementById('loginPopup').style.opacity = 100 + '%';
             document.getElementById('loginPopup').style.visibility = 'visible'; // show login popup
-            // setPadding(60);
-            // setIndicator('');
         }
     }; 
 
     const closingPopup = (type) => {
         document.getElementById(type).style.opacity = 0 + '%';
         document.getElementById(type).style.visibility = 'hidden';
+        
     }
 
     function handleLogout() {
@@ -54,9 +55,6 @@ const Account = () => {
     return(
         <>
         <Button variant="primary" onClick={viewAccount} > Your Account </Button>
-        {/* <button class='btn btn-primary' id={'your-account'} onClick={viewAccount}>
-            Your Account
-        </button> */}
         <Login/>
         <table id='accountPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
@@ -74,24 +72,25 @@ const Account = () => {
                 </tr>
                 <tr class='center'>
                     <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 30 + 'px'}}>
-                        <button
-                        class='btn btn-primary'
+                        <Button
+                        variant='primary'
                         style={{
                             textAlign: 'center',
                             marginTop: 20 + 'px',
                         }}
                         onClick={handleLogout}>
                         Sign Out
-                        </button>
+                        </Button>
                     </td>
                     <td style={{display: 'inline-block', marginLeft: 30 + 'px', marginRight: 10 + 'px'}}>
-                        <button class='btn btn-danger'
+                        <Button
+                        variant='danger'
                         style={{
                             textAlign: 'center',
                             marginTop: 20 + 'px',
                         }} onClick={deleteAccount}>
                             Delete Account
-                        </button>
+                        </Button>
                     </td>
                     
                 </tr>

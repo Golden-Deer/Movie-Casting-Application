@@ -76,7 +76,7 @@ image.center{
   width: 450px;
   height: 380px;
   border-radius: 15px;
-  transition: visibility 0.4s, opacity 0.4s;
+  transition: opacity 0.4s;
 }
 
 .extendedPopup{
@@ -89,7 +89,7 @@ image.center{
   width: 450px;
   height: 430px;
   border-radius: 15px;
-  transition: visibility 0.4s, opacity 0.4s;
+  transition: opacity 0.4s;
 }
 
 .largePopup{
@@ -102,7 +102,7 @@ image.center{
   width: 500px;
   height: 570px;
   border-radius: 15px;
-  transition: visibility 0.4s, opacity 0.4s;
+  transition: opacity 0.4s;
 }
 
 .scrollable{
@@ -117,6 +117,16 @@ image.center{
   margin-top: 10px;
   text-align: center;
   width: 400px;
+}
+
+.alteredProjectInputField{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  text-align: center;
+  width: 400px;
+  border: 2px solid #3283a8;
 }
 
 .popupText{

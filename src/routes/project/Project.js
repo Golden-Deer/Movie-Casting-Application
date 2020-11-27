@@ -14,6 +14,7 @@ const Project = (props) => {
           <a onClick={() => history.push('/')}>&lt; My Projects</a>
         </h1>
       </div>
+      {console.log(props.location.state.name)}
       <ProjectDetail projectName={props.location.state.name} />
       <div className='project-attributes'>
         <button onClick={() => history.push("/rolepage")}>Role</button>

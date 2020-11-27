@@ -37,6 +37,9 @@ class RoleList extends Component {
                 <div className='project-attributes'>Role</div>
             </div>;
         }
+        else{
+            console.log("HERE")
+        }
 
         return (
             <div>{display}</div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import Account from './Account';
 import Body from './Body';
 import '../App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Home = () => {
     const history = useHistory();

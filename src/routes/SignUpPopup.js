@@ -1,5 +1,6 @@
 import db from '../base';
 import {React, useState} from 'react';
+import Button from 'react-bootstrap/Button'
 
 const SignUpPopup = () => {
     // sign up states
@@ -72,9 +73,11 @@ const SignUpPopup = () => {
     }
 
     function login() {
-        document.getElementById('signUpPopup').style = 'display: none'; // hide login popup
+        document.getElementById('signUpPopup').style.opacity = 0 + '%'; // hide login popup
+        document.getElementById('signUpPopup').style.visibility = 'hidden'; // hide login popup
         // document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
-        document.getElementById('loginPopup').style = ''; // show sign up popup
+        document.getElementById('loginPopup').style.visibility = 'visible'; // hide login popup
+        document.getElementById('loginPopup').style.opacity = 100 + '%'; // show sign up popup
         setIndicator('');
     }
 
@@ -150,8 +153,8 @@ const SignUpPopup = () => {
                     <p class='warning'>{indicator}</p>
                 </tr>
                 <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
-                    <button
-                        class='btn btn-primary'
+                    <Button
+                        variant='primary'
                         style={{
                             display: 'block',
                             marginLeft: 'auto',
@@ -166,7 +169,7 @@ const SignUpPopup = () => {
                             lastName.length < 1
                         }>
                         Sign Up
-                    </button>
+                    </Button>
                 </tr>
             </table>
         </>

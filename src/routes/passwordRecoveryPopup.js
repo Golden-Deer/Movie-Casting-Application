@@ -1,6 +1,7 @@
 import {React, useState} from 'react';
 import db from '../base';
 import SignUpPopup from './SignUpPopup';
+import Button from 'react-bootstrap/Button'
 
 const PasswordRecoveryPopup = () => {
     
@@ -43,20 +44,24 @@ const PasswordRecoveryPopup = () => {
     }  
 
     function signUp() {
-        document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
-        document.getElementById('signUpPopup').style = ''; // show sign up popup
+        document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
+        document.getElementById('passwordRecoveryPopup').style.visibility = 'hidden'; // hide password recovery popup
+        document.getElementById('signUpPopup').style.visibility = 'visible';
+        document.getElementById('signUpPopup').style.opacity = 0 + '%'; // show sign up popup
         setIndicator('');
     }
 
     function login() {
-        document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
-        document.getElementById('loginPopup').style = ''; // show sign up popup
+        document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
+        document.getElementById('passwordRecoveryPopup').style.visibility = 'hidden'; // hide password recovery popup
+        document.getElementById('loginPopup').style.visibility = 'visible';
+        document.getElementById('loginPopup').style.opacity = 100 + '%'; // show sign up popup
         setIndicator('');
     }
 
     function closePopup(type) {
-        console.log("L")
         document.getElementById(type).style.opacity = 0 + '%';
+        document.getElementById(type).style.visibility = 'hidden';
         setIndicator('');
     }
 
@@ -70,7 +75,7 @@ const PasswordRecoveryPopup = () => {
             <table
                 id='passwordRecoveryPopup'
                 class='popup'
-                style={{ display: 'none' }}>
+                style={{opacity: 100 + '%', visibility: 'hidden'}}>
                 <tr class='center'>
                     <p
                         class='closeButton'
@@ -95,9 +100,9 @@ const PasswordRecoveryPopup = () => {
                     />
                 </tr>
                 <tr class='center'>
-                    <button class='invisibleMiniButton' onClick={signUp}>
+                    <label class='invisibleMiniButton' onClick={signUp}>
                         New to Golden Cast? Sign up here
-                    </button>
+                    </label>
                 </tr>
                 <tr class='center'>
                     <button class='invisibleMiniButton' onClick={login}>
@@ -108,8 +113,8 @@ const PasswordRecoveryPopup = () => {
                     <p class='warning'>{indicator}</p>
                 </tr>
                 <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
-                    <button
-                        class='btn btn-primary'
+                    <Button
+                        variant='primary'
                         style={{
                             display: 'block',
                             marginLeft: 'auto',
@@ -119,7 +124,7 @@ const PasswordRecoveryPopup = () => {
                         form='password_recovery_form'
                         disabled={recoveryEmail.length < 1}>
                         Send Email
-                    </button>
+                    </Button>
                 </tr>
             </table>
             </>

@@ -1,7 +1,8 @@
 import db from '../base';
-import React, { useContext, useState} from 'react';
+import {React, useState} from 'react';
 import SignUpPopup from './SignUpPopup';
 import PasswordRecoveryPopup from './passwordRecoveryPopup';
+import Button from 'react-bootstrap/Button'
 
 const Login = () => {
 
@@ -47,8 +48,9 @@ function resetPassword() {
     document.getElementById('loginPopup').style.visibility = 'hidden';
     document.getElementById('signUpPopup').style.opacity = 0 + '%'; // hide sign up popup
     document.getElementById('signUpPopup').style.visibility = 'hidden';
-    document.getElementById('passwordRecoveryPopup').style = ''; // show password recovery popup
     document.getElementById('passwordRecoveryPopup').style.visibility = 'visible';
+    document.getElementById('passwordRecoveryPopup').style = ''; // show password recovery popup
+    
     setIndicator('');
 }
 
@@ -56,8 +58,9 @@ function signUp() {
     document.getElementById('loginPopup').style.opacity = 0 + '%'; // hide login popup
     document.getElementById('loginPopup').style.visibility = 'hidden';
     // document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
+    document.getElementById('signUpPopup').style.visibility = 'visible';
     document.getElementById('signUpPopup').style.opacity = 100 + '%'; // show sign up popup
-    document.getElementById('signUpPopup').style = '';
+    
     setIndicator('');
 }
 
@@ -114,21 +117,21 @@ return(
             />
         </tr>
         <tr class='center'>
-            <button class='invisibleMiniButton' onClick={signUp}>
+            <label class='invisibleMiniButton' onClick={signUp}>
                 New to Golden Cast? Sign up here
-            </button>
+            </label>
         </tr>
         <tr class='center'>
-            <button class='invisibleMiniButton' onClick={resetPassword}>
+            <label class='invisibleMiniButton' onClick={resetPassword}>
                 Forgot your password? Reset it here
-            </button>
+            </label>
         </tr>
         <tr class='center'>
             <p class='warning'>{indicator}</p>
         </tr>
         <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
-            <button
-                class='btn btn-primary'
+            <Button
+                variant='primary'
                 style={{
                     display: 'block',
                     marginLeft: 'auto',
@@ -136,9 +139,10 @@ return(
                     marginTop: [indicatorPadding] + 'px',
                 }}
                 form='login_form'
+                type='submit'
                 disabled={loginEmail.length < 1 || loginPassword.length < 1}>
                 Sign In
-            </button>
+            </Button>
         </tr>
     </table>
     </>

@@ -11,7 +11,6 @@ import Navbar from './routes/layout/Navbar';
 import Project from './routes/project/Project';
 import RolePage from './routes/project/RolePage';
 import About from './routes/About';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

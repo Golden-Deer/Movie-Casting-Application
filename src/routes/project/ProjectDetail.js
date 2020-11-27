@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component } from 'react';
 import db from '../../base';
+import firebase from 'firebase';
 import { withRouter } from "react-router-dom";
 import RoleList from './RoleList';
 
@@ -12,14 +13,17 @@ class ProjectDetail extends Component {
             roleName: ''
         };
 
-        this.user = db.auth().currentUser;
-
-        this.projectRef = db.database().ref('USER').child(this.user.uid).child('projects');
+        // var user = db.auth().currentUser;
+        var user = firebase.auth().currentUser;
+        this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
     }
 
     componentDidMount() {
         this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
-            this.setState({ project: dataSnapshot.val()[1] });
+            dataSnapshot.forEach(childSnapshot => {
+                this.setState({ project: childSnapshot.val() });
+            })
+            
         });
         if (this.state.project != null) {
             alert(this.state.project.name);
@@ -121,7 +125,7 @@ class ProjectDetail extends Component {
                 <table id='roleDisplay' style={{ width: 100 + '%' }}>
                     <tr>
                         <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
-                            <b>My Projects&nbsp;&nbsp;</b>
+                            <b>My Roles&nbsp;&nbsp;</b>
                         </h2>
                         <button class='invisibleButton' onClick={() => this.rolePopup()} style={{ fontSize: 40 + 'px' }}>
                             <b>+</b>

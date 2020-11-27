@@ -2,14 +2,14 @@ import db from "../../base";
 import "../../App.js";
 import React from 'react';
 import { useHistory } from "react-router-dom";
-//import logo from "../../../images/logo.png"
+import Button from 'react-bootstrap/Button'
 
 const RolePage = () => {
     const history = useHistory();
     return (
         <>
             <header class="container">
-                <button id={"your-account"}>Your Account</button>
+                <Button id={"your-account"}>Your Account</Button>
             </header>
 
             <div className="back-to-project">
