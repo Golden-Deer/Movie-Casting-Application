@@ -56,10 +56,6 @@ class ProjectList extends Component{
         document.getElementById(type).style.visibility = 'hidden';
     }
 
-    openProject(project) {
-        
-    }
-
     componentDidMount(){
         this.mounted = true;
         this.projectRef.child('projects').on('value', dataSnapshot => {
