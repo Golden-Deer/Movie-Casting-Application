@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import {React, Component} from 'react';
+import { withRouter } from "react-router-dom";
 
 // Display all of the user's projects
 class ProjectList extends Component{
@@ -18,7 +19,10 @@ class ProjectList extends Component{
             projectProducer: '',
             selection: '',
         }
+
+        this.projectRef = firebase.database().ref('USER/' + firebase.auth().currentUser.uid);
         this.deleteProject = this.deleteProject.bind(this);
+        this.mounted = false;
     }
     viewProject(index) {
         this.setState({projectName: this.state.projects[index]['name']})
@@ -42,8 +46,9 @@ class ProjectList extends Component{
         let dict = this.state.projectDictionary;
         let reference = firebase.database().ref('USER/' + firebase.auth().currentUser.uid +'/projects/' + (dict[this.state.selection]));
         reference.remove();
-        this.closePopup('deleteProjectPopup')
-        this.closePopup('editProjectPopup')
+        this.closePopup('deleteProjectPopup');
+        this.closePopup('editProjectPopup');
+        reference.off();
     }
     
     closePopup(type) { 
@@ -51,14 +56,21 @@ class ProjectList extends Component{
         document.getElementById(type).style.visibility = 'hidden';
     }
 
+    openProject(project) {
+        
+    }
+
     componentDidMount(){
-        firebase.database().ref('USER/' + firebase.auth().currentUser.uid).child('projects').on('value', dataSnapshot => {
+        this.mounted = true;
+        this.projectRef.child('projects').on('value', dataSnapshot => {
             var projects = [];
             var index = 0;
             var temp = [];
             var dictionary = {};
             dataSnapshot.forEach(childSnapshot => {
-                temp.push(<td><button class='movieButton' onClick={this.viewProject.bind(this, index)}><b>{childSnapshot.val()['name']}</b></button></td>)
+                temp.push(<td><button class='movieButton' onClick={ () => 
+                    this.props.history.push('/project', childSnapshot.val())
+                }><b>{childSnapshot.val()['name']}</b></button></td>)
                 projects.push(childSnapshot.val());
                 dictionary[index] = childSnapshot.key;
                 index+=1;
@@ -66,9 +78,17 @@ class ProjectList extends Component{
                     temp.push(<tr></tr>)
                 }
             })
-            this.setState({projectDictionary: dictionary})
-            this.setState({projects: projects, icons: temp})
+            if (this.mounted) {
+                this.setState({projectDictionary: dictionary});
+                this.setState({projects: projects, icons: temp});
+            }
         })
+    }
+
+    componentWillUnmount() {
+        this.projectRef.off();
+        this.mounted = false;
+        document.body.removeEventListener('click', this.deleteProject);
     }
 
     render(){
@@ -239,4 +259,4 @@ class ProjectList extends Component{
     }
 }
 
-export default ProjectList
+export default withRouter(ProjectList);

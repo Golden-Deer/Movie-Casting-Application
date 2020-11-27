@@ -7,17 +7,6 @@ import '../App.css';
 const Home = () => {
     const history = useHistory();
 
-/*  not working yet
-    function uploadUser(user) {
-        var user = db.auth().currentUser;
-        db.database().ref('USER').set({
-            email: 'db.auth().currentUser.email,',
-            firstName: firstName,
-            lastName: lastName,
-            projects: []
-        });
-    } */
-
     return (
             <div id='main'>
                 <div className='jumbotron'>
