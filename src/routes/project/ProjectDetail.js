@@ -3,6 +3,8 @@ import db from '../../base';
 import firebase from 'firebase';
 import { withRouter } from "react-router-dom";
 import RoleList from './RoleList';
+import { Redirect } from "react-router-dom";
+
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -13,21 +15,40 @@ class ProjectDetail extends Component {
             roleName: ''
         };
 
-        // var user = db.auth().currentUser;
         var user = firebase.auth().currentUser;
-        this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
+        if (user != null)
+            this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
+        // console.log(user);
+        // 
+
+        
+
+
+        
     }
+    
+    
 
     componentDidMount() {
-        this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
-            dataSnapshot.forEach(childSnapshot => {
-                this.setState({ project: childSnapshot.val() });
-            })
-            
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user == null) {
+                <Redirect to='/'/>
+            }
+            else{
+                console.log("NOPE")
+                console.log(user)
+                this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
+
+                this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
+                    dataSnapshot.forEach(childSnapshot => {
+                        this.setState({ project: childSnapshot.val() });
+                    })
+                    
+                });
+            }
         });
-        if (this.state.project != null) {
-            alert(this.state.project.name);
-        }
+
+        
 
     }
 
