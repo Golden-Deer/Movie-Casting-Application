@@ -2,9 +2,7 @@ import React, {Component } from 'react';
 import db from '../../base';
 import firebase from 'firebase';
 import { withRouter } from "react-router-dom";
-import RoleList from './RoleList';
-import { Redirect } from "react-router-dom";
-
+import Button from 'react-bootstrap/Button'
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -12,44 +10,40 @@ class ProjectDetail extends Component {
 
         this.state = {
             project: null,
-            roleName: ''
+            roleName: '',
+            index: props.location.state[1],
         };
-
         var user = firebase.auth().currentUser;
         if (user != null)
             this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
-        // console.log(user);
-        // 
+        this.deleteProject = this.deleteProject.bind(this);
+    }
 
-        
+    deleteConfirmation(){
+        document.getElementById('deleteProjectPopup').style.visibility = 'visible';
+        document.getElementById('deleteProjectPopup').style.opacity = 100 + '%';
+    }
 
-
-        
+    deleteProject(){
+        let reference = firebase.database().ref('USER/' + firebase.auth().currentUser.uid +'/projects/' + (this.state.index));
+        reference.remove();
+        this.closePopup('deleteProjectPopup');
+        this.closePopup('editProjectPopup');
+        reference.off();
+        this.props.history.push('/');
     }
     
-    
-
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
-            if (user == null) {
-                <Redirect to='/'/>
-            }
-            else{
-                console.log("NOPE")
-                console.log(user)
+            if (user != null){
                 this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
-
                 this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
                         this.setState({ project: childSnapshot.val() });
-                    })
-                    
+                    })  
                 });
             }
         });
-
-        
-
     }
 
     componentWillUnmount() {
@@ -90,8 +84,11 @@ class ProjectDetail extends Component {
         var roles = null;
         if (this.state.project != null) {
             display = <div>
-                <div className='project-attributes'>Project Name: {this.state.project.name}</div>
-                <div className='project-attributes'>Description: {this.state.project.description}</div>
+                <p className='project-attributes'><b>Release Date: </b>{this.state.project.release_date}</p>
+                <p className='project-attributes'><b>Genre: </b>{this.state.project.genre}</p>
+                <p className='project-attributes'><b>Description: </b>{this.state.project.description}</p>
+                <p className='project-attributes'><b>Director: </b>{this.state.project.director}</p>
+                <p className='project-attributes'><b>Producer: </b>{this.state.project.producer}</p>
             </div>;
 
             if (this.state.project.roles == null) {
@@ -143,6 +140,16 @@ class ProjectDetail extends Component {
                     </tr>
                 </table>
                 {display}
+                <Button
+                    variant='danger'
+                    style={{
+                        textAlign: 'center',
+                        marginLeft: 50 + 'px',
+                    }}
+                    onClick={this.deleteConfirmation}
+                    >
+                    Delete Project
+                </Button>
                 <table id='roleDisplay' style={{ width: 100 + '%' }}>
                     <tr>
                         <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
@@ -154,6 +161,49 @@ class ProjectDetail extends Component {
                     </tr>
                 </table>
                 {roles}
+
+                <table id='deleteProjectPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
+                    <tr>
+                        <p class='closeButton' onClick={() => this.closePopup('deleteProjectPopup')}>
+                            x
+                        </p>
+                    </tr>
+                    <tr class='center'>
+                        <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                            <b>Delete Project Confirmation</b>
+                        </p>
+                    </tr>
+                    <tr class='center' style={{ marginTop: 15 + 'px', padding: 25 + 'px' }}>
+                        <label>Are you sure you want to delete <b>{this.state.projectName}</b>? This operation cannot be undone.</label>
+                    </tr>
+                    <tr class='center'>
+                        <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
+                            <Button
+                                variant='danger'
+                                style={{
+                                    textAlign: 'center',
+                                    marginTop: 20 + 'px',
+                                    marginBottom: 20 + 'px',
+                                }}
+                                onClick={this.deleteProject}
+                                >
+                                Delete
+                            </Button>
+                        </td>
+                        <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
+                            <Button
+                                variant='primary'
+                                style={{
+                                    textAlign: 'center',
+                                    marginTop: 20 + 'px',
+                                    marginBottom: 20 + 'px',
+                                }}
+                                onClick={()=> this.closePopup('deleteProjectPopup')}>
+                                Cancel
+                            </Button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         );
     }

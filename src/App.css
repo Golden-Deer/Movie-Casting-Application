@@ -283,7 +283,6 @@ image.center{
 /* Project Page */
 #my-projects {
   cursor: pointer;
-  float:left;
   padding:1% 1% 1% 1% ;
   margin: 0% 0% 2% 0%;
 }
@@ -305,12 +304,8 @@ button#your-account:hover {
 }
 
 .project-attributes {
-  clear: both;
-  cursor: default;
   font-size: 150%;
   margin: 3% 0% 3% 3%;
-  text-decoration: underline;
-  text-underline-offset: 10px;
 }
 
 .main-title{

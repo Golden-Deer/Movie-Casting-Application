@@ -4,20 +4,18 @@ import React, {useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 import '../../App.css';
 import ProjectDetail from './ProjectDetail';
-import { AuthProvider } from '../../auth/Auth';
-import { AuthContext } from "../../auth/Auth";
 
-const Project = (props) => {
+const ProjectViewer = (props) => {
   const history = useHistory();
-
+  console.log(props.location.state[1]);
   return (
     <>
-      <div>
+      <p>
         <h1 id='my-projects'>
-          <a onClick={() => history.push('/')}>&lt; My Projects</a>
+          <a onClick={() => history.push('/')}>&lt; <b>{props.location.state[0].name}</b></a>
         </h1>
-      </div>
-      <ProjectDetail projectName={props.location.state.name} />
+      </p>
+      <ProjectDetail projectName={props.location.state[0].name} />
       <div className='project-attributes'>
         <button onClick={() => history.push("/rolepage")}>Role</button>
       </div>
@@ -25,4 +23,4 @@ const Project = (props) => {
   );
 };
 
-export default Project;
+export default ProjectViewer;

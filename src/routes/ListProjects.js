@@ -10,7 +10,6 @@ class ProjectList extends Component{
         this.state = {
             projects: [],
             icons: [],
-            projectDictionary: {},  // map index to project name for easy database lookup
             projectName: '',
             projectReleaseDate: '',
             projectGenre: '',
@@ -21,7 +20,6 @@ class ProjectList extends Component{
         }
 
         this.projectRef = firebase.database().ref('USER/' + firebase.auth().currentUser.uid);
-        this.deleteProject = this.deleteProject.bind(this);
         this.mounted = false;
     }
     viewProject(index) {
@@ -36,20 +34,6 @@ class ProjectList extends Component{
         document.getElementById('editProjectPopup').style.visibility = 'visible'; // show project popup
         
     }
-
-    deleteConfirmation(){
-        document.getElementById('deleteProjectPopup').style.opacity = 100 + '%';
-        document.getElementById('deleteProjectPopup').style.visibility = 'visible';
-    }
-
-    deleteProject(){
-        let dict = this.state.projectDictionary;
-        let reference = firebase.database().ref('USER/' + firebase.auth().currentUser.uid +'/projects/' + (dict[this.state.selection]));
-        reference.remove();
-        this.closePopup('deleteProjectPopup');
-        this.closePopup('editProjectPopup');
-        reference.off();
-    }
     
     closePopup(type) { 
         document.getElementById(type).style.opacity = 0 + '%';
@@ -62,20 +46,17 @@ class ProjectList extends Component{
             var projects = [];
             var index = 0;
             var temp = [];
-            var dictionary = {};
             dataSnapshot.forEach(childSnapshot => {
                 temp.push(<td><button class='movieButton' onClick={ () => 
-                    this.props.history.push('/project', childSnapshot.val())
+                    this.props.history.push('/project', [childSnapshot.val(), childSnapshot.key])
                 }><b>{childSnapshot.val()['name']}</b></button></td>)
                 projects.push(childSnapshot.val());
-                dictionary[index] = childSnapshot.key;
                 index+=1;
                 if (index % 5 == 0){
                     temp.push(<tr></tr>)
                 }
             })
             if (this.mounted) {
-                this.setState({projectDictionary: dictionary});
                 this.setState({projects: projects, icons: temp});
             }
         })
@@ -189,65 +170,6 @@ class ProjectList extends Component{
                             Save Changes
                         </button>
                     </td>
-                    <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
-                        <button
-                            class='btn btn-danger'
-                            style={{
-                                textAlign: 'center',
-                                marginTop: 20 + 'px',
-                                marginBottom: 20 + 'px',
-                            }}
-                            onClick={this.deleteConfirmation}
-                            >
-                            Delete Project
-                        </button>
-                    </td>
-                    
-                </tr>
-            </table>
-
-            <table id='deleteProjectPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
-                <tr>
-                    <p class='closeButton' onClick={() => this.closePopup('deleteProjectPopup')}>
-                        x
-                    </p>
-                </tr>
-                <tr class='center'>
-                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
-                        <b>Delete Project Confirmation</b>
-                    </p>
-                </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px', padding: 15 + 'px' }}>
-                    <label>Are you sure you want to delete <b>{this.state.projectName}</b>? This operation cannot be undone</label>
-                </tr>
-
-                <tr class='center'>
-                    <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
-                        <button
-                            class='btn btn-danger'
-                            style={{
-                                textAlign: 'center',
-                                marginTop: 20 + 'px',
-                                marginBottom: 20 + 'px',
-                            }}
-                            onClick={this.deleteProject}
-                            >
-                            Delete
-                        </button>
-                    </td>
-                    <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
-                        <button
-                            class='btn btn-primary'
-                            style={{
-                                textAlign: 'center',
-                                marginTop: 20 + 'px',
-                                marginBottom: 20 + 'px',
-                            }}
-                            onClick={()=> this.closePopup('deleteProjectPopup')}>
-                            Cancel
-                        </button>
-                    </td>
-                    
                 </tr>
             </table>
             </>
