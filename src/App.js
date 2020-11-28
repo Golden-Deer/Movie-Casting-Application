@@ -23,7 +23,7 @@ function App() {
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
-          <Route exact path='/project' component = {ProjectViewer} />
+          <Route exact path='/project' component = {ProjectViewer} /> 
           <Route exact path='/rolepage' component = {RolePage} />
           <Route exact path='/about' component={About}/>
 

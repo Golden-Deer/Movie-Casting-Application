@@ -1,3 +1,13 @@
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+html {
+  font-size: 100%
+}
+
+.glyphicon {
+  font-size: 20px;
+}
+
 .center {
   display: block;
   margin-left: auto;
@@ -76,7 +86,7 @@ image.center{
   width: 450px;
   height: 380px;
   border-radius: 15px;
-  transition: opacity 0.4s;
+  transition: opacity 0.5s;
 }
 
 .extendedPopup{
@@ -89,7 +99,7 @@ image.center{
   width: 450px;
   height: 430px;
   border-radius: 15px;
-  transition: opacity 0.4s;
+  transition: opacity 0.5s;
 }
 
 .largePopup{
@@ -102,7 +112,7 @@ image.center{
   width: 500px;
   height: 570px;
   border-radius: 15px;
-  transition: opacity 0.4s;
+  transition: opacity 0.5s;
 }
 
 .scrollable{
@@ -303,10 +313,17 @@ button#your-account:hover {
   opacity: 1
 }
 
-.project-attributes {
+.project-attribute-title {
+  display: inline-block;
   font-size: 150%;
-  margin: 3% 0% 3% 3%;
+  margin: 1% 0% 1% 2%;
 }
+
+.project-attribute-description {
+  font-size: 130%;
+  margin: 0.25% 0% 1.5% 2%;
+}
+
 
 .main-title{
   display: block;

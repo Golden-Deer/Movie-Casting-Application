@@ -11,7 +11,7 @@ export const Navbar1 = () => {
       width="45" height="45" src={logo} />
       </Navbar.Brand>
     <Nav className="mr-auto">
-      <Nav.Link href="/project">Projects</Nav.Link>
+      <Nav.Link href="/">Projects</Nav.Link>
       <Nav.Link href="/search">Search</Nav.Link>
       <Nav.Link href="/about">About Us</Nav.Link>
       <Nav.Link href="/discover">Discover</Nav.Link>
