@@ -117,28 +117,28 @@ class ProjectDetail extends Component {
         if (this.state.project != null) {
             display = <div>
                 <p>
-                    <Button variant='info' onClick={()=>this.editProject('Release Date')} style={{margin: 0 + '% ' +  -1 + '% ' + 0 + '% ' + 2 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-title'><b>Release Date</b></p>
+                    <Button variant='info' onClick={()=>this.editProject('Release Date')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-description'>{this.state.project.release_date}</p>
                 </p>
                 <p>
-                    <Button variant='info' onClick={()=>this.editProject('Genre')} style={{margin: 0 + '% ' +  -1 + '% ' + 0 + '% ' + 2 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <label className='project-attribute-title'><b>Genre</b></label>
+                    <Button variant='info' onClick={()=>this.editProject('Genre')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-description'>{this.state.project.genre}</p>
                 </p>
                 <p>
-                    <Button variant='info' onClick={()=>this.editProject('Description')} style={{margin: 0 + '% ' +  -1 + '% ' + 0 + '% ' + 2 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-title'><b>Description</b></p>
+                    <Button variant='info' onClick={()=>this.editProject('Description')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-description'>{this.state.project.description}</p>
                 </p>
                 <p>
-                    <Button variant='info' onClick={()=>this.editProject('Director')} style={{margin: 0 + '% ' +  -1 + '% ' + 0 + '% ' + 2 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-title'><b>Director</b></p>
+                    <Button variant='info' onClick={()=>this.editProject('Director')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-description'>{this.state.project.director}</p>
                 </p>
                 <p>
-                    <Button variant='info' onClick={()=>this.editProject('Producer')} style={{margin: 0 + '% ' +  -1 + '% ' + 0 + '% ' + 2 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-title'><b>Producer</b></p>
+                    <Button variant='info' onClick={()=>this.editProject('Producer')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-description'>{this.state.project.producer}</p>
                 </p>
             </div>;

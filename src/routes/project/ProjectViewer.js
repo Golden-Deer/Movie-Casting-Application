@@ -7,7 +7,6 @@ import ProjectDetail from './ProjectDetail';
 
 const ProjectViewer = (props) => {
   const history = useHistory();
-  console.log(props.location.state[1]);
   return (
     <>
       <p>
