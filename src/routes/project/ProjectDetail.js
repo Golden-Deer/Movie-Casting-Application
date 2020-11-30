@@ -10,7 +10,9 @@ class ProjectDetail extends Component {
 
         this.state = {
             project: null,
+            projectKey: '',
             roleName: '',
+            roleDescription: '',
             field: '',
             originalValue: '',
             newValue: '',
@@ -32,7 +34,7 @@ class ProjectDetail extends Component {
                 this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
                 this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
-                        this.setState({ project: childSnapshot.val() });
+                        this.setState({ project: childSnapshot.val(), projectKey: childSnapshot.key });
                     })  
                 });
             }
@@ -52,9 +54,9 @@ class ProjectDetail extends Component {
                 updateProject.roles = [];
             }
             this.setState({ project: updateProject.roles.push({ name: this.state.roleName }) });
-            this.projectRef.child(this.state.project.name).set(this.state.project);
+            this.projectRef.child(this.state.projectKey).set(this.state.project);
             // reset states
-            this.setState({ roleName: '' });
+            this.setState({ roleName: '', roleDescription: '' });
         }
     }
 
@@ -174,6 +176,14 @@ class ProjectDetail extends Component {
                             placeholder='Role Name *'
                             form='project_creation_form'
                             onChange={(e) => this.setState({ roleName: e.target.value })}
+                        />
+                    </tr>
+                    <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                        <input
+                            class='projectInputField'
+                            placeholder='Description'
+                            form='project_creation_form'
+                            onChange={(e) => this.setState({ roleDescription: e.target.value })}
                         />
                     </tr>
                     <tr class='center'>
