@@ -154,19 +154,19 @@ class ProjectDetail extends Component {
             </div>;
 
             if (this.state.project.roles == null) {
-                roles = <p class='banner'>You don't have any roles :(</p>
+                roles =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
+                <tr>
+                    <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
+                        <b>My Roles&nbsp;&nbsp;</b>
+                    </h2>
+                    <label class='invisibleButton' onClick={() => this.rolePopup()} style={{ fontSize: 40 + 'px' }}>
+                        <b>+</b>
+                    </label>
+                </tr>
+                <tr class='banner'>You don't have any roles :(</tr>
+                </table>
             }
             else {
-                console.log(this.state.project.roles);
-                // var role = this.state.project.roles.map(roles =>
-                //     <tr><Card className='roleCard'>
-                //     <Card.Body>
-                //     <Card.Title><b>{roles.name}</b></Card.Title>
-                //     <Card.Subtitle>{roles.description}</Card.Subtitle>
-                //     </Card.Body>
-                //     </Card>
-                //     </tr>
-                // );
                 var role = [];
                 for (var i=0; i<this.state.project.roles.length; i++){
                     if (i % 3 == 0){
