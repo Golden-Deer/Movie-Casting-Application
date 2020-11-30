@@ -2,7 +2,11 @@ import React, {Component } from 'react';
 import db from '../../base';
 import firebase from 'firebase';
 import { withRouter } from "react-router-dom";
+import RolePopup from './RolePopup';
+import EditProjectPopup from './EditProjectPopup';
+import DeleteProjectPopup from './DeleteProjectPopup';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -26,6 +30,10 @@ class ProjectDetail extends Component {
         // bind functions
         this.updateProject = this.updateProject.bind(this);
         this.deleteProject = this.deleteProject.bind(this);
+        this.setNewValue = this.setNewValue.bind(this);
+        this.setRoleName = this.setRoleName.bind(this);
+        this.setRoleDescription = this.setRoleDescription.bind(this);
+        this.setProject = this.setProject.bind(this);
     }
 
     componentDidMount() {
@@ -45,36 +53,10 @@ class ProjectDetail extends Component {
         this.projectRef.off();
     }
 
-    createRole() {
-        // add this project to the project list of this user
-        if (this.state.project != null) {
-            var updateProject = this.state.project;
-            alert(updateProject.name)
-            if (updateProject.roles == null) {
-                updateProject.roles = [];
-            }
-            this.setState({ project: updateProject.roles.push({ name: this.state.roleName }) });
-            this.projectRef.child(this.state.projectKey).set(this.state.project);
-            // reset states
-            this.setState({ roleName: '', roleDescription: '' });
-        }
-    }
-
     editProject(field){
         document.getElementById('editProjectPopup').style.visibility = 'visible';
         document.getElementById('editProjectPopup').style.opacity = 100 + '%';
         this.setState({field: field, originalValue: this.state.project[field.toLowerCase().replace(' ', '_')], newValue: this.state.project[field.toLowerCase().replace(' ', '_')], disableSave: true});
-    }
-
-    editField(e) {
-        const re = /^[0-9\b]+$/;
-        if (!(this.state.field == 'Release Date' && (e.target.value.length > 4 || !re.test(e.target.value)))){
-        if (this.state.originalValue == e.target.value || (this.state.field == 'Release Date' && e.target.value.length != 4))
-            this.setState({newValue: e.target.value, disableSave: true})
-        else
-            this.setState({newValue: e.target.value, disableSave: false})
-        }
-        
     }
 
     updateProject(){
@@ -113,6 +95,22 @@ class ProjectDetail extends Component {
         }
     }
 
+    setNewValue(e, bool){
+        this.setState({newValue: e.target.value, disableSave: bool})
+    }
+
+    setRoleName(e){
+        this.setState({ roleName: e });
+    }
+
+    setRoleDescription(e){
+        this.setState({ roleDescription: e });
+    }
+
+    setProject(e){
+        this.setState({project: e});
+    }
+
     render() {
         var display = null;
         var roles = null;
@@ -143,179 +141,68 @@ class ProjectDetail extends Component {
                     <Button variant='info' onClick={()=>this.editProject('Producer')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                     <p className='project-attribute-description'>{this.state.project.producer}</p>
                 </p>
-            </div>;
-
-            if (this.state.project.roles == null) {
-                roles = <p class='banner'>You don't have any roles :(</p>
-            }
-            else {
-                roles = this.state.project.roles.map(roles =>
-                    <Button variant='primary' id={"block"} key={roles.name}>
-                        <h5 style={{ width: '80%', textAlign: 'center' }}>Name: {roles.name}</h5>
-                    </Button>
-                );
-            }
-        }
-
-        return (
-            <div>
-                <table id='rolePopup' class='popup' style={{ opacity: 0 + '%', visibility: 'hidden' }}>
-                    <tr>
-                        <p class='closeButton' onClick={() => this.closePopup('rolePopup')}>
-                            x
-                        </p>
-                    </tr>
-                    <tr class='center'>
-                        <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
-                            <b>Create New Role</b>
-                        </p>
-                    </tr>
-                    <tr class='center' style={{ marginTop: 15 + 'px' }}>
-                        <input
-                            class='projectInputField'
-                            placeholder='Role Name *'
-                            form='project_creation_form'
-                            onChange={(e) => this.setState({ roleName: e.target.value })}
-                        />
-                    </tr>
-                    <tr class='center' style={{ marginTop: 15 + 'px' }}>
-                        <input
-                            class='projectInputField'
-                            placeholder='Description'
-                            form='project_creation_form'
-                            onChange={(e) => this.setState({ roleDescription: e.target.value })}
-                        />
-                    </tr>
-                    <tr class='center'>
-                        <Button
-                            variant='primary'
-                            style={{
-                                display: 'block',
-                                marginLeft: 'auto',
-                                marginRight: 'auto',
-                                marginTop: 20 + 'px',
-                            }}
-                            onClick={() => this.createRole()}
-                            disabled={this.state.roleName.length < 1}>
-                            Create Role
-                        </Button>
-                    </tr>
-                </table>
-                {display}
                 <Button
                     variant='danger'
                     style={{
+                        fontSize: 1.25 + 'rem',
                         margin: 2 + '% ' + 2 + '% ' +2 + '% ' + 2 + '%',
                     }}
                     onClick={this.deleteConfirmation}
                     >
                     Delete Project
                 </Button>
+            </div>;
 
-                <table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
-                    <tr>
-                        <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
-                            <b>My Roles&nbsp;&nbsp;</b>
-                        </h2>
-                        <label class='invisibleButton' onClick={() => this.rolePopup()} style={{ fontSize: 40 + 'px' }}>
-                            <b>+</b>
-                        </label>
-                    </tr>
-                </table>
-                {roles}
-
-                <table id='editProjectPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
-                    <tr>
-                        <p class='closeButton' onClick={() => this.closePopup('editProjectPopup')}>
-                            x
-                        </p>
-                    </tr>
-                    <tr class='center'>
-                        <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
-                            <b>Edit Project {this.state.field}</b>
-                        </p>
-                    </tr>
-                    {this.state.field == 'Description' ? 
-                        <tr class='center'>
-                            <textarea value={this.state.newValue} cols='41' rows='4' onChange={(e)=>this.editField(e)} style={{marginTop: 40 + 'px'}}></textarea>
-                        </tr>
-                        :
-                        <tr class='center'>
-                            <input value={this.state.newValue} onChange={(e)=>this.editField(e)} style={{marginTop: 50 + 'px'}}></input>
-                        </tr>
+            if (this.state.project.roles == null) {
+                roles = <p class='banner'>You don't have any roles :(</p>
+            }
+            else {
+                console.log(this.state.project.roles);
+                // var role = this.state.project.roles.map(roles =>
+                //     <tr><Card className='roleCard'>
+                //     <Card.Body>
+                //     <Card.Title><b>{roles.name}</b></Card.Title>
+                //     <Card.Subtitle>{roles.description}</Card.Subtitle>
+                //     </Card.Body>
+                //     </Card>
+                //     </tr>
+                // );
+                var role = [];
+                for (var i=0; i<this.state.project.roles.length; i++){
+                    if (i % 3 == 0){
+                        console.log("newline")
+                        role.push(<tr></tr>)
                     }
-                    <tr class='center'>
-                        <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
-                            <Button
-                                variant='primary'
-                                style={{
-                                    textAlign: 'center',
-                                    marginTop: 20 + 'px',
-                                    marginBottom: 20 + 'px',
-                                }}
-                                onClick={this.updateProject}
-                                disabled={this.state.disableSave}
-                                >
-                                Save
-                            </Button>
-                        </td>
-                        <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
-                            <Button
-                                variant='danger'
-                                style={{
-                                    textAlign: 'center',
-                                    marginTop: 20 + 'px',
-                                    marginBottom: 20 + 'px',
-                                }}
-                                onClick={()=> this.closePopup('editProjectPopup')}>
-                                Cancel
-                            </Button>
-                        </td>
-                    </tr>
+                    role.push(<td><Card className='roleCard'>
+                    <Card.Body>
+                    <Card.Title><b>{this.state.project.roles[i].name}</b></Card.Title>
+                    <Card.Subtitle>{this.state.project.roles[i].description}</Card.Subtitle>
+                    </Card.Body>
+                    </Card>
+                    </td>);
+                }
+                console.log("HERE")
+                roles =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
+                <tr>
+                    <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
+                        <b>My Roles&nbsp;&nbsp;</b>
+                    </h2>
+                    <label class='invisibleButton' onClick={() => this.rolePopup()} style={{ fontSize: 40 + 'px' }}>
+                        <b>+</b>
+                    </label>
+                </tr>
+                {role}
                 </table>
+            }
+        }
 
-                <table id='deleteProjectPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
-                    <tr>
-                        <p class='closeButton' onClick={() => this.closePopup('deleteProjectPopup')}>
-                            x
-                        </p>
-                    </tr>
-                    <tr class='center'>
-                        <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
-                            <b>Delete Project Confirmation</b>
-                        </p>
-                    </tr>
-                    <tr class='center' style={{ marginTop: 15 + 'px', padding: 25 + 'px' }}>
-                        <label>Are you sure you want to delete <b>{this.state.projectName}</b>? This operation cannot be undone.</label>
-                    </tr>
-                    <tr class='center'>
-                        <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
-                            <Button
-                                variant='danger'
-                                style={{
-                                    textAlign: 'center',
-                                    marginTop: 20 + 'px',
-                                    marginBottom: 20 + 'px',
-                                }}
-                                onClick={this.deleteProject}
-                                >
-                                Delete
-                            </Button>
-                        </td>
-                        <td style={{display: 'inline-block', marginLeft: 20 + 'px', marginRight: 10 + 'px'}}> 
-                            <Button
-                                variant='primary'
-                                style={{
-                                    textAlign: 'center',
-                                    marginTop: 20 + 'px',
-                                    marginBottom: 20 + 'px',
-                                }}
-                                onClick={()=> this.closePopup('deleteProjectPopup')}>
-                                Cancel
-                            </Button>
-                        </td>
-                    </tr>
-                </table>
+        return (
+            <div>
+                <RolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project} projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleDescription={this.setRoleDescription} setProject={this.setProject} closePopup={this.closePopup}/>
+                {display}
+                {roles}
+                <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue} setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateProject={this.updateProject} closePopup={this.closePopup}/>
+                <DeleteProjectPopup deleteProject={this.deleteProject} projectName={this.state.projectName} closePopup={this.closePopup}/>
             </div>
         );
     }

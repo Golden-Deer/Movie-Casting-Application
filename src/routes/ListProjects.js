@@ -1,6 +1,8 @@
 import firebase from 'firebase';
 import {React, Component} from 'react';
 import { withRouter } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 // Display all of the user's projects
 class ProjectList extends Component{
@@ -8,6 +10,7 @@ class ProjectList extends Component{
         super(props);
 
         this.state = {
+            test: [],
             projects: [],
             icons: [],
             projectName: '',
@@ -47,18 +50,22 @@ class ProjectList extends Component{
             var index = 0;
             var temp = [];
             dataSnapshot.forEach(childSnapshot => {
-                temp.push(<td><button class='movieButton' onClick={ () => 
-                    this.props.history.push('/project', [childSnapshot.val(), childSnapshot.key])
-                }><b>{childSnapshot.val()['name']}</b></button></td>)
+                temp.push(<td>
+                    <Card className='movieCard' onClick={() => this.props.history.push('/project', [childSnapshot.val(), childSnapshot.key])}>
+                        <Card.Body>
+                        <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.5 + 'rem'}}><b>{childSnapshot.val()['name']}</b></Card.Title>
+                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{childSnapshot.val()['release_date']}</Card.Subtitle>
+                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{childSnapshot.val()['genre']}</Card.Subtitle>
+                        </Card.Body>
+                    </Card>
+                    </td>)
                 projects.push(childSnapshot.val());
                 index+=1;
                 if (index % 5 == 0){
                     temp.push(<tr></tr>)
                 }
             })
-            if (this.mounted) {
-                this.setState({projects: projects, icons: temp});
-            }
+            this.setState({projects: projects, test: temp});
         })
     }
 
@@ -69,7 +76,7 @@ class ProjectList extends Component{
     }
 
     render(){
-        var buttons = this.state.icons;
+        var buttons = this.state.test;
         if (buttons.length == 0)
             buttons = <p class='banner'>You don't have any projects :(</p>
         else

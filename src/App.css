@@ -150,22 +150,38 @@ image.center{
   margin-top: 10px;
 }
 
-.movieButton{
-  width: 275px;
-  height: 275px;
-  font-size: 23px;
+.movieCard{
+  width: 18rem;
+  height: 14rem;
   display: block;
-  border-radius: 20px;
   margin: 20px 20px 28px 28px;
   padding: 15px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
   transition-duration: 0.3s;
 }
 
-.movieButton:hover {
+.movieCard:hover {
   background-color: #1453aa;
   color: white;
   position: relative;
   transform: translate(0px, -15px);
+}
+
+.roleCard{
+  width: 30rem;
+  height: 12rem;
+  display: block;
+  margin: 5px 5px 28px 28px;
+  padding: 15px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+  transition-duration: 0.3s;
+}
+
+.roleCard:hover {
+  background-color: #1453aa;
+  color: white;
+  position: relative;
+  transform: translate(0px, -10px);
 }
 
 .banner{
