@@ -1,58 +1,45 @@
 import db from '../../base';
 import '../../App.js';
 import React, { Component } from 'react';
-//import { useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import ExploreActor from './ExploreActor';
+import { useHistory, useState } from 'react-router-dom';
 
-class Discover extends Component {
-  constructor(props) {
-    super(props);
+const Discover = () => {
+  const history = useHistory();
+  const [count, setCount] = useState(6);
+  const tags = {
+    gender: 'male',
+  };
 
-    this.state = {
-      profiles: [],
-    };
+  window.onscroll = function (ev) {
+    if (
+      Math.ceil(window.innerHeight + window.scrollY) >=
+      document.documentElement.scrollHeight
+    ) {
+      setCount(count + 6);
+    }
+  };
 
-    this.firebaseRef = db.database().ref('PROFILE');
-    this.firebaseRef.on('value', (dataSnapshot) => {
-      let profiles = [];
-      dataSnapshot.forEach((childSnapshot) => {
-        let profile = childSnapshot.val();
-        profile['.key'] = childSnapshot.key;
-        profiles.push(profile);
-      });
-      this.setState({ profiles });
-    });
-  }
-
-  componentWillUnmount() {
-    this.firebaseRef.off();
-  }
-  //const history = useHistory();
-
-  // map image of actor to profile ID
-  render() {
-    const display = this.state.profiles.map((records) => (
-      <Button id={'block'} key={records.name}>
-        <div style={{ width: '80%', textAlign: 'center' }}>
-          <img
-            src={records.profilepic}
-            style={{ width: '300px' }}
-            alt='The Rock'
-          />
+  return (
+    <div>
+      <div className='s-navbar'>
+        <h1 onClick={() => history.push('/')}>
+          My Project <a>Showing result for Role1</a>{' '}
+          {/*TODO: change is to new*/}
+        </h1>
+      </div>
+      <div className='s-main'>
+        <div className='s-sidebar'>
+          <h1>Project list</h1>
+          <h2> - Project1</h2>
+          <div id={'mini-project'}>
+            <h2>project</h2>
+          </div>
         </div>
-        <h5 style={{ width: '80%', textAlign: 'center' }}>
-          Name: {records.name}
-        </h5>
-        <h5 style={{ width: '80%', textAlign: 'center' }}>
-          Age: {records.tag.age} Gender: {records.tag.gender}
-        </h5>
-        <h5 style={{ width: '80%', textAlign: 'center' }}>
-          Height: {records.tag.height} Weight: {records.tag.weight}
-        </h5>
-      </Button>
-    ));
-    return <div>{display}</div>;
-  }
-}
+      </div>
+      <ExploreActor tags={tags} numActor={count} />
+    </div>
+  );
+};
 
 export default Discover;
