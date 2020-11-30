@@ -18,25 +18,26 @@ const PasswordRecoveryPopup = () => {
 
     function handlePasswordRecovery(event) {
         event.preventDefault();
-        const { email } = event.target.elements;
         try {
             db
                 .auth()
-                .fetchSignInMethodsForEmail(email.value)
+                .fetchSignInMethodsForEmail(recoveryEmail)
                 .then((signInMethods) => {
+                    console.log("HERE");
                     // an empty array means the account doesn't exist
                     if (signInMethods.length == 0) {
                         setIndicator("No account in our database is associated with this email")
-                        setPadding(30)
+                        
                     }
                     else {
-                        db.auth().sendPasswordResetEmail(email.value).then(function () {
+                        db.auth().sendPasswordResetEmail(recoveryEmail).then(function () {
                             setIndicator("Email sent")
+                            setPadding(30);
                         }).catch(function (error) {
                             setIndicator(error);
                         });
-                        setPadding(30)
                     }
+                    
                 })
         } catch (error) {
             alert(error);
@@ -47,7 +48,7 @@ const PasswordRecoveryPopup = () => {
         document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
         document.getElementById('passwordRecoveryPopup').style.visibility = 'hidden'; // hide password recovery popup
         document.getElementById('signUpPopup').style.visibility = 'visible';
-        document.getElementById('signUpPopup').style.opacity = 0 + '%'; // show sign up popup
+        document.getElementById('signUpPopup').style.opacity = 100 + '%'; // show sign up popup
         setIndicator('');
     }
 
@@ -68,14 +69,10 @@ const PasswordRecoveryPopup = () => {
     return(
             <>
             <SignUpPopup/>
-            <form
-                onSubmit={handlePasswordRecovery}
-                id='password_recovery_form'>
-            </form>
             <table
                 id='passwordRecoveryPopup'
                 class='popup'
-                style={{opacity: 100 + '%', visibility: 'hidden'}}>
+                style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr class='center'>
                     <p
                         class='closeButton'
@@ -95,7 +92,6 @@ const PasswordRecoveryPopup = () => {
                         type='email'
                         value={recoveryEmail}
                         placeholder='Email'
-                        form='password_recovery_form'
                         onChange={changeRecoveryEmail}
                     />
                 </tr>
@@ -121,7 +117,7 @@ const PasswordRecoveryPopup = () => {
                             marginRight: 'auto',
                             marginTop: [indicatorPadding] + 'px',
                         }}
-                        form='password_recovery_form'
+                        onClick={handlePasswordRecovery}
                         disabled={recoveryEmail.length < 1}>
                         Send Email
                     </Button>

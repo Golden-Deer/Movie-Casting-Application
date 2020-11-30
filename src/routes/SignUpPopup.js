@@ -73,11 +73,10 @@ const SignUpPopup = () => {
     }
 
     function login() {
-        document.getElementById('signUpPopup').style.opacity = 0 + '%'; // hide login popup
-        document.getElementById('signUpPopup').style.visibility = 'hidden'; // hide login popup
-        // document.getElementById('passwordRecoveryPopup').style = 'display: none'; // hide password recovery popup
         document.getElementById('loginPopup').style.visibility = 'visible'; // hide login popup
         document.getElementById('loginPopup').style.opacity = 100 + '%'; // show sign up popup
+        document.getElementById('signUpPopup').style.opacity = 0 + '%'; // hide login popup
+        document.getElementById('signUpPopup').style.visibility = 'hidden'; // hide login popup
         setIndicator('');
     }
 
@@ -89,7 +88,7 @@ const SignUpPopup = () => {
     return(
         <>
         <form onSubmit={handleSignUp} id='sign_up_form'></form>
-        <table id='signUpPopup' class='extendedPopup' style={{ display: 'none' }}>
+        <table id='signUpPopup' class='extendedPopup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr class='center'>
                     <p class='closeButton' onClick={() => closePopup('signUpPopup')}>
                         x
@@ -117,7 +116,7 @@ const SignUpPopup = () => {
                         name='password'
                         type='password'
                         value={signUpPassword}
-                        placeholder='Password (6+ characters)'
+                        placeholder='Password (7+ characters)'
                         form='sign_up_form'
                         onChange={changeSignUpPassword}
                     />
