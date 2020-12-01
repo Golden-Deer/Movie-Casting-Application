@@ -1,130 +1,132 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 import db from '../base';
 import SignUpPopup from './SignUpPopup';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 
 const PasswordRecoveryPopup = () => {
-    
-    // password recovery state
-    const [recoveryEmail, setRecoveryEmail] = useState('');
-    const [indicator, setIndicator] = useState(' ');
-    const [indicatorPadding, setPadding] = useState(64);
+  // password recovery state
+  const [recoveryEmail, setRecoveryEmail] = useState('');
+  const [indicator, setIndicator] = useState(' ');
+  const [indicatorPadding, setPadding] = useState(64);
 
-    function changeRecoveryEmail(e) {
-        setRecoveryEmail(e.target.value);
-        setPadding(64);
-        setIndicator('');
+  function changeRecoveryEmail(e) {
+    setRecoveryEmail(e.target.value);
+    setPadding(64);
+    setIndicator('');
+  }
+
+  function handlePasswordRecovery(event) {
+    event.preventDefault();
+    try {
+      db.auth()
+        .fetchSignInMethodsForEmail(recoveryEmail)
+        .then((signInMethods) => {
+          console.log('HERE');
+          // an empty array means the account doesn't exist
+          if (signInMethods.length == 0) {
+            setIndicator(
+              'No account in our database is associated with this email'
+            );
+          } else {
+            db.auth()
+              .sendPasswordResetEmail(recoveryEmail)
+              .then(function () {
+                setIndicator('Email sent');
+                setPadding(30);
+              })
+              .catch(function (error) {
+                setIndicator(error);
+              });
+          }
+        });
+    } catch (error) {
+      alert(error);
     }
+  }
 
-    function handlePasswordRecovery(event) {
-        event.preventDefault();
-        try {
-            db
-                .auth()
-                .fetchSignInMethodsForEmail(recoveryEmail)
-                .then((signInMethods) => {
-                    console.log("HERE");
-                    // an empty array means the account doesn't exist
-                    if (signInMethods.length == 0) {
-                        setIndicator("No account in our database is associated with this email")
-                        
-                    }
-                    else {
-                        db.auth().sendPasswordResetEmail(recoveryEmail).then(function () {
-                            setIndicator("Email sent")
-                            setPadding(30);
-                        }).catch(function (error) {
-                            setIndicator(error);
-                        });
-                    }
-                    
-                })
-        } catch (error) {
-            alert(error);
-        }
-    }  
+  function signUp() {
+    document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
+    document.getElementById('passwordRecoveryPopup').style.visibility =
+      'hidden'; // hide password recovery popup
+    document.getElementById('signUpPopup').style.visibility = 'visible';
+    document.getElementById('signUpPopup').style.opacity = 100 + '%'; // show sign up popup
+    setIndicator('');
+  }
 
-    function signUp() {
-        document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
-        document.getElementById('passwordRecoveryPopup').style.visibility = 'hidden'; // hide password recovery popup
-        document.getElementById('signUpPopup').style.visibility = 'visible';
-        document.getElementById('signUpPopup').style.opacity = 100 + '%'; // show sign up popup
-        setIndicator('');
-    }
+  function login() {
+    document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
+    document.getElementById('passwordRecoveryPopup').style.visibility =
+      'hidden'; // hide password recovery popup
+    document.getElementById('loginPopup').style.visibility = 'visible';
+    document.getElementById('loginPopup').style.opacity = 100 + '%'; // show sign up popup
+    setIndicator('');
+  }
 
-    function login() {
-        document.getElementById('passwordRecoveryPopup').style.opacity = 0 + '%';
-        document.getElementById('passwordRecoveryPopup').style.visibility = 'hidden'; // hide password recovery popup
-        document.getElementById('loginPopup').style.visibility = 'visible';
-        document.getElementById('loginPopup').style.opacity = 100 + '%'; // show sign up popup
-        setIndicator('');
-    }
+  function closePopup(type) {
+    document.getElementById(type).style.opacity = 0 + '%';
+    document.getElementById(type).style.visibility = 'hidden';
+    setIndicator('');
+  }
 
-    function closePopup(type) {
-        document.getElementById(type).style.opacity = 0 + '%';
-        document.getElementById(type).style.visibility = 'hidden';
-        setIndicator('');
-    }
-
-    return(
-            <>
-            <SignUpPopup/>
-            <table
-                id='passwordRecoveryPopup'
-                class='popup'
-                style={{opacity: 0 + '%', visibility: 'hidden'}}>
-                <tr class='center'>
-                    <p
-                        class='closeButton'
-                        onClick={() => closePopup('passwordRecoveryPopup')}>
-                        x
-                    </p>
-                </tr>
-                <tr class='center'>
-                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
-                        <b>Password Recovery</b>
-                    </p>
-                </tr>
-                <tr class='center' style={{ marginTop: 35 + 'px' }}>
-                    <input
-                        class='center'
-                        name='email'
-                        type='email'
-                        value={recoveryEmail}
-                        placeholder='Email'
-                        onChange={changeRecoveryEmail}
-                    />
-                </tr>
-                <tr class='center'>
-                    <label class='invisibleMiniButton' onClick={signUp}>
-                        New to Golden Cast? Sign up here
-                    </label>
-                </tr>
-                <tr class='center'>
-                    <button class='invisibleMiniButton' onClick={login}>
-                        Know your password? Login up here
-                    </button>
-                </tr>
-                <tr class='center'>
-                    <p class='warning'>{indicator}</p>
-                </tr>
-                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
-                    <Button
-                        variant='primary'
-                        style={{
-                            display: 'block',
-                            marginLeft: 'auto',
-                            marginRight: 'auto',
-                            marginTop: [indicatorPadding] + 'px',
-                        }}
-                        onClick={handlePasswordRecovery}
-                        disabled={recoveryEmail.length < 1}>
-                        Send Email
-                    </Button>
-                </tr>
-            </table>
-            </>
-    )
+  return (
+    <>
+      <SignUpPopup />
+      <table
+        id='passwordRecoveryPopup'
+        class='popup'
+        style={{ opacity: 0 + '%', visibility: 'hidden' }}>
+        <tr class='center'>
+          <p
+            class='closeButton'
+            onClick={() => closePopup('passwordRecoveryPopup')}>
+            x
+          </p>
+        </tr>
+        <tr class='center'>
+          <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+            <b>Password Recovery</b>
+          </p>
+        </tr>
+        <tr class='center' style={{ marginTop: 35 + 'px' }}>
+          <input
+            class='center'
+            name='email'
+            type='email'
+            value={recoveryEmail}
+            placeholder='Email'
+            onChange={changeRecoveryEmail}
+          />
+        </tr>
+        <tr class='center'>
+          <label class='invisibleMiniButton' onClick={signUp}>
+            New to Golden Cast? Sign up here
+          </label>
+        </tr>
+        <tr class='center'>
+          <button class='invisibleMiniButton' onClick={login}>
+            Know your password? Login here
+          </button>
+        </tr>
+        <tr class='center'>
+          <p class='warning'>{indicator}</p>
+        </tr>
+        <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
+          <Button
+            variant='primary'
+            style={{
+              display: 'block',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginTop: [indicatorPadding] + 'px',
+            }}
+            onClick={handlePasswordRecovery}
+            disabled={recoveryEmail.length < 1}>
+            Send Email
+          </Button>
+        </tr>
+      </table>
+    </>
+  );
 };
 
 export default PasswordRecoveryPopup;
