@@ -5,7 +5,7 @@ import PrivateRoute from './auth/PrivateRoute';
 import { AuthProvider } from './auth/Auth';
 import Home from './routes/Home';
 import passwordRecovery from './routes/passwordRecoveryPopup';
-import Discover from './routes/discover/ExploreActor';
+import Discover from './routes/discover/Discover';
 import Search from './routes/search/Search';
 import Navbar from './routes/layout/Navbar';
 import ProjectViewer from './routes/project/ProjectViewer';

@@ -288,6 +288,19 @@ image.center{
   /* padding:15px 50px 50px; */
 } 
 
+/* Discover Page */
+#explore-block {
+  /* background-color: lightgray; */
+  float:left;
+  font-size: 15px;
+  margin: 1% 70px 1% 1%;
+  padding:1% 1% 1% 1%;
+  border: none;
+  /* opacity: 0.85; */
+  border-radius: 1px;
+  color: #B5B5B5;
+}
+
 #mini-project {
   display: inline;
   font-size: 15px;
