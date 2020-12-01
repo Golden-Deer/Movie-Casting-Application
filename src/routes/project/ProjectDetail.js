@@ -20,6 +20,7 @@ class ProjectDetail extends Component {
             roleKey: '',
             roleName: '',
             roleDescription: '',
+            roleImage: null,
             newRoleName: '',
             field: '',
             originalValue: '',
@@ -41,6 +42,8 @@ class ProjectDetail extends Component {
         this.setRoleDescription = this.setRoleDescription.bind(this);
         this.setProject = this.setProject.bind(this);
         this.editRolePopup = this.editRolePopup.bind(this);
+        // this.setRoleImage = this.setRoleImage.bind(this);
+        // this.setNewRoleImage = this.setNewRoleImage.bind(this);
     }
 
     componentDidMount() {
@@ -131,6 +134,10 @@ class ProjectDetail extends Component {
 
     setNewRoleDescription(e){
         this.setState({newRoleDescription: e});
+    }
+
+    setRoleImage(e){
+        this.setState({})
     }
 
     setProject(e){

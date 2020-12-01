@@ -1,12 +1,24 @@
 import {React, Component} from 'react';
 import Button from 'react-bootstrap/Button';
+import ImageUploader from 'react-images-upload'
 
 class CreateRolePopup extends Component{
     constructor(props){
         super(props)
 
         this.createRole = this.createRole.bind(this);
+
+        this.state = {
+            file: null
+          }
+        this.handleChange = this.handleChange.bind(this)
     }
+
+    handleChange(event) {
+        this.setState({
+          file: URL.createObjectURL(event.target.files[0])
+        })
+      }
 
     createRole() {
         // add this role to the project list of this user
@@ -26,6 +38,7 @@ class CreateRolePopup extends Component{
 
     render(){
         return(
+            
             <table id='rolePopup' class='popup' style={{ opacity: 0 + '%', visibility: 'hidden' }}>
                     <tr>
                         <p class='closeButton' onClick={() => this.props.closePopup('rolePopup')}>
@@ -35,6 +48,10 @@ class CreateRolePopup extends Component{
                     <tr class='center'>
                         <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
                             <b>Create New Role</b>
+                            <div>
+                                <input type="file" onChange={this.handleChange}/>
+                                <img className = "photo" src={this.state.file}/>
+                            </div>
                         </p>
                     </tr>
                     <tr class='center' style={{ marginTop: 15 + 'px' }}>
@@ -72,8 +89,9 @@ class CreateRolePopup extends Component{
                             Create Role
                         </Button>
                     </tr>
+
                 </table>
-        )
+        );
     }
 }
 
