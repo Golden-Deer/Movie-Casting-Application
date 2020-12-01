@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import db from '../../base';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { withRouter } from "react-router-dom";
 
 class DisplayActor extends Component {
     constructor(props) {
@@ -106,7 +106,7 @@ class DisplayActor extends Component {
 
     render() {
         const display = this.state.records.map(records =>
-            <Card style={{ width: '90%' }} key={records.name}>
+            <Card style={{ width: '90%' }} key={records.name} onClick={() => this.props.history.push('/actor', records)}>
             <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
             <Card.Body>
             <Card.Title>{records.name}</Card.Title>
@@ -126,4 +126,4 @@ class DisplayActor extends Component {
 
 
 
-export default DisplayActor;
+export default withRouter(DisplayActor);
