@@ -8,12 +8,8 @@ const RolePage = () => {
     const history = useHistory();
     return (
         <>
-            <header class="container">
-                <Button id={"your-account"}>Your Account</Button>
-            </header>
-
             <div className="back-to-project">
-                <a onClick={() => history.push('/project')}>&lt;&lt; Back to Project</a>
+                <a onClick={() => history.push('/')}>&lt;&lt; Back to Project</a>
             </div>
 
             <div className="role-info">

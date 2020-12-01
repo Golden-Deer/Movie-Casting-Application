@@ -81,8 +81,8 @@ image.center{
 	background-color: white;
 	position: fixed;
 	filter: drop-shadow(5px 5px  7px grey);
-	top: 30%;
-  left: 38%;
+	top: 10%;
+  left: 30%;
   width: 450px;
   height: 380px;
   border-radius: 15px;
@@ -402,7 +402,10 @@ header {
   background-color: brown;
 }
 
-
+.photo {
+  height: 100px;
+  width: 200px;
+}
 
 
 
