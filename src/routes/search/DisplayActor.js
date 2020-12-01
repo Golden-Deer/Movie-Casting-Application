@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import db from '../../base'
-import Button from 'react-bootstrap/Button'
+import db from '../../base';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 class DisplayActor extends Component {
     constructor(props) {
@@ -99,16 +100,20 @@ class DisplayActor extends Component {
 
     render() {
         const display = this.state.records.map(records =>
-            <Button id={"block"} key={records.name}>
-                <div style={{ width: '80%', textAlign: 'center' }}><img src={records.profilepic} style={{ width: '300px' }} alt="The Rock" /></div>
-                <h5 style={{ width: '80%', textAlign: 'center' }}>Name: {records.name}</h5>
-                <h5 style={{ width: '80%', textAlign: 'center' }}>Age: {records.tag.age} Gender: {records.tag.gender}</h5>
-                <h5 style={{ width: '80%', textAlign: 'center' }}>Height: {records.tag.height} Weight: {records.tag.weight}</h5>
-            </Button>
+            <Card style={{ width: '90%' }} key={records.name}>
+            <Card.Img variant="top" src= {records.profilepic} />
+            <Card.Body>
+            <Card.Title>{records.name}</Card.Title>
+            <Card.Subtitle>Age: {records.tag.age}, Height: {records.tag.height} </Card.Subtitle>
+            <Card.Text>
+            Some brief introduction of the actor
+            </Card.Text>
+            </Card.Body>
+            </Card>
         );
 
         return (
-            <div>{display}</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 28%)'}}>{display}</div>
         );
     }
 }
