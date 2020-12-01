@@ -1,7 +1,7 @@
 import {React, Component} from 'react';
 import Button from 'react-bootstrap/Button';
 
-class RolePopup extends Component{
+class CreateRolePopup extends Component{
     constructor(props){
         super(props)
 
@@ -9,7 +9,7 @@ class RolePopup extends Component{
     }
 
     createRole() {
-        // add this project to the project list of this user
+        // add this role to the project list of this user
         if (this.props.project != null) {
             var updateProject = this.props.project;
             if (updateProject.roles == null) {
@@ -46,12 +46,17 @@ class RolePopup extends Component{
                         />
                     </tr>
                     <tr class='center' style={{ marginTop: 15 + 'px' }}>
-                        <input
+                        <textarea
                             class='projectInputField'
                             placeholder='Description'
                             form='project_creation_form'
                             onChange={(e) => this.props.setRoleDescription(e.target.value)}
                         />
+                    </tr>
+                    <tr class='center'>
+                        <label class='center' style={{ fontSize: 12 + 'px' }}>
+                            Fields with an asterisk are mandatory
+                        </label>
                     </tr>
                     <tr class='center'>
                         <Button
@@ -60,7 +65,7 @@ class RolePopup extends Component{
                                 display: 'block',
                                 marginLeft: 'auto',
                                 marginRight: 'auto',
-                                marginTop: 20 + 'px',
+                                marginTop: 30 + 'px',
                             }}
                             onClick={this.createRole}
                             disabled={this.props.roleName.length < 1}>
@@ -72,4 +77,4 @@ class RolePopup extends Component{
     }
 }
 
-export default RolePopup
+export default CreateRolePopup

@@ -19,7 +19,6 @@ class ProjectList extends Component{
             projectDescription: '',
             projectDirector: '',
             projectProducer: '',
-            selection: '',
         }
 
         this.projectRef = firebase.database().ref('USER/' + firebase.auth().currentUser.uid);
@@ -32,13 +31,12 @@ class ProjectList extends Component{
         this.setState({projectDescription: this.state.projects[index]['description']})
         this.setState({projectProducer: this.state.projects[index]['producer']})
         this.setState({projectDirector: this.state.projects[index]['director']})
-        this.setState({selection: index});    
         document.getElementById('editProjectPopup').style.opacity = 100 + '%';
         document.getElementById('editProjectPopup').style.visibility = 'visible'; // show project popup
         
     }
     
-    closePopup(type) { 
+    closePopup(type) {
         document.getElementById(type).style.opacity = 0 + '%';
         document.getElementById(type).style.visibility = 'hidden';
     }
@@ -53,7 +51,8 @@ class ProjectList extends Component{
                 temp.push(<td>
                     <Card className='movieCard' onClick={() => this.props.history.push('/project', [childSnapshot.val(), childSnapshot.key])}>
                         <Card.Body>
-                        <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.5 + 'rem'}}><b>{childSnapshot.val()['name']}</b></Card.Title>
+                        <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.0 + 'rem'}}><b>{childSnapshot.val()['name']}</b></Card.Title>
+                        <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
                         <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{childSnapshot.val()['release_date']}</Card.Subtitle>
                         <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{childSnapshot.val()['genre']}</Card.Subtitle>
                         </Card.Body>

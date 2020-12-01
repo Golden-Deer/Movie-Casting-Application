@@ -130,7 +130,7 @@ const Body = () => {
                 <tr class='center'>
                     <label class='center' style={{ fontSize: 12 + 'px' }}>
                         Fields with an asterisk are mandatory
-          </label>
+                    </label>
                 </tr>
                 <tr class='center'>
                     <Button

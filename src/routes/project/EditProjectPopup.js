@@ -9,7 +9,6 @@ class EditProjectPopup extends Component{
     }
 
     editField(e, field, original) {
-        console.log(e.target.value);
         const re = /^[0-9\b]+$/;
         if (!(field == 'Release Date' && (e.target.value.length > 4 || !re.test(e.target.value)))){
             if (original == e.target.value || (field == 'Release Date' && e.target.value.length != 4))

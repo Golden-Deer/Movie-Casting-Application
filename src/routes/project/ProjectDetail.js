@@ -2,7 +2,8 @@ import React, {Component } from 'react';
 import db from '../../base';
 import firebase from 'firebase';
 import { withRouter } from "react-router-dom";
-import RolePopup from './RolePopup';
+import CreateRolePopup from './CreateRolePopup';
+import EditRolePopup from './EditRolePopup';
 import EditProjectPopup from './EditProjectPopup';
 import DeleteProjectPopup from './DeleteProjectPopup';
 import Button from 'react-bootstrap/Button';
@@ -15,8 +16,11 @@ class ProjectDetail extends Component {
         this.state = {
             project: null,
             projectKey: '',
+            role: null,
+            roleKey: '',
             roleName: '',
             roleDescription: '',
+            newRoleName: '',
             field: '',
             originalValue: '',
             newValue: '',
@@ -32,8 +36,11 @@ class ProjectDetail extends Component {
         this.deleteProject = this.deleteProject.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
         this.setRoleName = this.setRoleName.bind(this);
+        this.setNewRoleName = this.setNewRoleName.bind(this);
+        this.setNewRoleDescription = this.setNewRoleDescription.bind(this);
         this.setRoleDescription = this.setRoleDescription.bind(this);
         this.setProject = this.setProject.bind(this);
+        this.editRolePopup = this.editRolePopup.bind(this);
     }
 
     componentDidMount() {
@@ -43,10 +50,13 @@ class ProjectDetail extends Component {
                 this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
                         this.setState({ project: childSnapshot.val(), projectKey: childSnapshot.key });
+                        // save roles
+                        this.setState({role: childSnapshot.val()['roles']});
                     })  
                 });
             }
         });
+       
     }
 
     componentWillUnmount() {
@@ -88,6 +98,14 @@ class ProjectDetail extends Component {
         }
     }
 
+    editRolePopup(e){
+        if (document.getElementById('editRolePopup') != null){
+            document.getElementById('editRolePopup').style.opacity = 100 + '%'; // show project popup
+            document.getElementById('editRolePopup').style.visibility = 'visible'; // show project popup\
+            this.setState({roleKey: e, roleName: this.state.project['roles'][e]['name'], newRoleName: this.state.project['roles'][e]['name'], roleDescription: this.state.project['roles'][e]['description'], newRoleDescription: this.state.project['roles'][e]['description']})
+        }
+    }
+
     closePopup(type) {
         if (document.getElementById(type) != null) {
             document.getElementById(type).style.opacity = 0 + '%';
@@ -100,11 +118,19 @@ class ProjectDetail extends Component {
     }
 
     setRoleName(e){
-        this.setState({ roleName: e });
+        this.setState({roleName: e});
+    }
+
+    setNewRoleName(e){
+        this.setState({newRoleName: e});
     }
 
     setRoleDescription(e){
-        this.setState({ roleDescription: e });
+        this.setState({roleDescription: e});
+    }
+
+    setNewRoleDescription(e){
+        this.setState({newRoleDescription: e});
     }
 
     setProject(e){
@@ -170,10 +196,9 @@ class ProjectDetail extends Component {
                 var role = [];
                 for (var i=0; i<this.state.project.roles.length; i++){
                     if (i % 3 == 0){
-                        console.log("newline")
                         role.push(<tr></tr>)
                     }
-                    role.push(<td><Card className='roleCard'>
+                    role.push(<td><Card className='roleCard' onClick={this.editRolePopup.bind(null, i)}>
                     <Card.Body>
                     <Card.Title><b>{this.state.project.roles[i].name}</b></Card.Title>
                     <Card.Subtitle>{this.state.project.roles[i].description}</Card.Subtitle>
@@ -181,7 +206,6 @@ class ProjectDetail extends Component {
                     </Card>
                     </td>);
                 }
-                console.log("HERE")
                 roles =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
                     <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
@@ -198,7 +222,8 @@ class ProjectDetail extends Component {
 
         return (
             <div>
-                <RolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project} projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleDescription={this.setRoleDescription} setProject={this.setProject} closePopup={this.closePopup}/>
+                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project} projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleDescription={this.setRoleDescription} setProject={this.setProject} closePopup={this.closePopup}/>
+                <EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey} roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription} newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription} setProject={this.setProject} closePopup={this.closePopup}/>
                 {display}
                 {roles}
                 <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue} setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateProject={this.updateProject} closePopup={this.closePopup}/>
