@@ -13,32 +13,38 @@ class DisplayActor extends Component {
         };
 
         this.profileRef = db.database().ref("PROFILE");
+        this.pictureRef = db.storage().ref("Actor Pictures");
 
         this.profileRef.orderByChild('name').on('value', dataSnapshot => {
             let newactors = [];
             dataSnapshot.forEach(childSnapshot => {
                 let actor = childSnapshot.val();
                 actor['.key'] = childSnapshot.key;
-                newactors.push(actor);
+                this.pictureRef.child(actor.profilepic).getDownloadURL().then((url) => {
+                    actor.profilepic = url;
+                    newactors.push(actor);
+                    for (const tag in props.tags) {
+                        if (tag === "age") {
+                            newactors = this.filterAge(newactors, props.tags[tag])
+                        }
+                        if (tag === "gender") {
+                            newactors = this.filterGender(newactors, props.tags[tag])
+                        }
+                        if (tag === "height") {
+                            console.log(newactors.length);
+                            newactors = this.filterHeight(newactors, props.tags[tag])
+                            console.log(newactors.length);
+                        }
+                        if (tag === "weight") {
+                            newactors = this.filterWeight(newactors, props.tags[tag])
+                        }
+                    }
+                    this.setState({ actors: newactors });
+                    this.setState({ records: this.state.actors.slice(0, this.props.numActor) });
+                }).catch(function(error) {
+                    alert(error);
+                  });
             });
-            for (const tag in props.tags) {
-                if (tag === "age") {
-                    newactors = this.filterAge(newactors, props.tags[tag])
-                }
-                if (tag === "gender") {
-                    newactors = this.filterGender(newactors, props.tags[tag])
-                }
-                if (tag === "height") {
-                    console.log(newactors.length);
-                    newactors = this.filterHeight(newactors, props.tags[tag])
-                    console.log(newactors.length);
-                }
-                if (tag === "weight") {
-                    newactors = this.filterWeight(newactors, props.tags[tag])
-                }
-            }
-            this.setState({ actors: newactors });
-            this.setState({ records: this.state.actors.slice(0, this.props.numActor) });
         });
     }
 
@@ -101,7 +107,7 @@ class DisplayActor extends Component {
     render() {
         const display = this.state.records.map(records =>
             <Card style={{ width: '90%' }} key={records.name}>
-            <Card.Img variant="top" src= {records.profilepic} />
+            <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
             <Card.Body>
             <Card.Title>{records.name}</Card.Title>
             <Card.Subtitle>Age: {records.tag.age}, Height: {records.tag.height} </Card.Subtitle>
