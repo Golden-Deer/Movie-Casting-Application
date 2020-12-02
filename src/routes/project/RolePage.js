@@ -79,7 +79,7 @@ class RolePage extends Component {
                     <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
-                    <label class='invisibleButton'  style={{ fontSize: 40 + 'px' }}>
+                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.props.roleName])} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>

@@ -6,7 +6,7 @@ import logo from "../../images/logo.png";
 import DisplayActor from "./DisplayActor"
 import ToggleBar from "./ToggleBar"
 
-const Search = () => {
+const Search = (props) => {
         const history = useHistory();
         const [count, setCount] = useState(6);
         const tags = {
@@ -19,14 +19,25 @@ const Search = () => {
                 }
         };
 
+        var topDisplay = null;
+        if (props.location.state != null) {
+            topDisplay  = <div className="s-navbar">
+                <h1 onClick={() => history.push("/project", [props.location.state[0], props.location.state[1]])}>
+                    {props.location.state[0].name} <a>Showing result for {props.location.state[2]}</a>
+                </h1>
+            </div>
+        } else {
+            topDisplay = <div className="s-navbar">
+                <h1 onClick={() => history.push("/")}>
+                    My Projects
+                </h1>
+
+            </div>
+        }
+
         return (
                 <div>
-                        <div className="s-navbar">
-                                <h1 onClick={() => history.push("/")}>
-                                        My Project <a>Showing result for Role1</a> {/*TODO: change is to new*/}
-                                </h1>
-
-                        </div>
+                        {topDisplay}
                         <div className="s-main">
                                 <div className="s-sidebar">
                                         <h1>Project list</h1>
