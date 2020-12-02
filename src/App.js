@@ -12,6 +12,7 @@ import ProjectViewer from './routes/project/ProjectViewer';
 import RolePage from './routes/project/RolePage';
 import About from './routes/About';
 import ActorProfile from './routes/ActorProfile';
+import RoleViewer from "./routes/project/RoleViewer";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
           <Route exact path='/project' component={ProjectViewer} />
-          <Route exact path='/rolepage' component={RolePage} />
+          <Route exact path='/rolepage' component={RoleViewer} />
           <Route exact path='/about' component={About} />
           <Route exact path='/actor' component={ActorProfile} />
         </div>

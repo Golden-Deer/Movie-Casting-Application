@@ -26,7 +26,7 @@ class CreateRolePopup extends Component{
             if (updateProject.roles == null) {
                 updateProject.roles = [];
             }
-            this.props.setProject(updateProject.roles.push({ name: this.props.roleName, description: this.props.roleDescription}))
+            this.props.setProject(updateProject.roles.push({ name: this.props.roleName, description: this.props.roleDescription}));
             this.props.projectRef.child(this.props.projectKey).set(this.props.project);
             // reset states
             this.props.setRoleName('');

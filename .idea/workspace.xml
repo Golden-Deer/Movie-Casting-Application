@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="099ee1e4-f662-4860-8dd4-20df8b877c1f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Home.js" afterDir="false" />
-    </list>
+    <list default="true" id="099ee1e4-f662-4860-8dd4-20df8b877c1f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,10 +19,25 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -38,6 +49,9 @@
       <updated>1605653103735</updated>
       <workItem from="1605653104919" duration="12745000" />
       <workItem from="1605699711900" duration="2734000" />
+      <workItem from="1606311850364" duration="452000" />
+      <workItem from="1606650586816" duration="5334000" />
+      <workItem from="1606789916229" duration="21129000" />
     </task>
     <servers />
   </component>
@@ -45,9 +59,13 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="264" y="182" key="new project wizard" timestamp="1605674743194">
+    <state x="0" y="0" width="1405" height="797" key="dock-window-1" timestamp="1606875457824">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="264" y="182" key="new project wizard/0.0.1792.1120@0.0.1792.1120" timestamp="1605674743194" />
+    <state x="0" y="0" width="1405" height="797" key="dock-window-1/0.23.1792.1033@0.23.1792.1033" timestamp="1606875457824" />
+    <state x="264" y="182" key="new project wizard" timestamp="1606716599437">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="264" y="182" key="new project wizard/0.0.1792.1120@0.0.1792.1120" timestamp="1606716599437" />
   </component>
 </project>
