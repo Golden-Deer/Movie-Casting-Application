@@ -71,6 +71,7 @@ class ActorDetail extends Component {
 
     componentWillUnmount() {
         this.candidateRef.off();
+        this.pictureRef.off();
     }
 
     render() {
@@ -81,7 +82,9 @@ class ActorDetail extends Component {
         }
         var images = [];
         for (var picture of this.state.pictures) {
-            images.push(<img width='200px' src={picture} alt={picture} />);
+            images.push(<Card style={{ width: '90%' }} >
+            <Card.Img variant="top" src= {picture} alt={picture} />
+            </Card>);
         }
         var display = null;
         display = <div>
@@ -110,7 +113,7 @@ class ActorDetail extends Component {
                 <p className='project-attribute-title'><b>Description</b></p>
                 <p className='project-attribute-description'>{this.props.actor.introduction}</p>
             </p>
-            {images}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 28%)'}}>{images}</div>
             <Button
                 variant='primary'
                 id='addCandidateButton'
