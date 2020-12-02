@@ -79,12 +79,13 @@ image.center{
 .popup{
 	z-index: 99;
 	background-color: white;
-	position: fixed;
 	filter: drop-shadow(5px 5px  7px grey);
-	top: 10%;
-  left: 30%;
+  position: fixed;
   width: 450px;
   height: 380px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-62%, -55%);
   border-radius: 15px;
   transition-duration: 0.5s;
   transition: opacity 0.5s;
@@ -95,10 +96,11 @@ image.center{
 	background-color: white;
 	position: fixed;
 	filter: drop-shadow(5px 5px  7px grey);
-	top: 27%;
-  left: 38%;
   width: 450px;
   height: 430px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-62%, -55%);
   border-radius: 15px;
   transition-duration: 0.3s;
   transition: opacity 0.5s;
@@ -108,11 +110,12 @@ image.center{
   z-index: 99;
 	background-color: white;
 	position: fixed;
-	filter: drop-shadow(5px 5px  7px grey);
-	top: 20%;
-  left: 36.5%;
+  filter: drop-shadow(5px 5px  7px grey);
   width: 500px;
   height: 570px;
+	top: 50%;
+  left: 50%;
+  transform: translate(-62%, -55%);
   border-radius: 15px;
   transition-duration: 0.5s;
   transition: opacity 0.5s;
