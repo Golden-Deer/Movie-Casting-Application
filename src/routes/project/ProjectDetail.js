@@ -8,6 +8,7 @@ import EditProjectPopup from './EditProjectPopup';
 import DeleteProjectPopup from './DeleteProjectPopup';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import RolePage from "./RolePage";
 
 class ProjectDetail extends Component {
     constructor(props) {
@@ -69,7 +70,8 @@ class ProjectDetail extends Component {
     editProject(field){
         document.getElementById('editProjectPopup').style.visibility = 'visible';
         document.getElementById('editProjectPopup').style.opacity = 100 + '%';
-        this.setState({field: field, originalValue: this.state.project[field.toLowerCase().replace(' ', '_')], newValue: this.state.project[field.toLowerCase().replace(' ', '_')], disableSave: true});
+        this.setState({field: field, originalValue: this.state.project[field.toLowerCase().replace(' ', '_')],
+            newValue: this.state.project[field.toLowerCase().replace(' ', '_')], disableSave: true});
     }
 
     updateProject(){
@@ -105,7 +107,8 @@ class ProjectDetail extends Component {
         if (document.getElementById('editRolePopup') != null){
             document.getElementById('editRolePopup').style.opacity = 100 + '%'; // show project popup
             document.getElementById('editRolePopup').style.visibility = 'visible'; // show project popup\
-            this.setState({roleKey: e, roleName: this.state.project['roles'][e]['name'], newRoleName: this.state.project['roles'][e]['name'], roleDescription: this.state.project['roles'][e]['description'], newRoleDescription: this.state.project['roles'][e]['description']})
+            this.setState({roleKey: e, roleName: this.state.project['roles'][e]['name'], newRoleName: this.state.project['roles'][e]['name'],
+                roleDescription: this.state.project['roles'][e]['description'], newRoleDescription: this.state.project['roles'][e]['description']})
         }
     }
 
@@ -205,7 +208,12 @@ class ProjectDetail extends Component {
                     if (i % 3 == 0){
                         role.push(<tr></tr>)
                     }
-                    role.push(<td><Card className='roleCard' onClick={this.editRolePopup.bind(null, i)}>
+                    // role.push(<td><Card className='roleCard' onClick={this.editRolePopup.bind(null, i)}>
+                    // Not implemented yet
+                    console.log(this.state.project.roles);
+                    console.log(this.state.project.roles[i]);
+                    var roleName = this.state.project.roles[i].name;
+                    role.push(<td><Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [roleName, this.state.project, this.state.projectKey])}>
                     <Card.Body>
                     <Card.Title><b>{this.state.project.roles[i].name}</b></Card.Title>
                     <Card.Subtitle>{this.state.project.roles[i].description}</Card.Subtitle>
@@ -229,11 +237,19 @@ class ProjectDetail extends Component {
 
         return (
             <div>
-                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project} projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleDescription={this.setRoleDescription} setProject={this.setProject} closePopup={this.closePopup}/>
-                <EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey} roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription} newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription} setProject={this.setProject} closePopup={this.closePopup}/>
+                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project}
+                                 projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName}
+                                 setRoleDescription={this.setRoleDescription} setRoleImage={this.roleImage} setProject={this.setProject}
+                                 closePopup={this.closePopup}/>
+                <EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}
+                               roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription}
+                               newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription}
+                               setProject={this.setProject} closePopup={this.closePopup}/>
                 {display}
                 {roles}
-                <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue} setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateProject={this.updateProject} closePopup={this.closePopup}/>
+                <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}
+                                  setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateProject={this.updateProject}
+                                  closePopup={this.closePopup}/>
                 <DeleteProjectPopup deleteProject={this.deleteProject} projectName={this.state.projectName} closePopup={this.closePopup}/>
             </div>
         );
