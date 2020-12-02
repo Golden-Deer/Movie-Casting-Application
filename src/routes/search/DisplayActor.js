@@ -23,20 +23,19 @@ class DisplayActor extends Component {
                 this.pictureRef.child(actor.profilepic).getDownloadURL().then((url) => {
                     actor.profilepic = url;
                     newactors.push(actor);
+                    console.log(props.tags);
                     for (const tag in props.tags) {
-                        if (tag === "age") {
-                            newactors = this.filterAge(newactors, props.tags[tag])
+                        if (tag === "age" && props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterAge(newactors, parseInt(props.tags[tag]));
                         }
-                        if (tag === "gender") {
-                            newactors = this.filterGender(newactors, props.tags[tag])
+                        if (tag === "gender" && props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterGender(newactors, props.tags[tag]);
                         }
-                        if (tag === "height") {
-                            console.log(newactors.length);
-                            newactors = this.filterHeight(newactors, props.tags[tag])
-                            console.log(newactors.length);
+                        if (tag === "height" && props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterHeight(newactors, parseInt(props.tags[tag]));
                         }
-                        if (tag === "weight") {
-                            newactors = this.filterWeight(newactors, props.tags[tag])
+                        if (tag === "weight" && props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterWeight(newactors, parseInt(props.tags[tag]));
                         }
                     }
                     this.setState({ actors: newactors });
@@ -67,14 +66,12 @@ class DisplayActor extends Component {
     }
 
     filterHeight(actors, height) {
-        console.log(actors.length);
         for (var i = actors.length - 1; i >= 0; i--) {
             if (actors[i].tag.height > height + 5 || actors[i].tag.height < height - 5) {
                 console.log("removed height ", actors[i].tag.height);
                 actors.splice(i, 1);
             }
         }
-        console.log(actors.length);
         return actors;
     }
 

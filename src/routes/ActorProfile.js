@@ -9,7 +9,7 @@ const ActorProfile = (props) => {
     <>
       <p>
         <h1 id='my-projects'>
-          <a onClick={() => history.push('/search')}>&lt; <b>{props.location.state.name}</b></a>
+          <a onClick={() => history.goBack()}>&lt; <b>{props.location.state.name}</b></a>
         </h1>
       </p>
     </>

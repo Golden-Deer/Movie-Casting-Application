@@ -9,8 +9,12 @@ import ToggleBar from "./ToggleBar"
 const Search = (props) => {
         const history = useHistory();
         const [count, setCount] = useState(6);
+        console.log(props.location.state[2]);
         const tags = {
-                gender: "male"
+                gender: props.location.state[2].roleGender,
+                age: props.location.state[2].roleAge,
+                height: props.location.state[2].roleHeight,
+                weight: props.location.state[2].roleWeight
         };
 
         window.onscroll = function (ev) {
@@ -22,8 +26,8 @@ const Search = (props) => {
         var topDisplay = null;
         if (props.location.state != null) {
             topDisplay  = <div className="s-navbar">
-                <h1 onClick={() => history.push("/project", [props.location.state[0], props.location.state[1]])}>
-                    {props.location.state[0].name} <a>Showing result for {props.location.state[2]}</a>
+                <h1 onClick={() => history.goBack()}>
+                    {props.location.state[0].name} <a>Showing result for {props.location.state[2].name}</a>
                 </h1>
             </div>
         } else {
@@ -47,7 +51,6 @@ const Search = (props) => {
                                         </div>
                                 </div>
                         </div>
-                        <ToggleBar/>
                         <DisplayActor tags={tags} numActor={count}/>
 
                 </div>
