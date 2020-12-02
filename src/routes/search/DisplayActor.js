@@ -25,16 +25,16 @@ class DisplayActor extends Component {
                     newactors.push(actor);
                     console.log(props.tags);
                     for (const tag in props.tags) {
-                        if (tag === "age" && props.tags[tag] !== 'unspecified') {
+                        if (tag === "age" && props.tags[tag] !== '') {
                             newactors = this.filterAge(newactors, parseInt(props.tags[tag]));
                         }
-                        if (tag === "gender" && props.tags[tag] !== 'unspecified') {
+                        if (tag === "gender" && props.tags[tag] !== '') {
                             newactors = this.filterGender(newactors, props.tags[tag]);
                         }
-                        if (tag === "height" && props.tags[tag] !== 'unspecified') {
+                        if (tag === "height" && props.tags[tag] !== '') {
                             newactors = this.filterHeight(newactors, parseInt(props.tags[tag]));
                         }
-                        if (tag === "weight" && props.tags[tag] !== 'unspecified') {
+                        if (tag === "weight" && props.tags[tag] !== '') {
                             newactors = this.filterWeight(newactors, parseInt(props.tags[tag]));
                         }
                     }
@@ -103,7 +103,7 @@ class DisplayActor extends Component {
 
     render() {
         const display = this.state.records.map(records =>
-            <Card style={{ width: '90%' }} key={records.name} onClick={() => this.props.history.push('/actor', [records, this.props.project, this.props.role])}>
+            <Card style={{ width: '90%' }} key={records.name} onClick={() => this.props.history.push('/actor', [records, this.props.projectKey, this.props.role])}>
             <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
             <Card.Body>
             <Card.Title>{records.name}</Card.Title>

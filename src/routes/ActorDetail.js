@@ -19,8 +19,8 @@ class ActorDetail extends Component {
     }
 
     addCandidate() {
-        alert(this.props.actor.key);
-        db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.project.key + '/roles/' + this.props.role.key + '/candidates/').push({
+        console.log(this.props.projectKey);
+        db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/').push({
             name: this.props.actor.name,
             profilePic: this.state.profilePic
         });

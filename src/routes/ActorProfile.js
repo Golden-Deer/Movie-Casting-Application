@@ -13,7 +13,7 @@ const ActorProfile = (props) => {
           <a onClick={() => history.goBack()}>&lt; <b>{props.location.state[0].name}</b></a>
         </h1>
       </p>
-      <ActorDetail actor={props.location.state[0]} project={props.location.state[1]} role={props.location.state[2]} />
+      <ActorDetail actor={props.location.state[0]} projectKey={props.location.state[1]} role={props.location.state[2]} />
     </div>
   );
 };

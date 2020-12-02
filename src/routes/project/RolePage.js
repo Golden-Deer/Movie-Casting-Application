@@ -40,7 +40,7 @@ class RolePage extends Component {
     }
 
     componentWillUnmount() {
-        // this.roleRef.off();
+        this.roleRef.off();
     }
 
 
