@@ -1,5 +1,6 @@
 import { React, Component } from 'react';
 import Button from 'react-bootstrap/Button';
+import ImageUploader from 'react-images-upload'
 
 class CreateRolePopup extends Component {
     constructor(props) {
@@ -26,7 +27,6 @@ class CreateRolePopup extends Component {
             if (updateProject.roles == null) {
                 updateProject.roles = [];
             }
-            alert(this.props.roleAge);
             this.props.setProject(updateProject.roles.push({ name: this.props.roleName, 
                 description: this.props.roleDescription,
                 roleAge: this.props.roleAge,

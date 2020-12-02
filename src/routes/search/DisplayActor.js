@@ -19,7 +19,7 @@ class DisplayActor extends Component {
             let newactors = [];
             dataSnapshot.forEach(childSnapshot => {
                 let actor = childSnapshot.val();
-                actor['.key'] = childSnapshot.key;
+                actor.key = childSnapshot.key;
                 this.pictureRef.child(actor.profilepic).getDownloadURL().then((url) => {
                     actor.profilepic = url;
                     newactors.push(actor);
