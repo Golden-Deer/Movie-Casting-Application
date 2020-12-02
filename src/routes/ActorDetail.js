@@ -69,11 +69,6 @@ class ActorDetail extends Component {
         }
     }
 
-    componentWillUnmount() {
-        this.candidateRef.off();
-        this.pictureRef.off();
-    }
-
     render() {
 
         if (this.state.added) {
@@ -112,6 +107,9 @@ class ActorDetail extends Component {
             <p>
                 <p className='project-attribute-title'><b>Description</b></p>
                 <p className='project-attribute-description'>{this.props.actor.introduction}</p>
+            </p>
+            <p>
+                <p className='project-attribute-title'><b>More Images</b></p>
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 28%)'}}>{images}</div>
             <Button
