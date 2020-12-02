@@ -28,12 +28,10 @@ class RolePage extends Component {
             if (user != null){
                 this.roleRef.orderByChild('name').equalTo(this.props.roleName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
-                        this.setState({role: dataSnapshot.val()});
+                        this.setState({role: childSnapshot.val()});
                         this.setState({tags: childSnapshot.val()['tags']});
                         this.setState({candidates: childSnapshot.val()['candidates']});
                     })
-                    console.log(this.state.role);
-
                 });
             }
         });
@@ -47,9 +45,7 @@ class RolePage extends Component {
     render() {
     var display = null;
     var candidates = null;
-    console.log(this.state.role);
     if (this.state.role != null) {
-        console.log(this.state.role.name);
         display = <div>
             <p>
                 <p className='project-attribute-title'><b>Role Name</b></p>
