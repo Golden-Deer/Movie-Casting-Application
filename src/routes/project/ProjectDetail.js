@@ -61,7 +61,9 @@ class ProjectDetail extends Component {
                 this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
                 this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
-                        this.setState({ project: childSnapshot.val(), projectKey: childSnapshot.key });
+                        var newProject = childSnapshot.val();
+                        newProject.key = childSnapshot.key;
+                        this.setState({ project: newProject, projectKey: childSnapshot.key });
                         // save roles
                         this.setState({role: childSnapshot.val()['roles']});
                     })  

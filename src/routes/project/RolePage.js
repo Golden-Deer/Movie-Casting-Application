@@ -28,7 +28,9 @@ class RolePage extends Component {
             if (user != null){
                 this.roleRef.orderByChild('name').equalTo(this.props.roleName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
-                        this.setState({role: childSnapshot.val()});
+                        var newRole = childSnapshot.val();
+                        newRole.key = childSnapshot.key;
+                        this.setState({role: newRole});
                         this.setState({tags: childSnapshot.val()['tags']});
                         this.setState({candidates: childSnapshot.val()['candidates']});
                     })

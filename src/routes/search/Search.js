@@ -51,7 +51,7 @@ const Search = (props) => {
                                         </div>
                                 </div>
                         </div>
-                        <DisplayActor tags={tags} numActor={count}/>
+                        <DisplayActor tags={tags} numActor={count} project={props.location.state[0]} role={props.location.state[2]} />
 
                 </div>
         )

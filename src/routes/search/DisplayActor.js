@@ -103,7 +103,7 @@ class DisplayActor extends Component {
 
     render() {
         const display = this.state.records.map(records =>
-            <Card style={{ width: '90%' }} key={records.name} onClick={() => this.props.history.push('/actor', records)}>
+            <Card style={{ width: '90%' }} key={records.name} onClick={() => this.props.history.push('/actor', [records, this.props.project, this.props.role])}>
             <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
             <Card.Body>
             <Card.Title>{records.name}</Card.Title>
