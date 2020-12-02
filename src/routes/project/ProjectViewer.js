@@ -15,9 +15,6 @@ const ProjectViewer = (props) => {
         </h1>
       </p>
       <ProjectDetail projectName={props.location.state[0].name}/>
-      <div className='project-attributes'>
-        <button onClick={() => history.push("/rolepage")}>Role</button>
-      </div>
     </>
   );
 };

@@ -21,6 +21,10 @@ class ProjectDetail extends Component {
             roleKey: '',
             roleName: '',
             roleDescription: '',
+            roleAge: '',
+            roleGender: '',
+            roleHeight: '',
+            roleWeight: '',
             roleImage: null,
             newRoleName: '',
             field: '',
@@ -38,6 +42,10 @@ class ProjectDetail extends Component {
         this.deleteProject = this.deleteProject.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
         this.setRoleName = this.setRoleName.bind(this);
+        this.setRoleAge = this.setRoleAge.bind(this);
+        this.setRoleGender = this.setRoleGender.bind(this);
+        this.setRoleHeight = this.setRoleHeight.bind(this);
+        this.setRoleWeight = this.setRoleWeight.bind(this);
         this.setNewRoleName = this.setNewRoleName.bind(this);
         this.setNewRoleDescription = this.setNewRoleDescription.bind(this);
         this.setRoleDescription = this.setRoleDescription.bind(this);
@@ -125,6 +133,22 @@ class ProjectDetail extends Component {
 
     setRoleName(e){
         this.setState({roleName: e});
+    }
+
+    setRoleAge(e){
+        this.setState({roleAge: e});
+    }
+
+    setRoleGender(e){
+        this.setState({roleGender: e});
+    }
+
+    setRoleHeight(e){
+        this.setState({roleHeight: e});
+    }
+
+    setRoleWeight(e){
+        this.setState({roleWeight: e});
     }
 
     setNewRoleName(e){
@@ -237,8 +261,8 @@ class ProjectDetail extends Component {
 
         return (
             <div>
-                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project}
-                                 projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName}
+                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} roleWeight={this.state.roleWeight} roleAge={this.state.roleAge} roleGender={this.state.roleGender} roleHeight={this.state.roleHeight} project={this.state.project}
+                                 projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleAge={this.setRoleAge} setRoleGender={this.setRoleGender} setRoleHeight={this.setRoleHeight} setRoleWeight={this.setRoleWeight}
                                  setRoleDescription={this.setRoleDescription} setRoleImage={this.roleImage} setProject={this.setProject}
                                  closePopup={this.closePopup}/>
                 <EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}
