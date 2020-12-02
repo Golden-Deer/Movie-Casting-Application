@@ -1,6 +1,6 @@
 import db from "../base";
 import "../App.js";
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 import Card from "react-bootstrap/Card";
@@ -18,6 +18,16 @@ class ActorDetail extends Component {
         this.user = db.auth().currentUser;
         this.pictureRef = db.storage().ref("Actor Pictures");
         this.candidateRef = null;
+        for (var picture of this.props.actor.pictures) {
+            var pictures = this.state.pictures;
+            console.log(picture);
+            this.pictureRef.child(picture).getDownloadURL().then((url) => {
+                pictures.push(url);
+                this.setState({ pictures: pictures });
+            }).catch(function (error) {
+                alert(error);
+            });
+        }
         if (this.user != null) this.candidateRef = db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/');
     }
 
@@ -36,9 +46,9 @@ class ActorDetail extends Component {
     }
 
     componentDidMount() {
-        
+
         db.auth().onAuthStateChanged((user) => {
-            if (user != null){
+            if (user != null) {
                 this.user = user;
                 this.candidateRef = db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/');
                 this.candidateRef.on('value', dataSnapshot => {
@@ -64,17 +74,21 @@ class ActorDetail extends Component {
     }
 
     render() {
-        
+
         if (this.state.added) {
             document.getElementById('addCandidateButton').style.visibility = 'hidden';
             document.getElementById('deleteCandidateButton').style.visibility = 'visible';
         }
-    var display = null;
+        var images = [];
+        for (var picture of this.state.pictures) {
+            images.push(<img width='200px' src={picture} alt={picture} />);
+        }
+        var display = null;
         display = <div>
             <p>
                 <p className='project-attribute-title'><b>Name</b></p>
-                <p className='project-attribute-description'>{this.props.actor.name} added:{this.state.added.toString()}</p>
-                <img className='project-attribute-title' src={this.state.profilePic} width='400px' alt={this.props.actor.profilepic}/>
+                <p className='project-attribute-description'>{this.props.actor.name}</p>
+                <img className='project-attribute-title' src={this.state.profilePic} width='400px' alt={this.props.actor.profilepic} />
             </p>
             <p>
                 <label className='project-attribute-title'><b>Age</b></label>
@@ -96,26 +110,27 @@ class ActorDetail extends Component {
                 <p className='project-attribute-title'><b>Description</b></p>
                 <p className='project-attribute-description'>{this.props.actor.introduction}</p>
             </p>
+            {images}
             <Button
                 variant='primary'
                 id='addCandidateButton'
                 onClick={() => this.addCandidate()}
                 style={{
                     fontSize: 1.25 + 'rem',
-                    margin: 2 + '% ' + 2 + '% ' +2 + '% ' + 2 + '%',
+                    margin: 2 + '% ' + 2 + '% ' + 2 + '% ' + 2 + '%',
                     visibility: 'visible'
                 }}
             >
                 Add Candidate
             </Button>
-            
+
             <Button
                 variant='danger'
                 id='deleteCandidateButton'
                 onClick={() => this.removeCandidate()}
                 style={{
                     fontSize: 1.25 + 'rem',
-                    margin: 2 + '% ' + 2 + '% ' +2 + '% ' + 2 + '%',
+                    margin: 2 + '% ' + 2 + '% ' + 2 + '% ' + 2 + '%',
                     visibility: 'hidden'
                 }}
             >
@@ -123,15 +138,15 @@ class ActorDetail extends Component {
             </Button>
         </div>;
 
-        
-    return (
-        <div>
 
-            {display}
+        return (
+            <div>
 
-        </div>
-    );
-}
+                {display}
+
+            </div>
+        );
+    }
 }
 
 export default withRouter(ActorDetail);
