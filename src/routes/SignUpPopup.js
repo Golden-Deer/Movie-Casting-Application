@@ -35,7 +35,8 @@ const SignUpPopup = () => {
         setIndicator('');
     };
 
-    function handleSignUp(event) {
+    const handleSignUp = (event) => {
+        console.log("HERE")
         event.preventDefault();
         db
             .auth()
@@ -161,6 +162,7 @@ const SignUpPopup = () => {
                             marginTop: [indicatorPadding] + 'px',
                         }}
                         form='sign_up_form'
+                        type='submit'
                         disabled={
                             signUpEmail.length < 1 ||
                             signUpPassword.length < 7 ||

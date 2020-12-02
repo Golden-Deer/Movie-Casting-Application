@@ -1,6 +1,5 @@
 import { React, Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import ImageUploader from 'react-images-upload'
 
 class CreateRolePopup extends Component {
     constructor(props) {
