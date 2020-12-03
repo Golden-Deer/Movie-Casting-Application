@@ -29,10 +29,10 @@ class CreateRolePopup extends Component {
             }
             this.props.setProject(updateProject.roles.push({ name: this.props.roleName, 
                 description: this.props.roleDescription,
-                roleAge: this.props.roleAge,
-                roleGender: this.props.roleGender,
-                roleHeight: this.props.roleHeight,
-                roleWeight: this.props.roleWeight }));
+                age: this.props.roleAge,
+                gender: this.props.roleGender,
+                height: this.props.roleHeight,
+                weight: this.props.roleWeight }));
             this.props.projectRef.child(this.props.projectKey).set(this.props.project);
             // reset states
             this.props.setRoleName('');
