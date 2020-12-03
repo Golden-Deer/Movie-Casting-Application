@@ -11,7 +11,7 @@ const RoleViewer = (props) => {
         <>
             <p>
                 <h1 id='my-projects'>
-                    <a onClick={() => history.goBack()}>&lt;&lt; <b>{props.location.state[0]}</b></a>
+                    <a onClick={() => history.goBack()}>&lt; <b>{props.location.state[0]}</b></a>
                 </h1>
             </p>
             <RolePage roleName={props.location.state[0]} project={props.location.state[1]} projectKey={props.location.state[2]} />

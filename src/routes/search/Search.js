@@ -43,7 +43,7 @@ const Search = (props) => {
                 <div>
                         {topDisplay}
                         <div className="s-main">
-                                <div className="s-sidebar">
+                            <div className="s-sidebar">
                                         <h1>Project list</h1>
                                         <h2> - Project1</h2>
                                         <div id={"mini-project"}>

@@ -11,7 +11,7 @@ const ProjectViewer = (props) => {
     <>
       <p>
         <h1 id='my-projects'>
-          <a onClick={() => history.push('/')}>&lt;&lt; <b>{props.location.state[0].name}</b></a>
+          <a onClick={() => history.push('/')}>&lt; <b>{props.location.state[0].name}</b></a>
         </h1>
       </p>
       <ProjectDetail projectName={props.location.state[0].name}/>
