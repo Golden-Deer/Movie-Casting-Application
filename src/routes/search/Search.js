@@ -27,13 +27,13 @@ const Search = (props) => {
         if (props.location.state != null) {
             topDisplay  = <div className="s-navbar">
                 <h1 onClick={() => history.goBack()}>
-                    {props.location.state[0].name} <a>Showing result for {props.location.state[2].name}</a>
+                    &lt;&lt; {props.location.state[0].name} <a>Showing result for {props.location.state[2].name}</a>
                 </h1>
             </div>
         } else {
             topDisplay = <div className="s-navbar">
                 <h1 onClick={() => history.push("/")}>
-                    My Projects
+                    &lt;&lt; My Projects
                 </h1>
 
             </div>
