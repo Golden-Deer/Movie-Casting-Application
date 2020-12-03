@@ -25,16 +25,16 @@ class DisplayActor extends Component {
                     newactors.push(actor);
                     console.log(props.tags);
                     for (const tag in props.tags) {
-                        if (tag === "age" && props.tags[tag] !== '') {
+                        if (tag === "age" && props.tags[tag] !== 'unspecified') {
                             newactors = this.filterAge(newactors, parseInt(props.tags[tag]));
                         }
-                        if (tag === "gender" && props.tags[tag] !== '') {
+                        if (tag === "gender" && props.tags[tag] !== 'unspecified') {
                             newactors = this.filterGender(newactors, props.tags[tag]);
                         }
-                        if (tag === "height" && props.tags[tag] !== '') {
+                        if (tag === "height" && props.tags[tag] !== 'unspecified') {
                             newactors = this.filterHeight(newactors, parseInt(props.tags[tag]));
                         }
-                        if (tag === "weight" && props.tags[tag] !== '') {
+                        if (tag === "weight" && props.tags[tag] !== 'unspecified') {
                             newactors = this.filterWeight(newactors, parseInt(props.tags[tag]));
                         }
                     }

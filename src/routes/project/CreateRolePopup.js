@@ -37,10 +37,10 @@ class CreateRolePopup extends Component {
             // reset states
             this.props.setRoleName('');
             this.props.setRoleDescription('');
-            this.props.setRoleAge('');
-            this.props.setRoleGender('');
-            this.props.setRoleHeight('');
-            this.props.setRoleWeight('');
+            this.props.setRoleAge('unspecified');
+            this.props.setRoleGender('unspecified');
+            this.props.setRoleHeight('unspecified');
+            this.props.setRoleWeight('unspecified');
             this.props.closePopup('rolePopup')
         }
     }
