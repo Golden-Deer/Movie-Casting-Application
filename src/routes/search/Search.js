@@ -11,10 +11,10 @@ const Search = (props) => {
         const [count, setCount] = useState(6);
         console.log(props.location.state[2]);
         const tags = {
-                gender: props.location.state[2].roleGender,
-                age: props.location.state[2].roleAge,
-                height: props.location.state[2].roleHeight,
-                weight: props.location.state[2].roleWeight
+                gender: props.location.state[2].gender,
+                age: props.location.state[2].age,
+                height: props.location.state[2].height,
+                weight: props.location.state[2].weight
         };
 
         window.onscroll = function (ev) {
