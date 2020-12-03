@@ -5,22 +5,37 @@ import { withRouter } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 import Card from "react-bootstrap/Card";
 import firebase from "firebase";
+import DeleteRole from './DeleteRole';
+import EditRole from "./EditRole";
+import EditProjectPopup from "./EditProjectPopup";
 
 class RolePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             role: null,
+            roleName: this.props.roleName,
+            roleKey: '',
             tags: null,
             candidates: null,
             roleDescription: '',
-            roleImage: ''
+            roleImage: '',
+            field: '',
+            originalValue: '',
+            newValue: '',
+            disableSave: true
         }
 
         var user = db.auth().currentUser;
         if (user != null) {
             this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/');
         }
+
+        this.editRole = this.editRole.bind(this);
+        this.updateRole = this.updateRole.bind(this);
+        this.deleteRole = this.deleteRole.bind(this);
+        this.setNewValue = this.setNewValue.bind(this);
+
     }
 
     componentDidMount() {
@@ -30,7 +45,7 @@ class RolePage extends Component {
                     dataSnapshot.forEach(childSnapshot => {
                         var newRole = childSnapshot.val();
                         newRole.key = childSnapshot.key;
-                        this.setState({role: newRole});
+                        this.setState({role: newRole, roleKey: childSnapshot.key});
                         this.setState({tags: childSnapshot.val()['tags']});
                         this.setState({candidates: childSnapshot.val()['candidates']});
                     })
@@ -43,6 +58,44 @@ class RolePage extends Component {
         this.roleRef.off();
     }
 
+    editRole(field){
+        document.getElementById('editRole').style.visibility = 'visible';
+        document.getElementById('editRole').style.opacity = 100 + '%';
+        this.setState({field: field, originalValue: this.state.role[field.toLowerCase()],
+            newValue: this.state.role[field.toLowerCase()], disableSave: true});
+    }
+
+    updateRole(){
+        let reference = this.roleRef.child(this.state.roleKey);
+        let updates = {}
+        updates[this.state.field.toLowerCase()] = this.state.newValue;
+        reference.update(updates);
+        this.closePopup('editRole');
+    }
+
+    deleteRole(){
+        let reference = this.roleRef.child(this.state.roleKey);
+        reference.remove();
+        this.closePopup('deleteRole');
+        reference.off();
+        this.props.history.push('/project', [this.props.project, this.props.projectKey]);
+    }
+
+    deleteConfirmation(){
+        document.getElementById('deleteRole').style.visibility = 'visible';
+        document.getElementById('deleteRole').style.opacity = 100 + '%';
+    }
+
+    closePopup(type) {
+        if (document.getElementById(type) != null) {
+            document.getElementById(type).style.opacity = 0 + '%';
+            document.getElementById(type).style.visibility = 'hidden';
+        }
+    }
+
+    setNewValue(e, bool){
+        this.setState({newValue: e.target.value, disableSave: bool})
+    }
 
     render() {
     var display = null;
@@ -51,7 +104,8 @@ class RolePage extends Component {
         display = <div>
             <p>
                 <p className='project-attribute-title'><b>Role Name</b></p>
-                <Button variant='info'  style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
+                <Button variant='info' onClick={()=>this.editRole('Name')} style={{marginLeft: 1 + '%'}}>
+                    <span class='glyphicon glyphicon-pencil'></span></Button>
                 <p className='project-attribute-description'>{this.state.role.name}</p>
             </p>
             <p>
@@ -61,16 +115,16 @@ class RolePage extends Component {
             </p>
             <p>
                 <p className='project-attribute-title'><b>Description</b></p>
-                <Button variant='info'  style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
+                <Button variant='info' onClick={()=>this.editRole('Description')} style={{marginLeft: 1 + '%'}}>
+                    <span class='glyphicon glyphicon-pencil'></span></Button>
                 <p className='project-attribute-description'>{this.state.role.description}</p>
             </p>
-            <Button
-                variant='danger'
+            <Button variant='danger'
                 style={{
                     fontSize: 1.25 + 'rem',
                     margin: 2 + '% ' + 2 + '% ' +2 + '% ' + 2 + '%',
                 }}
-            >
+                onClick={()=>{<DeleteRole deleteRole={this.deleteRole()} roleName={this.roleRef.name} closePopup={this.closePopup}/>}}>
                 Delete Role
             </Button>
         </div>;
@@ -121,7 +175,9 @@ class RolePage extends Component {
 
             {display}
             {candidates}
-
+            <EditRole field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}
+                      setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateRole={this.updateRole}
+                      closePopup={this.closePopup}/>
         </div>
     );
 }
