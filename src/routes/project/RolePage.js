@@ -35,19 +35,28 @@ class RolePage extends Component {
         this.updateRole = this.updateRole.bind(this);
         this.deleteRole = this.deleteRole.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
-
     }
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null){
+                this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/');
                 this.roleRef.orderByChild('name').equalTo(this.props.roleName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
                         var newRole = childSnapshot.val();
                         newRole.key = childSnapshot.key;
                         this.setState({role: newRole, roleKey: childSnapshot.key});
                         this.setState({tags: childSnapshot.val()['tags']});
-                        this.setState({candidates: childSnapshot.val()['candidates']});
+                        var candidate = [];
+                        candidate.push(<td><Card className='roleCard' >
+                            <Card.Body>
+                                <Card.Title><b>{childSnapshot.val()['name']}</b></Card.Title>
+                                <Card.Subtitle>{childSnapshot.val()['description']}</Card.Subtitle>
+                            </Card.Body>
+                        </Card>
+                        </td>);                
+                        
+                        this.setState({candidates: candidate});
                     })
                 });
             }
@@ -110,7 +119,7 @@ class RolePage extends Component {
             </p>
             <p>
                 <label className='project-attribute-title'><b>Tags</b></label>
-                <Button variant='info'  style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
+                <Button variant='info'  onClick={()=>this.editRole('Tags')}  style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
                 <p className='project-attribute-description'>{this.state.role.tags}</p>
             </p>
             <p>
@@ -143,19 +152,7 @@ class RolePage extends Component {
             </table>
         }
         else {
-            var candidate = [];
-            for (var i=0; i<this.state.role.candidates.length; i++){
-                if (i % 3 == 0){
-                    candidate.push(<tr></tr>)
-                }
-                candidate.push(<td><Card className='roleCard' >
-                    <Card.Body>
-                        <Card.Title><b>{this.state.role.candidates[i].name}</b></Card.Title>
-                        <Card.Subtitle>{this.state.role.candidates[i].description}</Card.Subtitle>
-                    </Card.Body>
-                </Card>
-                </td>);
-            }
+           
             candidates =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
                     <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
@@ -165,14 +162,13 @@ class RolePage extends Component {
                         <b>+</b>
                     </label>
                 </tr>
-                {candidate}
+                {this.state.candidates}
             </table>
         }
     }
 
     return (
         <div>
-
             {display}
             {candidates}
             <EditRole field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}
