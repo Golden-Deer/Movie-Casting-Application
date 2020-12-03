@@ -164,29 +164,30 @@ class ProjectDetail extends Component {
         this.setState({roleHeight: e});
     }
 
-    setRoleWeight(e){
-        this.setState({roleWeight: e});
-    }
-
-    setNewRoleName(e){
-        this.setState({newRoleName: e});
-    }
-
-    setRoleDescription(e){
-        this.setState({roleDescription: e});
-    }
-
-    setNewRoleDescription(e){
-        this.setState({newRoleDescription: e});
-    }
-
-    setRoleImage(e){
-        this.setState({})
-    }
-
-    setProject(e){
-        this.setState({project: e});
-    }
+    // The following functions are not being used
+    // setRoleWeight(e){
+    //     this.setState({roleWeight: e});
+    // }
+    //
+    // setNewRoleName(e){
+    //     this.setState({newRoleName: e});
+    // }
+    //
+    // setRoleDescription(e){
+    //     this.setState({roleDescription: e});
+    // }
+    //
+    // setNewRoleDescription(e){
+    //     this.setState({newRoleDescription: e});
+    // }
+    //
+    // setRoleImage(e){
+    //     this.setState({})
+    // }
+    //
+    // setProject(e){
+    //     this.setState({project: e});
+    // }
 
     render() {
         var display = null;
@@ -264,10 +265,11 @@ class ProjectDetail extends Component {
                                  projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleAge={this.setRoleAge} setRoleGender={this.setRoleGender} setRoleHeight={this.setRoleHeight} setRoleWeight={this.setRoleWeight}
                                  setRoleDescription={this.setRoleDescription} setRoleImage={this.roleImage} setProject={this.setProject}
                                  closePopup={this.closePopup}/>
-                <EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}
-                               roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription}
-                               newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription}
-                               setProject={this.setProject} closePopup={this.closePopup}/>
+                {/*      Use EditRole from RolePage instead           */}
+                {/*<EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}*/}
+                {/*               roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription}*/}
+                {/*               newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription}*/}
+                {/*               setProject={this.setProject} closePopup={this.closePopup}/>*/}
                 {display}
                 {roles}
                 <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}

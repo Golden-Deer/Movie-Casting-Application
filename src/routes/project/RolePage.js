@@ -80,7 +80,6 @@ class RolePage extends Component {
                                         candidate.push(<tr></tr>)
                                     }
                                 }
-
                             })
                         })
                         this.setState({candidateCards: candidate});
