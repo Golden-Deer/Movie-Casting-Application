@@ -18,9 +18,14 @@ class ProjectDetail extends Component {
             project: null,
             projectKey: '',
             role: null,
+            roles: [],
             roleKey: '',
             roleName: '',
             roleDescription: '',
+            roleAge: 'unspecified',
+            roleGender: 'unspecified',
+            roleHeight: 'unspecified',
+            roleWeight: 'unspecified',
             roleImage: null,
             newRoleName: '',
             field: '',
@@ -38,10 +43,14 @@ class ProjectDetail extends Component {
         this.deleteProject = this.deleteProject.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
         this.setRoleName = this.setRoleName.bind(this);
-        this.setNewRoleName = this.setNewRoleName.bind(this);
-        this.setNewRoleDescription = this.setNewRoleDescription.bind(this);
-        this.setRoleDescription = this.setRoleDescription.bind(this);
-        this.setProject = this.setProject.bind(this);
+        this.setRoleAge = this.setRoleAge.bind(this);
+        this.setRoleGender = this.setRoleGender.bind(this);
+        this.setRoleHeight = this.setRoleHeight.bind(this);
+        // this.setRoleWeight = this.setRoleWeight.bind(this);
+        // this.setNewRoleName = this.setNewRoleName.bind(this);
+        // this.setNewRoleDescription = this.setNewRoleDescription.bind(this);
+        // this.setRoleDescription = this.setRoleDescription.bind(this);
+        // this.setProject = this.setProject.bind(this);
         this.editRolePopup = this.editRolePopup.bind(this);
         // this.setRoleImage = this.setRoleImage.bind(this);
         // this.setNewRoleImage = this.setNewRoleImage.bind(this);
@@ -53,9 +62,25 @@ class ProjectDetail extends Component {
                 this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
                 this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
-                        this.setState({ project: childSnapshot.val(), projectKey: childSnapshot.key });
+                        var newProject = childSnapshot.val();
+                        newProject.key = childSnapshot.key;
+                        this.setState({ project: newProject, projectKey: childSnapshot.key });
                         // save roles
                         this.setState({role: childSnapshot.val()['roles']});
+                        var role = [];
+                        this.roleRef = db.database().ref('USER').child(user.uid).child('projects').child(childSnapshot.key).child('roles');
+                        this.roleRef.on('value', data => {
+                            data.forEach(childData =>{
+                                role.push(<td><Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, childSnapshot.key])}>
+                                <Card.Body>
+                                <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
+                                <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
+                                </Card.Body>
+                                </Card>
+                                </td>);
+                                })
+                        })
+                        this.setState({roles: role});
                     })  
                 });
             }
@@ -127,25 +152,42 @@ class ProjectDetail extends Component {
         this.setState({roleName: e});
     }
 
-    setNewRoleName(e){
-        this.setState({newRoleName: e});
+    setRoleAge(e){
+        this.setState({roleAge: e});
     }
 
-    setRoleDescription(e){
-        this.setState({roleDescription: e});
+    setRoleGender(e){
+        this.setState({roleGender: e});
     }
 
-    setNewRoleDescription(e){
-        this.setState({newRoleDescription: e});
+    setRoleHeight(e){
+        this.setState({roleHeight: e});
     }
 
-    setRoleImage(e){
-        this.setState({})
-    }
-
-    setProject(e){
-        this.setState({project: e});
-    }
+    // The following functions are not being used
+    // setRoleWeight(e){
+    //     this.setState({roleWeight: e});
+    // }
+    //
+    // setNewRoleName(e){
+    //     this.setState({newRoleName: e});
+    // }
+    //
+    // setRoleDescription(e){
+    //     this.setState({roleDescription: e});
+    // }
+    //
+    // setNewRoleDescription(e){
+    //     this.setState({newRoleDescription: e});
+    // }
+    //
+    // setRoleImage(e){
+    //     this.setState({})
+    // }
+    //
+    // setProject(e){
+    //     this.setState({project: e});
+    // }
 
     render() {
         var display = null;
@@ -203,24 +245,6 @@ class ProjectDetail extends Component {
                 </table>
             }
             else {
-                var role = [];
-                for (var i=0; i<this.state.project.roles.length; i++){
-                    if (i % 3 == 0){
-                        role.push(<tr></tr>)
-                    }
-                    // role.push(<td><Card className='roleCard' onClick={this.editRolePopup.bind(null, i)}>
-                    // Not implemented yet
-                    console.log(this.state.project.roles);
-                    console.log(this.state.project.roles[i]);
-                    var roleName = this.state.project.roles[i].name;
-                    role.push(<td><Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [roleName, this.state.project, this.state.projectKey])}>
-                    <Card.Body>
-                    <Card.Title><b>{this.state.project.roles[i].name}</b></Card.Title>
-                    <Card.Subtitle>{this.state.project.roles[i].description}</Card.Subtitle>
-                    </Card.Body>
-                    </Card>
-                    </td>);
-                }
                 roles =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
                     <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
@@ -230,21 +254,22 @@ class ProjectDetail extends Component {
                         <b>+</b>
                     </label>
                 </tr>
-                {role}
+                {this.state.roles}
                 </table>
             }
         }
 
         return (
             <div>
-                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} project={this.state.project}
-                                 projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName}
+                <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} roleWeight={this.state.roleWeight} roleAge={this.state.roleAge} roleGender={this.state.roleGender} roleHeight={this.state.roleHeight} project={this.state.project}
+                                 projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleAge={this.setRoleAge} setRoleGender={this.setRoleGender} setRoleHeight={this.setRoleHeight} setRoleWeight={this.setRoleWeight}
                                  setRoleDescription={this.setRoleDescription} setRoleImage={this.roleImage} setProject={this.setProject}
                                  closePopup={this.closePopup}/>
-                <EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}
-                               roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription}
-                               newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription}
-                               setProject={this.setProject} closePopup={this.closePopup}/>
+                {/*      Use EditRole from RolePage instead           */}
+                {/*<EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}*/}
+                {/*               roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription}*/}
+                {/*               newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription}*/}
+                {/*               setProject={this.setProject} closePopup={this.closePopup}/>*/}
                 {display}
                 {roles}
                 <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}

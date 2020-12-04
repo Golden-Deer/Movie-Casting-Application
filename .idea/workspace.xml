@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="099ee1e4-f662-4860-8dd4-20df8b877c1f" name="Default Changelist" comment="" />
+    <list default="true" id="099ee1e4-f662-4860-8dd4-20df8b877c1f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/project/ProjectDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/project/ProjectDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/project/RolePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/project/RolePage.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,19 +30,6 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,7 +42,8 @@
       <workItem from="1605699711900" duration="2734000" />
       <workItem from="1606311850364" duration="452000" />
       <workItem from="1606650586816" duration="5334000" />
-      <workItem from="1606789916229" duration="21129000" />
+      <workItem from="1606789916229" duration="59234000" />
+      <workItem from="1607006299575" duration="307000" />
     </task>
     <servers />
   </component>
