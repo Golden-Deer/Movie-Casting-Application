@@ -211,7 +211,7 @@ class ProjectDetail extends Component {
                 </div>
                 <br />
                 <Card>
-                    <Card.Header><b>Release Date</b>
+                    <Card.Header style={{fontSize: 22+'px'}}><b>Release Date</b>
                         <Button variant='outline-info' style={{float: 'right'}}
                             onClick={()=>this.editProject('Release Date')} >
                                 <span class='glyphicon glyphicon-pencil'></span>
@@ -223,7 +223,7 @@ class ProjectDetail extends Component {
                 </Card>
                 <br />
                 <Card>
-                    <Card.Header><b>Genere</b>
+                    <Card.Header style={{fontSize: 22+'px'}}><b>Genere</b>
                         <Button variant='outline-info' style={{float: 'right'}}
                              onClick={()=>this.editProject('Genre')}>
                                 <span class='glyphicon glyphicon-pencil'></span>
@@ -235,7 +235,7 @@ class ProjectDetail extends Component {
                 </Card>
                 <br />
                 <Card>
-                    <Card.Header><b>Description</b>
+                    <Card.Header style={{fontSize: 22+'px'}}><b>Description</b>
                         <Button variant='outline-info' style={{float: 'right'}}
                              onClick={()=>this.editProject('Description')}>
                                 <span class='glyphicon glyphicon-pencil'></span>
@@ -247,7 +247,7 @@ class ProjectDetail extends Component {
                 </Card>
                 <br />
                 <Card>
-                    <Card.Header><b>Director</b>
+                    <Card.Header style={{fontSize: 22+'px'}}><b>Director</b>
                         <Button variant='outline-info' style={{float: 'right'}}
                              onClick={()=>this.editProject('Director')}>
                                 <span class='glyphicon glyphicon-pencil'></span>
@@ -259,7 +259,7 @@ class ProjectDetail extends Component {
                 </Card>
                 <br />
                 <Card>
-                    <Card.Header><b>Producer</b>
+                    <Card.Header style={{fontSize: 22+'px'}}><b>Producer</b>
                         <Button variant='outline-info' style={{float: 'right'}}
                              onClick={()=>this.editProject('Producer')} >
                                 <span class='glyphicon glyphicon-pencil'></span>

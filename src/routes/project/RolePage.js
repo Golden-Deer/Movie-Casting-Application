@@ -3,7 +3,7 @@ import "../../App.js";
 import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
-import Card from "react-bootstrap/Card";
+import { Card, CardDeck } from "react-bootstrap";
 import firebase from "firebase";
 import DeleteRole from './DeleteRole';
 import EditRole from "./EditRole";
@@ -147,14 +147,36 @@ class RolePage extends Component {
     var candidates = null;
     if (this.state.role != null) {
         display = <div>
-            <p>
-                <p className='project-attribute-title'><b>Role Name</b></p>
-                <Button variant='info' onClick={()=>this.editRole('name')} style={{marginLeft: 1 + '%'}}>
-                    <span class='glyphicon glyphicon-pencil'></span></Button>
-                <p className='project-attribute-description'>{this.state.role.name}</p>
-            </p>
-            <p>
-                <label className='project-attribute-title'><b>Tags</b></label>
+            <div>
+                <h2 style={{display: 'inline-block' }}>
+                        <b>Role Detail</b>
+                </h2>
+
+                <Button variant='danger'
+                    style={{
+                       float: 'right'
+                    }}
+                    onClick={()=>{<DeleteRole deleteRole={this.deleteRole()} roleName={this.roleRef.name} closePopup={this.closePopup}/>}}>
+                    Delete Role
+                </Button>
+
+            </div>
+            <br />
+            <Card>
+                <Card.Header style={{fontSize: 22+'px'}}><b>Role Name</b>
+                    <Button variant='outline-info' style={{float: 'right'}}
+                        onClick={()=>this.editRole('name')} >
+                            <span class='glyphicon glyphicon-pencil'></span>
+                    </Button>
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title>{this.state.role.name}</Card.Title>
+                </Card.Body>
+            </Card>
+            <br/>
+            <Card>
+            <Card.Header style={{fontSize: 22+'px'}}><b>Tags</b></Card.Header>
+                 <br/>
                 <p className='project-attribute-description'>
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Age')}>Age: {this.state.role.age}</Button>{' '}
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Gender')}>Gender: {this.state.role.gender}</Button>{' '}
@@ -163,27 +185,25 @@ class RolePage extends Component {
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Weight')}>
                         Weight(kg): {this.state.role.weight}</Button>
                 </p>
-            </p>
-            <p>
-                <p className='project-attribute-title'><b>Description</b></p>
-                <Button variant='info' onClick={()=>this.editRole('description')} style={{marginLeft: 1 + '%'}}>
-                    <span class='glyphicon glyphicon-pencil'></span></Button>
-                <p className='project-attribute-description'>{this.state.role.description}</p>
-            </p>
-            <Button variant='danger'
-                style={{
-                    fontSize: 1.25 + 'rem',
-                    margin: 2 + '% ' + 2 + '% ' +2 + '% ' + 2 + '%',
-                }}
-                onClick={()=>{<DeleteRole deleteRole={this.deleteRole()} roleName={this.roleRef.name} closePopup={this.closePopup}/>}}>
-                Delete Role
-            </Button>
+            </Card>
+            <br />
+            <Card>
+                <Card.Header style={{fontSize: 22+'px'}}><b>Description</b>
+                    <Button variant='outline-info' style={{float: 'right'}}
+                        onClick={()=>this.editRole('description')} >
+                            <span class='glyphicon glyphicon-pencil'></span>
+                    </Button>
+                </Card.Header>
+                <Card.Body>
+                    <Card.Title>{this.state.role.description}</Card.Title>
+                </Card.Body>
+            </Card>
         </div>;
 
         if (this.state.role.candidates == null) {
             candidates =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
-                    <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
+                    <h2 style={{ display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
                     <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role])} style={{ fontSize: 40 + 'px' }}>
@@ -197,14 +217,16 @@ class RolePage extends Component {
            
             candidates =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
-                    <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
+                    <h2 style={{ display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
                     <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role])} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>
-                {this.state.candidateCards}
+                <CardDeck>
+                    {this.state.candidateCards}
+                </CardDeck>
             </table>
         }
     }
