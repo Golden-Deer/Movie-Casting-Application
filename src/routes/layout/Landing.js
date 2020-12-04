@@ -3,10 +3,11 @@ import { Link, Redirect } from 'react-router-dom';
 import Account from '../Account';
 import PropTypes from 'prop-types';
 import logo from '../../images/logo.png';
+import Body from '../Body'; 
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+    return <Redirect to='/dashboard'/>;
   }
   return (
     <section className='landing'>
