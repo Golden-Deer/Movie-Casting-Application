@@ -1,19 +1,82 @@
-import db from "../base";
-import "../App.js";
 import React from 'react';
-import { useHistory } from "react-router-dom";
-import Logo from '../images/logo.png';
+import { Link, Redirect } from 'react-router-dom';
+import logo from '../images/logo.png';
+import { Container, Row, Col } from 'react-bootstrap';
+import ActingRed from '../images/acting-red-back.jpg';
+import FilmingWater from '../images/filming-water.jpg';
 
 const About = () => {
-        const history = useHistory();
-        return (
-            <div class="body">
-                <h2 style={{ marginLeft: 30 + 'px', marginTop: 30 + 'px'}}><b>About Us</b></h2>
-                <p style={{ marginLeft: 30 + 'px', maxWidth: 1000 + 'px', marginTop: 20 + 'px', display: 'inline-block' }}>The Golden Deer is a non-profit organization represented by a small group of eleven juvenile delinquients, each more barbarous than the last, who coincidentally crossed paths during the Fall 2020 academic term while taking courses to obtain a degree in Critical Gender and Sexuality Studies. They banded together early in the quarter and unanimously decided that forming an underground brothel network under the thinly-veiled disguise of a professional casting and hiring service would best serve their nefarious interests. Their tireless labor over the next ten weeks bore fruit in the form of a website bearing the name Golden Cast, a subtle nod to the reflective, dappled sheen of saturated urine droplets cast under direct sunlight, which not only provides an incredible visual spectacle but also serves as a vital source of hydration as well for those living in the scorching conditions of California's desert terrain.</p>
-                <img style={{display: 'inline-block', marginLeft: 50 + 'px', marginTop: -100 + 'px', width: 180 + 'px', height: 180 + 'px'}} src={Logo}/>
-                <p style={{ marginLeft: 30 + 'px', marginTop: 10 + 'px'}}>The Golden Deer team name is in no way shape or form associated with the Fire Emblem video game franchise</p>
+  return (
+    <div className='about-page'>
+      <section className='landing1'>
+        <div className='dark-overlay'>
+          <div className='landing-inner'>
+            <img
+              src={logo}
+              alt='Golden Cast Logo'
+              className='landing-logo'></img>
+            <h1 className='x-large'>Golden Cast</h1>
+            <p className='lead'>
+              Golden Cast is a premium service to help your casting crew quickly
+              find the right actors and actresses for your casting roles.
+            </p>
+            <div className='about-buttons'>
+              <Link to='/discover' className='about-button'>
+                Discover
+              </Link>
+              <Link to='/search' className='about-button'>
+                Search
+              </Link>
             </div>
-        )
-}
+          </div>
+        </div>
+      </section>
+      <section className='landing2'>
+        <Container className='container-about'>
+          <Row>
+            <Col sm={true}>
+              <img src={FilmingWater} alt='Actors' className='page-img'></img>
+            </Col>
+            <Col sm={true}>
+              <h1>Find Great Talent</h1>
+              <p>
+                With our intuitive interface and wide range of actors to choose
+                from, Golden Cast guarantess that you will find the perfect
+                actor for your role. Whether you have a specific actor you are
+                looking for or simply want to browse our collection, use our
+                Discover page to find popular, up-and-coming actors or use our
+                Search page to find results for actors with the specific traits
+                you are looking for. Golden Cast is even free to use so you
+                don't have to worry about using your film budget towards finding
+                great talent and instead making cinematic masterpieces. What are
+                you waiting for? Go ahead and make an account and see what
+                Golden Cast can do for your film crew.
+              </p>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+      <section className='landing3'>
+        <div className='dark-overlay'>
+          <div className='landing-inner'>
+            <h1 className='x-large'>Casting Made Easy</h1>
+            <p className='lead'>
+              Golden Cast makes it easy to find the great actors and actresses
+              needed to make your cinematic masterpiece. We make it easy to
+              manage the casting and audition process by allowing you to create
+              projects with role openings. Then, you can browse our Discover
+              page or Search for a specific actor or actress to add to a role in
+              your project. You can make any changes needed to the projects or
+              roles at any time and once all roles are filled, you can easily
+              get into contact with each one to arrange auditions. Golden Cast
+              is simply casting made easy.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 
 export default About;

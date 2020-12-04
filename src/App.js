@@ -13,7 +13,7 @@ import RolePage from './routes/project/RolePage';
 import About from './routes/About';
 import ActorProfile from './routes/ActorProfile';
 import RoleViewer from './routes/project/RoleViewer';
-import Landing from './routes/layout/Landing';
+import NotFound from './routes/layout/NotFound';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       <Router>
         <div>
           <Navbar />
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/' component={Home} />
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
@@ -30,6 +30,7 @@ function App() {
           <Route exact path='/rolepage' component={RoleViewer} />
           <Route exact path='/about' component={About} />
           <Route exact path='/actor' component={ActorProfile} />
+          {/* <Route component={NotFound} /> */}
         </div>
       </Router>
     </AuthProvider>
