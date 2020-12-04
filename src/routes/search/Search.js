@@ -10,13 +10,30 @@ import ToggleBar from "./ToggleBar"
 const Search = (props) => {
         const history = useHistory();
         const [count, setCount] = useState(6);
-        console.log(props.location.state[2]);
-        const tags = {
-                gender: props.location.state[2].gender,
-                age: props.location.state[2].age,
-                height: props.location.state[2].height,
-                weight: props.location.state[2].weight
+        var tags = {
+                gender: 'unspecified',
+                age: 'unspecified',
+                height: 'unspecified',
+                weight: 'unspecified'
         };
+        //FIXME: var or const?
+        var projectKey = 'unspecified'
+        var role = 'unspecified'
+
+        //if the role is not created, skip the part for searching and set to default
+        if(props.location.state != null){
+                console.log(props.location.state[2]);
+                tags = {
+                        gender: props.location.state[2].gender,
+                        age: props.location.state[2].age,
+                        height: props.location.state[2].height,
+                        weight: props.location.state[2].weight
+                }; 
+                
+                projectKey = props.location.state[1]
+                role = props.location.state[2]
+        }
+        
 
         window.onscroll = function (ev) {
                 if (Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight) {
@@ -58,7 +75,7 @@ const Search = (props) => {
                         <div class="body">
                         {/* <ToggleBar /> */}
                         <br />
-                        <DisplayActor tags={tags} numActor={count} projectKey={props.location.state[1]} role={props.location.state[2]} />
+                        <DisplayActor tags={tags} numActor={count} projectKey={projectKey} role={role} />
                         </div>
 
                 </div>
