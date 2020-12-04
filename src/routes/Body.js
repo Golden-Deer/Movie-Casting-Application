@@ -185,7 +185,7 @@ const Body = () => {
           </tr>
         </table>
       ) : (
-        <></>
+        <></> // implement redirect to about page if user is not logged in
       )}
     </>
   );
