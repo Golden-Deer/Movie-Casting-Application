@@ -107,10 +107,10 @@ class DisplayActor extends Component {
             <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
             <Card.Body>
             <Card.Title>{records.name}</Card.Title>
-            <Card.Subtitle>Age: {records.tag.age}, Height: {records.tag.height} </Card.Subtitle>
-            <Card.Text>
-            Some brief introduction of the actor
-            </Card.Text>
+                <Card.Subtitle>Age: {records.tag.age} Gender: {records.tag.gender} Height: {records.tag.height} Weight: {records.tag.weight}</Card.Subtitle>
+                <Card.Text>
+                    {records.introduction}
+                </Card.Text>
             </Card.Body>
             </Card>
         );

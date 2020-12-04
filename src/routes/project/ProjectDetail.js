@@ -74,7 +74,8 @@ class ProjectDetail extends Component {
                                 role.push(<Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, childSnapshot.key])}>
                                 <Card.Body>
                                 <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
-                                <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
+                                    <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
+                                    <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
                                 </Card.Body>
                                 </Card>
                                 );
@@ -164,7 +165,7 @@ class ProjectDetail extends Component {
         this.setState({roleHeight: e});
     }
 
-    // The following functions are not being used
+    // setNew... functions are not being used
     setRoleWeight(e){
         this.setState({roleWeight: e});
     }
