@@ -15,23 +15,13 @@ export const Navbar1 = () => {
           src={logo}
         />
       </Navbar.Brand>
-<<<<<<< HEAD
       <Nav className='mr-auto'>
+        <Nav.Link href='/dashboard'>Projects</Nav.Link>
         <Nav.Link href='/about'>About Us</Nav.Link>
         <Nav.Link href='/discover'>Discover</Nav.Link>
-        <Nav.Link href='/'>Projects</Nav.Link>
       </Nav>
       <Account />
     </Navbar>
-=======
-    <Nav className="mr-auto">
-      <Nav.Link href="/dashboard">Projects</Nav.Link>
-      <Nav.Link href="/about">About Us</Nav.Link>
-      <Nav.Link href="/discover">Discover</Nav.Link>
-    </Nav>
-    <Account/>
-  </Navbar>
->>>>>>> 958ef9dc201e7536a931a6f438c6aba482a569be
   );
 };
 
