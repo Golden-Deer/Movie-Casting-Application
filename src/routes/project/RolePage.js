@@ -157,20 +157,10 @@ class RolePage extends Component {
                 <p className='project-attribute-description'>
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Age')}>Age: {this.state.role.age}</Button>{' '}
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Gender')}>Gender: {this.state.role.gender}</Button>{' '}
-                    {this.state.role.height == 'unspecified' ?
-                        <Button variant="outline-info" onClick={()=>this.editRoleTag('Height')}>
-                            Height(cm): {this.state.role.height}</Button>
-                            :
-                        <Button variant="outline-info" onClick={()=>this.editRoleTag('Height')}>
-                        Height(cm): {this.state.role.height}-{Number(this.state.role.height)+9}</Button>
-                    }{' '}
-                    {this.state.role.height == 'unspecified' ?
-                        <Button variant="outline-info" onClick={()=>this.editRoleTag('Weight')}>
-                            Weight(kg): {this.state.role.weight}</Button>
-                            :
-                        <Button variant="outline-info" onClick={()=>this.editRoleTag('Weight')}>
-                        Weight(kg): {this.state.role.weight}-{Number(this.state.role.weight)+9}</Button>
-                    }
+                    <Button variant="outline-info" onClick={()=>this.editRoleTag('Height')}>
+                        Height(cm): {this.state.role.height}</Button>{' '}
+                    <Button variant="outline-info" onClick={()=>this.editRoleTag('Weight')}>
+                        Weight(kg): {this.state.role.weight}</Button>
                 </p>
             </p>
             <p>

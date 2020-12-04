@@ -46,11 +46,11 @@ class ProjectDetail extends Component {
         this.setRoleAge = this.setRoleAge.bind(this);
         this.setRoleGender = this.setRoleGender.bind(this);
         this.setRoleHeight = this.setRoleHeight.bind(this);
-        this.setRoleWeight = this.setRoleWeight.bind(this);
-        this.setNewRoleName = this.setNewRoleName.bind(this);
-        this.setNewRoleDescription = this.setNewRoleDescription.bind(this);
-        this.setRoleDescription = this.setRoleDescription.bind(this);
-        this.setProject = this.setProject.bind(this);
+        // this.setRoleWeight = this.setRoleWeight.bind(this);
+        // this.setNewRoleName = this.setNewRoleName.bind(this);
+        // this.setNewRoleDescription = this.setNewRoleDescription.bind(this);
+        // this.setRoleDescription = this.setRoleDescription.bind(this);
+        // this.setProject = this.setProject.bind(this);
         this.editRolePopup = this.editRolePopup.bind(this);
         // this.setRoleImage = this.setRoleImage.bind(this);
         // this.setNewRoleImage = this.setNewRoleImage.bind(this);

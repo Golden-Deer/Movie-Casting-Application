@@ -85,7 +85,7 @@ image.center{
   height: 380px;
   top: 50%;
   left: 50%;
-  transform: translate(-62%, -55%);
+  transform: translate(-55%, -45%);
   border-radius: 15px;
   transition-duration: 0.5s;
   transition: opacity 0.5s;
@@ -100,7 +100,7 @@ image.center{
   height: 430px;
   top: 50%;
   left: 50%;
-  transform: translate(-62%, -55%);
+  transform: translate(-55%, -45%);
   border-radius: 15px;
   transition-duration: 0.3s;
   transition: opacity 0.5s;
@@ -115,7 +115,7 @@ image.center{
   height: 570px;
 	top: 50%;
   left: 50%;
-  transform: translate(-62%, -55%);
+  transform: translate(-55%, -45%);
   border-radius: 15px;
   transition-duration: 0.5s;
   transition: opacity 0.5s;
