@@ -12,7 +12,8 @@ import ProjectViewer from './routes/project/ProjectViewer';
 import RolePage from './routes/project/RolePage';
 import About from './routes/About';
 import ActorProfile from './routes/ActorProfile';
-import RoleViewer from "./routes/project/RoleViewer";
+import RoleViewer from './routes/project/RoleViewer';
+import Landing from './routes/layout/Landing';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <Router>
         <div>
           <Navbar />
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Landing} />
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
