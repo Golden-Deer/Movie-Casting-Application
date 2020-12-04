@@ -210,7 +210,7 @@ class RolePage extends Component {
     }
 
     return (
-        <div>
+        <div class="body">
             {display}
             {candidates}
             <EditRole field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}
