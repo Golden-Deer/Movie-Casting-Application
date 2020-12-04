@@ -6,7 +6,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 export const Navbar1 = () => {
   return (
     <Navbar bg='dark' variant='dark'>
-      <Navbar.Brand href='/'>
+      <Navbar.Brand href='/dashboard'>
         <img
           alt='Golden Cast'
           className='d-inline-block align-top'

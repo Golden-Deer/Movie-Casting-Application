@@ -21,7 +21,6 @@ function App() {
       <Router>
         <div>
           <Navbar />
-          <Route exact path='/' component={Home} />
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
