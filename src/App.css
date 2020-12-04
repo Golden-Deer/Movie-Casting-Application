@@ -361,8 +361,8 @@ image.center{
 }
 
 .landing-logo {
-  width: 350px;
-  height: 350px;
+  width: 250px;
+  height: 250px;
 }
 
 .landing-inner h1 {
@@ -556,7 +556,4 @@ header {
   float: none !important; 
   padding: 0px 20px 10px 20px;
 }
-
-
-
 
