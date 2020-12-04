@@ -7,7 +7,7 @@ import EditRolePopup from './EditRolePopup';
 import EditProjectPopup from './EditProjectPopup';
 import DeleteProjectPopup from './DeleteProjectPopup';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import {Card, CardDeck} from 'react-bootstrap';
 import RolePage from "./RolePage";
 
 class ProjectDetail extends Component {
@@ -71,13 +71,13 @@ class ProjectDetail extends Component {
                         this.roleRef = db.database().ref('USER').child(user.uid).child('projects').child(childSnapshot.key).child('roles');
                         this.roleRef.on('value', data => {
                             data.forEach(childData =>{
-                                role.push(<td><Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, childSnapshot.key])}>
+                                role.push(<Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, childSnapshot.key])}>
                                 <Card.Body>
                                 <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
                                 <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
                                 </Card.Body>
                                 </Card>
-                                </td>);
+                                );
                                 })
                         })
                         this.setState({roles: role});
@@ -194,41 +194,81 @@ class ProjectDetail extends Component {
         var roles = null;
         if (this.state.project != null) {
             display = <div>
-                <p>
-                    <p className='project-attribute-title'><b>Release Date</b></p>
-                    <Button variant='info' onClick={()=>this.editProject('Release Date')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
-                    <p className='project-attribute-description'>{this.state.project.release_date}</p>
-                </p>
-                <p>
-                    <label className='project-attribute-title'><b>Genre</b></label>
-                    <Button variant='info' onClick={()=>this.editProject('Genre')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
-                    <p className='project-attribute-description'>{this.state.project.genre}</p>
-                </p>
-                <p>
-                    <p className='project-attribute-title'><b>Description</b></p>
-                    <Button variant='info' onClick={()=>this.editProject('Description')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
-                    <p className='project-attribute-description'>{this.state.project.description}</p>
-                </p>
-                <p>
-                    <p className='project-attribute-title'><b>Director</b></p>
-                    <Button variant='info' onClick={()=>this.editProject('Director')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
-                    <p className='project-attribute-description'>{this.state.project.director}</p>
-                </p>
-                <p>
-                    <p className='project-attribute-title'><b>Producer</b></p>
-                    <Button variant='info' onClick={()=>this.editProject('Producer')} style={{marginLeft: 1 + '%'}}><span class='glyphicon glyphicon-pencil'></span></Button>
-                    <p className='project-attribute-description'>{this.state.project.producer}</p>
-                </p>
+                <div>
+                <h2 style={{display: 'inline-block' }}>
+                        <b>Project Detail</b>
+                </h2>
+
                 <Button
                     variant='danger'
                     style={{
-                        fontSize: 1.25 + 'rem',
-                        margin: 2 + '% ' + 2 + '% ' +2 + '% ' + 2 + '%',
+                        float:"right"
                     }}
                     onClick={this.deleteConfirmation}
                     >
                     Delete Project
                 </Button>
+                </div>
+                <br />
+                <Card>
+                    <Card.Header><b>Release Date</b>
+                        <Button variant='outline-info' style={{float: 'right'}}
+                            onClick={()=>this.editProject('Release Date')} >
+                                <span class='glyphicon glyphicon-pencil'></span>
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.state.project.release_date}</Card.Title>
+                    </Card.Body>
+                </Card>
+                <br />
+                <Card>
+                    <Card.Header><b>Genere</b>
+                        <Button variant='outline-info' style={{float: 'right'}}
+                             onClick={()=>this.editProject('Genre')}>
+                                <span class='glyphicon glyphicon-pencil'></span>
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.state.project.genre}</Card.Title>
+                    </Card.Body>
+                </Card>
+                <br />
+                <Card>
+                    <Card.Header><b>Description</b>
+                        <Button variant='outline-info' style={{float: 'right'}}
+                             onClick={()=>this.editProject('Description')}>
+                                <span class='glyphicon glyphicon-pencil'></span>
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.state.project.description}</Card.Title>
+                    </Card.Body>
+                </Card>
+                <br />
+                <Card>
+                    <Card.Header><b>Director</b>
+                        <Button variant='outline-info' style={{float: 'right'}}
+                             onClick={()=>this.editProject('Director')}>
+                                <span class='glyphicon glyphicon-pencil'></span>
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.state.project.director}</Card.Title>
+                    </Card.Body>
+                </Card>
+                <br />
+                <Card>
+                    <Card.Header><b>Producer</b>
+                        <Button variant='outline-info' style={{float: 'right'}}
+                             onClick={()=>this.editProject('Producer')} >
+                                <span class='glyphicon glyphicon-pencil'></span>
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.state.project.producer}</Card.Title>
+                    </Card.Body>
+                </Card>
             </div>;
 
             if (this.state.project.roles == null) {
@@ -247,20 +287,22 @@ class ProjectDetail extends Component {
             else {
                 roles =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
-                    <h2 style={{ marginLeft: 30 + 'px', display: 'inline-block' }}>
+                    <h2 style={{display: 'inline-block' }}>
                         <b>My Roles&nbsp;&nbsp;</b>
                     </h2>
                     <label class='invisibleButton' onClick={() => this.rolePopup()} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>
-                {this.state.roles}
+                <CardDeck>
+                    {this.state.roles}
+                </CardDeck>
                 </table>
             }
         }
 
         return (
-            <div>
+            <div class="body">
                 <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} roleWeight={this.state.roleWeight} roleAge={this.state.roleAge} roleGender={this.state.roleGender} roleHeight={this.state.roleHeight} project={this.state.project}
                                  projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleAge={this.setRoleAge} setRoleGender={this.setRoleGender} setRoleHeight={this.setRoleHeight} setRoleWeight={this.setRoleWeight}
                                  setRoleDescription={this.setRoleDescription} setRoleImage={this.roleImage} setProject={this.setProject}
@@ -272,6 +314,8 @@ class ProjectDetail extends Component {
                 {/*               setProject={this.setProject} closePopup={this.closePopup}/>*/}
                 {display}
                 {roles}
+                <br />
+                
                 <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}
                                   setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateProject={this.updateProject}
                                   closePopup={this.closePopup}/>

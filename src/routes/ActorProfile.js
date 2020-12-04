@@ -7,7 +7,7 @@ import ActorDetail from './ActorDetail';
 const ActorProfile = (props) => {
   const history = useHistory();
   return (
-    <div>
+    <div class="body">
       <p>
         <h1 id='my-projects'>
           <a onClick={() => history.goBack()}>&lt; <b>{props.location.state[0].name}</b></a>

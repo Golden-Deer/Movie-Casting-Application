@@ -8,7 +8,7 @@ const Home = () => {
     const history = useHistory();
 
     return (
-            <div id='main'>
+            <div class='body' id='main'>
                 <div className='jumbotron'>
                     <label class='main-title'><b>GOLDEN CAST</b></label>
                 </div>
