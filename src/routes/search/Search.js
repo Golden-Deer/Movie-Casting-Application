@@ -42,7 +42,7 @@ const Search = (props) => {
         return (
                 <div>
                         {topDisplay}
-                        <div className="s-main">
+                        {/* <div className="s-main">
                             <div className="s-sidebar">
                                         <h1>Project list</h1>
                                         <h2> - Project1</h2>
@@ -50,7 +50,8 @@ const Search = (props) => {
                                                 <h2>project</h2>
                                         </div>
                                 </div>
-                        </div>
+                        </div> */}
+                        {/* <ToggleBar /> */}
                         <DisplayActor tags={tags} numActor={count} projectKey={props.location.state[1]} role={props.location.state[2]} />
 
                 </div>

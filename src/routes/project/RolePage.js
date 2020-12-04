@@ -43,6 +43,7 @@ class RolePage extends Component {
             if (user != null){
                 this.profileRef = db.database().ref("PROFILE");
                 this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/');
+
                 this.roleRef.orderByChild('name').equalTo(this.props.roleName).on('value', dataSnapshot => {
                     dataSnapshot.forEach(childSnapshot => {
 
@@ -57,7 +58,7 @@ class RolePage extends Component {
                             this.props.projectKey + '/roles/').child(childSnapshot.key).child('candidates');
                         this.candidateRef.on('value', data => {
                             data.forEach(childData =>{
-                                if (newRole.candidates[childData.key] != null) {
+                                if (newRole.candidates!= null && newRole.candidates[childData.key] != null) {
                                     var actorProfile = null;
                                     firebase.database().ref(this.profileRef.child(newRole.candidates[childData.key].key))
                                         .on('value', snapshot => {
@@ -67,7 +68,7 @@ class RolePage extends Component {
                                             actorProfile.profilepic = newRole.candidates[childData.key].profilePic;
                                         });
 
-                                    candidate.push(<td><Card onClick={() => this.props.history.push('/actor',
+                                    candidate.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
                                         [actorProfile, this.props.projectKey, newRole])}>
                                         <Card.Img variant="top" src={newRole.candidates[childData.key].profilePic}/>
                                         <Card.Body>
