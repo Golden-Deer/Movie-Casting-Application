@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import db from '../../base';
-import Card from 'react-bootstrap/Card';
+import { Card, CardDeck } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 
 class DisplayActor extends Component {
@@ -103,7 +103,7 @@ class DisplayActor extends Component {
 
     render() {
         const display = this.state.records.map(records =>
-            <Card style={{ width: '90%' }} key={records.name} onClick={() => this.props.history.push('/actor', [records, this.props.projectKey, this.props.role])}>
+            <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px'}} key={records.name} onClick={() => this.props.history.push('/actor', [records, this.props.projectKey, this.props.role])}>
             <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
             <Card.Body>
             <Card.Title>{records.name}</Card.Title>
@@ -116,7 +116,7 @@ class DisplayActor extends Component {
         );
 
         return (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 28%)'}}>{display}</div>
+            <CardDeck>{display}</CardDeck>
         );
     }
 }

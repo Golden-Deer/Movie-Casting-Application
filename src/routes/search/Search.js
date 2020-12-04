@@ -1,6 +1,7 @@
 import db from "../../base";
 import "../../App.js";
 import React, { useEffect, useState } from 'react';
+import { Navbar, Button } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
 import logo from "../../images/logo.png";
 import DisplayActor from "./DisplayActor"
@@ -25,18 +26,21 @@ const Search = (props) => {
 
         var topDisplay = null;
         if (props.location.state != null) {
-            topDisplay  = <div className="s-navbar">
-                <h1 onClick={() => history.goBack()}>
-                    &lt;&lt; {props.location.state[0].name} <a>Showing result for {props.location.state[2].name}</a>
-                </h1>
-            </div>
+            topDisplay =  <Navbar bg="dark" variant="dark" sticky="top">
+            <Navbar.Brand>
+                <Button variant="outline-light" onClick={() => history.goBack()}>Back</Button>  
+            </Navbar.Brand>
+                <h3 style={{color: 'white'}}>Showing result for {props.location.state[2].name} in {props.location.state[0].name}</h3>
+            </Navbar>
+     
         } else {
-            topDisplay = <div className="s-navbar">
-                <h1 onClick={() => history.push("/")}>
-                    &lt;&lt; My Projects
-                </h1>
-
-            </div>
+            topDisplay = 
+            <Navbar bg="dark" variant="dark" sticky="top">
+            <Navbar.Brand>
+                <Button variant="outline-light" onClick={() => history.goBack()}>Back</Button>  
+            </Navbar.Brand>
+                <h3 style={{color: 'white'}}>My Projects</h3>
+            </Navbar>
         }
 
         return (
@@ -51,8 +55,11 @@ const Search = (props) => {
                                         </div>
                                 </div>
                         </div> */}
+                        <div class="body">
                         {/* <ToggleBar /> */}
+                        <br />
                         <DisplayActor tags={tags} numActor={count} projectKey={props.location.state[1]} role={props.location.state[2]} />
+                        </div>
 
                 </div>
         )
