@@ -9,9 +9,6 @@ import Button from 'react-bootstrap/Button';
 const Discover = () => {
   const history = useHistory();
   // const [count, setCount] = useState(6);
-  const tags = {
-    gender: 'male',
-  };
 
   // window.onscroll = function (ev) {
   //   if (
@@ -32,7 +29,7 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <ExploreActor tags={'male'} numActor={9} />
+            <ExploreActor tags={{gender: 'male'}} numActor={9} />
           </Col>
         </Row>
         <Row>
@@ -42,7 +39,7 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <ExploreActor tags={'female'} numActor={9} />
+            <ExploreActor tags={{gender: 'female'}} numActor={9} />
           </Col>
         </Row>
         <Row>
@@ -50,7 +47,7 @@ const Discover = () => {
             <h1>Popular Young Actors</h1>
           </Col>
           <Col>
-            <ExploreActor tags={'age'} numActor={9} />
+            <ExploreActor tags={{age: '0-25'}} numActor={9} />
           </Col>
         </Row>
       </Container>

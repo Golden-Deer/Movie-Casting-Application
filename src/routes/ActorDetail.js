@@ -29,6 +29,9 @@ class ActorDetail extends Component {
             });
         }
         if (this.user != null) this.candidateRef = db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/');
+        if (this.props.projectKey == 'null') {
+            
+        }
     }
 
     addCandidate() {
@@ -53,7 +56,7 @@ class ActorDetail extends Component {
 
     componentDidMount() {
         db.auth().onAuthStateChanged((user) => {
-            if (user != null) {
+            if (user != null && this.props.projectKey != 'null') {
                 this.user = user;
                 this.candidateRef = db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/');
                 this.candidateRef.on('value', dataSnapshot => {
@@ -105,7 +108,7 @@ class ActorDetail extends Component {
                     <p className='project-attribute-description'>{this.props.actor.introduction}</p>
                 </p>
                 
-                {this.state.added ? 
+                {(this.props.projectKey == 'null') ? null : (this.state.added ? 
                 <Button
                     variant='danger'
                     size='lg'
@@ -129,7 +132,7 @@ class ActorDetail extends Component {
                     }} block>
                     Add Candidate
                 </Button>            
-                }
+                )}
             </div>
             <div style={{display: 'inline-block', float: 'left', width: 45 + '%', marginLeft: 50 + 'px'}}>
                 <p><img className='project-attribute-title' src={this.state.profilePic} alt={this.props.actor.profilepic} style={{cursor: 'pointer', width: '700px'}} onClick={()=>this.displayPicture(this.state.profilePic)}/></p>
