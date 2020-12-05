@@ -36,7 +36,6 @@ const SignUpPopup = () => {
     };
 
     const handleSignUp = (event) => {
-        console.log("HERE")
         event.preventDefault();
         db
             .auth()

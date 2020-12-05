@@ -8,6 +8,7 @@ import firebase from "firebase";
 
 class ActorDetail extends Component {
     constructor(props) {
+        console.log(props.location.state)
         super(props);
         this.state = {
             profilePic: this.props.actor.profilepic,
@@ -20,7 +21,6 @@ class ActorDetail extends Component {
         this.candidateRef = null;
         for (var picture of this.props.actor.pictures) {
             var pictures = this.state.pictures;
-            console.log(picture);
             this.pictureRef.child(picture).getDownloadURL().then((url) => {
                 pictures.push(url);
                 this.setState({ pictures: pictures });
@@ -32,17 +32,19 @@ class ActorDetail extends Component {
     }
 
     addCandidate() {
-        console.log(this.props.projectKey);
         this.candidateRef.child(this.props.actor.key).set({
             name: this.props.actor.name,
             key: this.props.actor.key,
             profilePic: this.state.profilePic
         });
+        // navigate back to rolepage
+        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey])
     }
 
     removeCandidate() {
         this.candidateRef.child(this.props.actor.key).remove();
-        window.location.reload();
+        // navigate back to rolepage
+        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey])
     }
 
     componentDidMount() {
@@ -62,7 +64,6 @@ class ActorDetail extends Component {
                 });
             }
         });
-        console.log(this.state.added);
         if (this.state.added) {
             document.getElementById('addCandidateButton').style.visibility = 'hidden';
             document.getElementById('deleteCandidateButton').style.visibility = 'visible';

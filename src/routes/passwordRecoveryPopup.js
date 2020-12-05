@@ -21,7 +21,6 @@ const PasswordRecoveryPopup = () => {
       db.auth()
         .fetchSignInMethodsForEmail(recoveryEmail)
         .then((signInMethods) => {
-          console.log('HERE');
           // an empty array means the account doesn't exist
           if (signInMethods.length == 0) {
             setIndicator(

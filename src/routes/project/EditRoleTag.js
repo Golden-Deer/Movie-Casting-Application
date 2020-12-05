@@ -35,41 +35,36 @@ class EditRole extends Component{
         if (this.props.field == 'Age') {
             options = [
                 <option selected disabled>Choose here</option>,
-                <option value='<10'>Under 10</option>,
+                <option value='0-10'>Under 10</option>,
                 <option value='10-17'>10-17</option>,
                 <option value="18-25">18-25</option>,
                 <option value="26-35">26-35</option>,
                 <option value="36-45">36-45</option>,
                 <option value="46-60">46-60</option>,
                 <option value="61-80">61-80</option>,
-                <option value=">80">Over 80</option>]
+                <option value=">80">Over 80</option>,
+                <option value="unspecified">Unspecified</option>,]
         }
         if (this.props.field == 'Gender') {
             options = [
                 <option selected disabled>Choose here</option>,
-                <option value="Cis Female">Cis Female</option>,
-                <option value="Non Cis Female">Non Cis Female</option>,
-                <option value="Cis Male">Cis Male</option>,
-                <option value="Non Cis Male">Non Cis Male</option>,
-                <option value="Agender">Agender</option>,
-                <option value="Androgynous">Androgynous</option>,
-                <option value="Demigender">Demigender</option>,
-                <option value="Bigender">Bigender</option>,
-                <option value="Gender Fluid">Gender Fluid</option>,
-                <option value="Non-Binary">Non-Binary</option>,
+                <option value="female">Female</option>,
+                <option value="male">Male</option>,
+                <option value="unspecified">Unspecified</option>,
             ]
         }
         if (this.props.field == 'Height') {
             options = [
                 <option selected disabled>Choose here</option>,
-                <option value="<140">Below 140cm</option>,
+                <option value="0-140">Below 140cm</option>,
                 <option value="140-149">140cm-149cm</option>,
                 <option value="150-159">150cm-159cm</option>,
                 <option value="160-169">160cm-169cm</option>,
                 <option value="170-179">170cm-179cm</option>,
                 <option value="180-189">180cm-189cm</option>,
                 <option value="190-199">190cm-199cm</option>,
-                <option value=">199">Over 199cm</option>]
+                <option value=">199">Over 199cm</option>,
+                <option value="unspecified">Unspecified</option>,]
         }
         if (this.props.field == 'Weight') {
             options = [
@@ -81,8 +76,8 @@ class EditRole extends Component{
                 <option value="70-79">70kg-79kg</option>,
                 <option value="80-89">80kg-89kg</option>,
                 <option value="90-99">90kg-99kg</option>,
-                <option value=">99">Over 100kg</option>
-            ]
+                <option value=">99">Over 100kg</option>,
+                <option value="unspecified">Unspecified</option>,]
         }
 
         return(

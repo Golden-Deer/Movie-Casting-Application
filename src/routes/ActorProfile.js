@@ -5,6 +5,7 @@ import '../App.css';
 import ActorDetail from './ActorDetail';
 
 const ActorProfile = (props) => {
+  console.log(props.location.state);
   const history = useHistory();
   return (
     <div class="body">
@@ -13,7 +14,7 @@ const ActorProfile = (props) => {
           <a onClick={() => history.goBack()}>&lt; <b>{props.location.state[0].name}</b></a>
         </h1>
       </p>
-      <ActorDetail actor={props.location.state[0]} projectKey={props.location.state[1]} role={props.location.state[2]} />
+      <ActorDetail roleName={props.location.state[0]} actor={props.location.state[1]} projectKey={props.location.state[2]} role={props.location.state[3]} project={props.location.state[4]} />
     </div>
   );
 };

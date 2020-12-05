@@ -25,7 +25,6 @@ const changeLoginPassword = (e) => {
 };
 
 const handleLogin = (event) => {
-    console.log("HERE")
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {

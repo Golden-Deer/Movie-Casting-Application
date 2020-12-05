@@ -8,6 +8,7 @@ import DisplayActor from "./DisplayActor"
 import ToggleBar from "./ToggleBar"
 
 const Search = (props) => {
+        console.log(props.location.state);
         const history = useHistory();
         const [count, setCount] = useState(6);
         var tags = {
@@ -22,7 +23,6 @@ const Search = (props) => {
 
         //if the role is not created, skip the part for searching and set to default
         if(props.location.state != null){
-                console.log(props.location.state[2]);
                 tags = {
                         gender: props.location.state[2].gender,
                         age: props.location.state[2].age,
@@ -75,7 +75,7 @@ const Search = (props) => {
                         <div class="body">
                         {/* <ToggleBar /> */}
                         <br />
-                        <DisplayActor tags={tags} numActor={count} projectKey={projectKey} role={role} />
+                        <DisplayActor project={props.location.state[0]} roleName={props.location.state[2].name} tags={tags} numActor={count} projectKey={projectKey} role={role}/>
                         </div>
 
                 </div>

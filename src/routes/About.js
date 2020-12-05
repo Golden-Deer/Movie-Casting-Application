@@ -24,9 +24,6 @@ const About = () => {
               <Link to='/discover' className='about-button'>
                 Discover
               </Link>
-              <Link to='/search' className='about-button'>
-                Search
-              </Link>
             </div>
           </div>
         </div>

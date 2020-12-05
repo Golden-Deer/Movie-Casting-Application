@@ -62,14 +62,13 @@ class RolePage extends Component {
                                     var actorProfile = null;
                                     firebase.database().ref(this.profileRef.child(newRole.candidates[childData.key].key))
                                         .on('value', snapshot => {
-                                            console.log(snapshot.val());
                                             actorProfile = snapshot.val();
                                             actorProfile.key = snapshot.key;
                                             actorProfile.profilepic = newRole.candidates[childData.key].profilePic;
                                         });
-
+                                    // pass rolename as props as well
                                     candidate.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
-                                        [actorProfile, this.props.projectKey, newRole])}>
+                                        [childSnapshot.val().name, actorProfile, this.props.projectKey, newRole, this.props.project])}>
                                         <Card.Img variant="top" src={newRole.candidates[childData.key].profilePic}/>
                                         <Card.Body>
                                             <Card.Title><b>{newRole.candidates[childData.key].name}</b></Card.Title>
@@ -214,7 +213,6 @@ class RolePage extends Component {
             </table>
         }
         else {
-           
             candidates =<table id='roleDisplay' style={{marginTop: 50 + 'px', width: 100 + '%' }}>
                 <tr>
                     <h2 style={{ display: 'inline-block' }}>
