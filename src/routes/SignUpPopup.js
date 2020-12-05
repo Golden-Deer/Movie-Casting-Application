@@ -46,7 +46,6 @@ const SignUpPopup = () => {
                 if (signInMethods.length == 0) {
                     db.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
                         .then((user) => {
-                            window.location.reload(); // reload the page
                             var user = db.auth().currentUser;
                             db.database().ref('USER/' + user.uid).set({
                                 email: user.email,
@@ -54,7 +53,7 @@ const SignUpPopup = () => {
                                 lastName: lastName,
                                 projects: []
                             }).then(() => {
-                                console.log("new user pushed");
+                                closePopup('signUpPopup');
                             }).catch((error) => {
                                 alert(error);
                             });

@@ -1,5 +1,5 @@
 import { AuthContext } from '../auth/Auth';
-import React, { useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import Login from './LoginPopup'
 import db from '../base';
 import '../App.css';
@@ -12,7 +12,23 @@ import Button from 'react-bootstrap/Button'
 const Account = () => {
     const {currentUser} = useContext(AuthContext);
     const [accountEmail, setAccountEmail] = useState('');
+    const [firstName, setFirstName] = useState('Your')
+    const [lastName, setLastName] = useState('Account')
 
+    useEffect(() => {
+    let user = db.auth().currentUser;
+    if (user!=null){
+        db.database().ref('USER/' + user.uid + '/firstName').once('value', dataSnapshot => {
+            setFirstName(dataSnapshot.val())
+        })
+        db.database().ref('USER/' + user.uid + '/lastName').once('value', dataSnapshot => {
+            setLastName(dataSnapshot.val())
+        })
+    }
+    });
+
+    
+    
     const viewAccount = () => {
         // user is logged in
         if (currentUser) {
@@ -20,6 +36,7 @@ const Account = () => {
             document.getElementById('accountPopup').style.visibility = 'visible';
             document.getElementById('accountPopup').style.opacity = 100 + '%';
             setAccountEmail(currentUser.email);
+            console.log(currentUser);
         } else {
             document.getElementById('loginPopup').style.opacity = 100 + '%';
             document.getElementById('loginPopup').style.visibility = 'visible'; // show login popup
@@ -34,6 +51,8 @@ const Account = () => {
 
     function handleLogout() {
         db.auth().signOut();
+        setFirstName('Your');
+        setLastName('Account');
         closingPopup('accountPopup');
     }
 
@@ -53,8 +72,11 @@ const Account = () => {
     }
     
     return(
+        
         <>
-        <Button variant="primary" onClick={viewAccount} > Your Account </Button>
+        <Button variant="primary" onClick={viewAccount} style={{marginRight: 35 + 'px'}}>
+            {firstName + ' ' + lastName} 
+        </Button>
         <Login/>
         <table id='accountPopup' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
@@ -64,7 +86,7 @@ const Account = () => {
                 </tr>
                 <tr>
                     <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
-                        <b>Your Account</b>
+                        <b>Welcome, {firstName + ' ' + lastName}!</b>
                     </p>
                 </tr>
                 <tr>

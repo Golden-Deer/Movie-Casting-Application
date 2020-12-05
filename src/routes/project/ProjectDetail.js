@@ -320,7 +320,7 @@ class ProjectDetail extends Component {
                 <EditProjectPopup field={this.state.field} originalValue={this.state.originalValue} newValue={this.state.newValue}
                                   setNewValue={this.setNewValue} disableSave={this.state.disableSave} updateProject={this.updateProject}
                                   closePopup={this.closePopup}/>
-                <DeleteProjectPopup deleteProject={this.deleteProject} projectName={this.state.projectName} closePopup={this.closePopup}/>
+                <DeleteProjectPopup deleteProject={this.deleteProject} projectName={this.props.projectName} closePopup={this.closePopup}/>
             </div>
         );
     }

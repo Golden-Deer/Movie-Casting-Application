@@ -166,7 +166,7 @@ class DisplayActor extends Component {
             var display = <p class='banner'>No actors found that meet your criteria</p>
         else{
             var display = this.state.records.map(records =>
-                <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px'}} key={records.name} onClick={() => this.props.history.push('/actor', [this.props.roleName, records, this.props.projectKey, this.props.role, this.props.project])}>
+                <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px', cursor: 'pointer'}} key={records.name} onClick={() => this.props.history.push('/actor', [this.props.roleName, records, this.props.projectKey, this.props.role, this.props.project])}>
                 <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
                 <Card.Body>
                 <Card.Title>{records.name}</Card.Title>

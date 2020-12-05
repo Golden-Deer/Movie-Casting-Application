@@ -177,11 +177,11 @@ class RolePage extends Component {
             <Card.Header style={{fontSize: 22+'px'}}><b>Tags</b></Card.Header>
                  <br/>
                  <Card.Body>
-                 <p className='project-attribute-description'>
+                 <p className='project-attribute-tags'>
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Age')}>Age: {this.state.role.age.charAt(0).toUpperCase() + this.state.role.age.slice(1)}</Button>
                     <Button variant="outline-info" onClick={()=>this.editRoleTag('Gender')} style={{marginLeft: 30 + 'px'}}>Gender: {this.state.role.gender.charAt(0).toUpperCase() + this.state.role.gender.slice(1)}</Button>
-                    <Button variant="outline-info" onClick={()=>this.editRoleTag('Height')} style={{marginLeft: 30 + 'px'}}>Height(cm): {this.state.role.height.charAt(0).toUpperCase() + this.state.role.height.slice(1)}</Button>
-                    <Button variant="outline-info" onClick={()=>this.editRoleTag('Weight')} style={{marginLeft: 30 + 'px'}}>Weight(kg): {this.state.role.weight.charAt(0).toUpperCase() + this.state.role.weight.slice(1)}</Button>
+                    <Button variant="outline-info" onClick={()=>this.editRoleTag('Height')} style={{marginLeft: 30 + 'px'}}>Height (cm): {this.state.role.height.charAt(0).toUpperCase() + this.state.role.height.slice(1)}</Button>
+                    <Button variant="outline-info" onClick={()=>this.editRoleTag('Weight')} style={{marginLeft: 30 + 'px'}}>Weight (kg): {this.state.role.weight.charAt(0).toUpperCase() + this.state.role.weight.slice(1)}</Button>
                 </p>
                  </Card.Body>
                 
