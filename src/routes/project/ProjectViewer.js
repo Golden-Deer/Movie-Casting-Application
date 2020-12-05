@@ -13,7 +13,7 @@ const ProjectViewer = (props) => {
       <Navbar.Brand>
         <Button variant="outline-light" onClick={() => history.push('/dashboard')}>Back</Button>  
       </Navbar.Brand>
-        <h3 style={{color: 'white'}}>{props.location.state[0].name}</h3>
+      <h3 style={{color: 'white'}}>{props.location.state[0].name}</h3>
       </Navbar>
       <br />
       <ProjectDetail projectName={props.location.state[0].name}/>

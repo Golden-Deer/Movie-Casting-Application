@@ -303,7 +303,7 @@ class ProjectDetail extends Component {
         }
 
         return (
-            <div class="body">
+            <div class='movieDetail'>
                 <CreateRolePopup roleName={this.state.roleName} roleDescription={this.state.roleDescription} roleWeight={this.state.roleWeight} roleAge={this.state.roleAge} roleGender={this.state.roleGender} roleHeight={this.state.roleHeight} project={this.state.project}
                                  projectRef={this.projectRef} projectKey={this.state.projectKey} setRoleName={this.setRoleName} setRoleAge={this.setRoleAge} setRoleGender={this.setRoleGender} setRoleHeight={this.setRoleHeight} setRoleWeight={this.setRoleWeight}
                                  setRoleDescription={this.setRoleDescription} setRoleImage={this.roleImage} setProject={this.setProject}

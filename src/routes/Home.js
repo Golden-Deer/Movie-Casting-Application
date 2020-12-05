@@ -10,7 +10,9 @@ const Home = () => {
     return (
             <div class='body' id='main'>
                 <div className='jumbotron'>
-                    <label class='main-title'><b>GOLDEN CAST</b></label>
+                    <div className='dark-overlay'>
+                        <h1 className='main-title'>Golden Cast</h1>
+                    </div>
                 </div>
                 <Body/>
             </div>

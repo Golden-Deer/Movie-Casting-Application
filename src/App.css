@@ -159,7 +159,7 @@ image.center{
   display: block;
   margin: 20px 20px 28px 28px;
   padding: 15px;
-  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
   transition-duration: 0.3s;
 }
 
@@ -202,6 +202,13 @@ image.center{
   color: white;
   position: relative;
   transform: translate(0px, -10px);
+}
+
+.candidateImages{
+  display: inline-block;
+  float: left;
+  width: 7.7%;
+  cursor: pointer;
 }
 
 .banner{
@@ -494,8 +501,8 @@ button#your-account:hover {
 }
 
 .project-attribute-description {
-  font-size: 125%;
-  margin: 0.25% 0% 1.5% 2%;
+  font-size: 115%;
+  margin: -0.5% 0% 3.5% 2%;
 }
 
 
@@ -506,21 +513,22 @@ button#your-account:hover {
   text-align: center;
   font-size: 130px;
   user-select: none;
-  opacity: 60%;
+  opacity: 90%;
   color: white;
-  text-shadow: 6px 6px 8px rgba(0,0,0,0.8);
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
 }
 
 /* Home Page */
 .jumbotron {
   background-image: url('./images/HomePic.png');
+  position: relative;
   height: 400px;
 }
 
 .jumbotron h1 {
   text-align: center;
   color: white;
-  margin: 7% 50% 10% 40%;
+  margin: 6rem;
 }
 
 .app-logo {
@@ -550,10 +558,14 @@ header {
 }
 
 .body { 
-  max-width: 1440px; 
   min-width: 700px;
 	margin: 0 auto !important; 
   float: none !important; 
-  padding: 0px 20px 10px 20px;
+}
+
+.movieDetail{
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 

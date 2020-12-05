@@ -47,8 +47,11 @@ class ActorDetail extends Component {
         this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey])
     }
 
-    componentDidMount() {
+    displayPicture(picture){
+        window.open(picture);
+    }
 
+    componentDidMount() {
         db.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 this.user = user;
@@ -64,89 +67,86 @@ class ActorDetail extends Component {
                 });
             }
         });
-        if (this.state.added) {
-            document.getElementById('addCandidateButton').style.visibility = 'hidden';
-            document.getElementById('deleteCandidateButton').style.visibility = 'visible';
-        }
     }
 
     render() {
-
-        if (this.state.added) {
-            document.getElementById('addCandidateButton').style.visibility = 'hidden';
-            document.getElementById('deleteCandidateButton').style.visibility = 'visible';
-        }
         var images = [];
         for (var picture of this.state.pictures) {
-            images.push(<Card style={{ width: '90%' }} >
-            <Card.Img variant="top" src= {picture} alt={picture} />
-            </Card>);
+            images.push(<tr><Card onClick={this.displayPicture.bind(this, picture)}>
+            <Card.Img variant="top" src={picture} alt={picture} />
+            </Card></tr>);
         }
         var display = null;
-        display = <div>
-            <p>
-                <p className='project-attribute-title'><b>Name</b></p>
-                <p className='project-attribute-description'>{this.props.actor.name}</p>
-                <img className='project-attribute-title' src={this.state.profilePic} width='400px' alt={this.props.actor.profilepic} />
-            </p>
-            <p>
-                <label className='project-attribute-title'><b>Age</b></label>
-                <p className='project-attribute-description'>{this.props.actor.tag.age}</p>
-            </p>
-            <p>
-                <label className='project-attribute-title'><b>Gender</b></label>
-                <p className='project-attribute-description'>{this.props.actor.tag.gender}</p>
-            </p>
-            <p>
-                <label className='project-attribute-title'><b>Height</b></label>
-                <p className='project-attribute-description'>{this.props.actor.tag.height} cm</p>
-            </p>
-            <p>
-                <label className='project-attribute-title'><b>Weight</b></label>
-                <p className='project-attribute-description'>{this.props.actor.tag.weight} kg</p>
-            </p>
-            <p>
-                <p className='project-attribute-title'><b>Description</b></p>
-                <p className='project-attribute-description'>{this.props.actor.introduction}</p>
-            </p>
-            <p>
-                <p className='project-attribute-title'><b>More Images</b></p>
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 28%)'}}>{images}</div>
-            <Button
-                variant='primary'
-                id='addCandidateButton'
-                onClick={() => this.addCandidate()}
-                style={{
-                    fontSize: 1.25 + 'rem',
-                    margin: 2 + '% ' + 2 + '% ' + 2 + '% ' + 2 + '%',
-                    visibility: 'visible'
-                }}
-            >
-                Add Candidate
-            </Button>
-
-            <Button
-                variant='danger'
-                id='deleteCandidateButton'
-                onClick={() => this.removeCandidate()}
-                style={{
-                    fontSize: 1.25 + 'rem',
-                    margin: 2 + '% ' + 2 + '% ' + 2 + '% ' + 2 + '%',
-                    visibility: 'hidden'
-                }}
-            >
-                Remove Candidate
-            </Button>
+        display = 
+        <div>
+            <div style={{display: 'inline-block', float: 'left', width: 40 + '%'}}>
+                <p>
+                    <p className='project-attribute-title'><b>Name</b></p>
+                    <p className='project-attribute-description'>{this.props.actor.name}</p>
+                </p>
+                <p>
+                    <label className='project-attribute-title'><b>Age</b></label>
+                    <p className='project-attribute-description'>{this.props.actor.tag.age}</p>
+                </p>
+                <p>
+                    <label className='project-attribute-title'><b>Gender</b></label>
+                    <p className='project-attribute-description'>{this.props.actor.tag.gender.charAt(0).toUpperCase() + this.props.actor.tag.gender.slice(1)}</p>
+                </p>
+                <p>
+                    <label className='project-attribute-title'><b>Height</b></label>
+                    <p className='project-attribute-description'>{this.props.actor.tag.height} cm</p>
+                </p>
+                <p>
+                    <label className='project-attribute-title'><b>Weight</b></label>
+                    <p className='project-attribute-description'>{this.props.actor.tag.weight} kg</p>
+                </p>
+                <p>
+                    <p className='project-attribute-title'><b>Description</b></p>
+                    <p className='project-attribute-description'>{this.props.actor.introduction}</p>
+                </p>
+                
+                {this.state.added ? 
+                <Button
+                    variant='danger'
+                    size='lg'
+                    id='deleteCandidateButton'
+                    onClick={() => this.removeCandidate()}
+                    style={{
+                        fontSize: 1.25 + 'rem',
+                        margin: 8 + '% ' + 2 + '% ' + 2 + '% ' + 2 + '%',
+                    }} block>
+                    Remove Candidate
+                </Button>
+                : 
+                <Button
+                    variant='primary'
+                    size='lg'
+                    id='addCandidateButton'
+                    onClick={() => this.addCandidate()}
+                    style={{
+                        fontSize: 1.25 + 'rem',
+                        margin: 8 + '% ' + 3 + '% ' + 2 + '% ' + 2 + '%',
+                    }} block>
+                    Add Candidate
+                </Button>            
+                }
+            </div>
+            <div style={{display: 'inline-block', float: 'left', width: 45 + '%', marginLeft: 50 + 'px'}}>
+                <p><img className='project-attribute-title' src={this.state.profilePic} alt={this.props.actor.profilepic} style={{cursor: 'pointer', width: '700px'}} onClick={()=>this.displayPicture(this.state.profilePic)}/></p>
+            </div>
+            <div class='candidateImages'>
+                {images}
+            </div>
         </div>;
 
 
         return (
-            <div>
-
+            <>
+            <div class='movieDetail'>
                 {display}
-
             </div>
+            </>
+            
         );
     }
 }
