@@ -1,4 +1,3 @@
-import db from '../../base';
 import '../../App.js';
 import React, { Component } from 'react';
 import ExploreActor from './ExploreActor';
@@ -24,12 +23,22 @@ const Discover = () => {
       <Container>
         <Row>
           <Col>
+            <h1>Trending Actors</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <ExploreActor numActor={25} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <h1>Popular Male Actors</h1>
           </Col>
         </Row>
         <Row>
           <Col>
-            <ExploreActor tags={{gender: 'male'}} numActor={9} />
+            <ExploreActor tags={{ gender: 'male' }} numActor={25} />
           </Col>
         </Row>
         <Row>
@@ -39,7 +48,7 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <ExploreActor tags={{gender: 'female'}} numActor={9} />
+            <ExploreActor tags={{ gender: 'female' }} numActor={25} />
           </Col>
         </Row>
         <Row>
@@ -47,7 +56,23 @@ const Discover = () => {
             <h1>Popular Young Actors</h1>
           </Col>
           <Col>
-            <ExploreActor tags={{age: '0-25'}} numActor={9} />
+            <ExploreActor tags={{ age: '0-25' }} numActor={25} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h1>Tall Actors</h1>
+          </Col>
+          <Col>
+            <ExploreActor tags={{ height: '170-250' }} numActor={25} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h1>Short Actors</h1>
+          </Col>
+          <Col>
+            <ExploreActor tags={{ height: '100-170' }} numActor={25} />
           </Col>
         </Row>
       </Container>
