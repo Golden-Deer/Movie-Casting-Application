@@ -39,51 +39,47 @@ class RolePage extends Component {
     }
 
     componentDidMount() {
+        // start at top of the page
+        window.scrollTo(0, 0)
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null){
                 this.profileRef = db.database().ref("PROFILE");
-                this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/');
-
-                this.roleRef.orderByChild('name').equalTo(this.props.roleName).on('value', dataSnapshot => {
-                    dataSnapshot.forEach(childSnapshot => {
-
-                        var newRole = childSnapshot.val();
-                        newRole.key = childSnapshot.key;
-                        this.setState({role: newRole, roleKey: childSnapshot.key});
-                        this.setState({candidates: childSnapshot.val()['candidates']});
-
-                        var candidate = [];
-                        var index = 0;
-                        this.candidateRef = db.database().ref('USER/' + user.uid + '/projects/' +
-                            this.props.projectKey + '/roles/').child(childSnapshot.key).child('candidates');
-                        this.candidateRef.on('value', data => {
-                            data.forEach(childData =>{
-                                if (newRole.candidates!= null && newRole.candidates[childData.key] != null) {
-                                    var actorProfile = null;
-                                    firebase.database().ref(this.profileRef.child(newRole.candidates[childData.key].key))
-                                        .on('value', snapshot => {
-                                            actorProfile = snapshot.val();
-                                            actorProfile.key = snapshot.key;
-                                            actorProfile.profilepic = newRole.candidates[childData.key].profilePic;
-                                        });
-                                    // pass rolename as props as well
-                                    candidate.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
-                                        [childSnapshot.val().name, actorProfile, this.props.projectKey, newRole, this.props.project])}>
-                                        <Card.Img variant="top" src={newRole.candidates[childData.key].profilePic}/>
-                                        <Card.Body>
-                                            <Card.Title><b>{newRole.candidates[childData.key].name}</b></Card.Title>
-                                        </Card.Body>
-                                    </Card>
-                                    </td>);
-                                    index+=1;
-                                    if (index % 3 == 0){
-                                        candidate.push(<tr></tr>)
-                                    }
+                this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.roleKey);
+                console.log(this.props.roleKey);
+                this.roleRef.on('value', dataSnapshot => {
+                    var newRole = dataSnapshot.val();
+                    newRole.key = dataSnapshot.key;
+                    this.setState({role: newRole, roleKey: dataSnapshot.key, candidates: dataSnapshot.val()['candidates']});
+                    var candidate = [];
+                    var index = 0;
+                    this.candidateRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/').child(dataSnapshot.key).child('candidates');
+                    this.candidateRef.on('value', data => {
+                        data.forEach(childData =>{
+                            if (newRole.candidates!= null && newRole.candidates[childData.key] != null) {
+                                var actorProfile = null;
+                                firebase.database().ref(this.profileRef.child(newRole.candidates[childData.key].key))
+                                    .on('value', snapshot => {
+                                        actorProfile = snapshot.val();
+                                        actorProfile.key = snapshot.key;
+                                        actorProfile.profilepic = newRole.candidates[childData.key].profilePic;
+                                    });
+                                // pass rolename as props as well
+                                candidate.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
+                                    [dataSnapshot.val().name, actorProfile, this.props.projectKey, newRole, this.props.project, this.props.roleKey])}>
+                                    <Card.Img variant="top" src={newRole.candidates[childData.key].profilePic}/>
+                                    <Card.Body>
+                                        <Card.Title><b>{newRole.candidates[childData.key].name}</b></Card.Title>
+                                    </Card.Body>
+                                </Card>
+                                </td>);
+                                index+=1;
+                                if (index % 3 == 0){
+                                    candidate.push(<tr></tr>)
                                 }
-                            })
+                            }
                         })
-                        this.setState({candidateCards: candidate});
                     })
+                    this.setState({candidateCards: candidate});
                 });
             }
         });
@@ -108,13 +104,15 @@ class RolePage extends Component {
     }
 
     updateRole(){
-        let reference = this.roleRef.child(this.state.roleKey);
+        let reference = this.roleRef;
         let updates = {}
         updates[this.state.field.toLowerCase()] = this.state.newValue;
         reference.update(updates);
         this.closePopup('editRole');
         this.closePopup('editRoleTag');
         this.setState({originalValue: '', newValue:''});
+        if (this.state.field == 'Name')
+            this.props.resetRoleName(this.state.newValue);
     }
 
     deleteRole(){
@@ -206,7 +204,7 @@ class RolePage extends Component {
                     <h2 style={{ display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
-                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role])} style={{ fontSize: 40 + 'px' }}>
+                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role, this.props.roleKey])} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>
@@ -219,7 +217,7 @@ class RolePage extends Component {
                     <h2 style={{ display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
-                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role])} style={{ fontSize: 40 + 'px' }}>
+                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role, this.props.roleKey])} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>
@@ -229,7 +227,7 @@ class RolePage extends Component {
             </table>
         }
     }
-
+    
     return (
         <div class="movieDetail">
             {display}

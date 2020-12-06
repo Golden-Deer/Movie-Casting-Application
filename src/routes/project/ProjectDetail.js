@@ -12,6 +12,7 @@ import RolePage from "./RolePage";
 
 class ProjectDetail extends Component {
     constructor(props) {
+        console.log(props);
         super(props);
 
         this.state = {
@@ -59,30 +60,28 @@ class ProjectDetail extends Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null){
-                this.projectRef = db.database().ref('USER').child(user.uid).child('projects');
-                this.projectRef.orderByChild('name').equalTo(this.props.projectName).on('value', dataSnapshot => {
-                    dataSnapshot.forEach(childSnapshot => {
-                        var newProject = childSnapshot.val();
-                        newProject.key = childSnapshot.key;
-                        this.setState({ project: newProject, projectKey: childSnapshot.key });
-                        // save roles
-                        this.setState({role: childSnapshot.val()['roles']});
-                        var role = [];
-                        this.roleRef = db.database().ref('USER').child(user.uid).child('projects').child(childSnapshot.key).child('roles');
-                        this.roleRef.on('value', data => {
-                            data.forEach(childData =>{
-                                role.push(<Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, childSnapshot.key])}>
-                                <Card.Body>
-                                <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
-                                    <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
-                                    <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
-                                </Card.Body>
-                                </Card>
-                                );
-                                })
-                        })
-                        this.setState({roles: role});
-                    })  
+                this.projectRef = db.database().ref('USER').child(user.uid).child('projects').child(this.props.index);
+                this.projectRef.on('value', dataSnapshot => {
+                    var newProject = dataSnapshot.val();
+                    newProject.key = dataSnapshot.key;
+                    this.setState({ project: newProject, projectKey: dataSnapshot.key });
+                    // save roles
+                    this.setState({role: dataSnapshot.val()['roles']});
+                    var role = [];
+                    this.roleRef = db.database().ref('USER').child(user.uid).child('projects').child(dataSnapshot.key).child('roles');
+                    this.roleRef.on('value', data => {
+                        data.forEach(childData =>{
+                            role.push(<Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, dataSnapshot.key, childData.key])}>
+                            <Card.Body>
+                            <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
+                                <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
+                                <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
+                            </Card.Body>
+                            </Card>
+                            );
+                            })
+                    })
+                    this.setState({roles: role});
                 });
             }
         });
@@ -105,6 +104,8 @@ class ProjectDetail extends Component {
         let updates = {}
         updates[this.state.field.toLowerCase().replace(' ', '_')] = this.state.newValue
         reference.update(updates);
+        if (this.state.field == 'Name')
+            this.props.resetProjectName(this.state.newValue);
         this.closePopup('editProjectPopup');
     }
 
@@ -124,8 +125,8 @@ class ProjectDetail extends Component {
 
     rolePopup() {
         if (document.getElementById('rolePopup') != null) {
-        document.getElementById('rolePopup').style.opacity = 100 + '%'; // show project popup
-        document.getElementById('rolePopup').style.visibility = 'visible'; // show project popup
+            document.getElementById('rolePopup').style.opacity = 100 + '%'; // show project popup
+            document.getElementById('rolePopup').style.visibility = 'visible'; // show project popup
         }
     }
 
@@ -210,6 +211,18 @@ class ProjectDetail extends Component {
                     Delete Project
                 </Button>
                 </div>
+                <br />
+                <Card>
+                    <Card.Header style={{fontSize: 22+'px'}}><b>Project Name</b>
+                        <Button variant='outline-info' style={{float: 'right'}}
+                            onClick={()=>this.editProject('Name')} >
+                                <span class='glyphicon glyphicon-pencil'></span>
+                        </Button>
+                    </Card.Header>
+                    <Card.Body>
+                        <Card.Title>{this.state.project.name}</Card.Title>
+                    </Card.Body>
+                </Card>
                 <br />
                 <Card>
                     <Card.Header style={{fontSize: 22+'px'}}><b>Release Date</b>

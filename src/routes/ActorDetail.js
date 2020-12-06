@@ -8,7 +8,6 @@ import firebase from "firebase";
 
 class ActorDetail extends Component {
     constructor(props) {
-        console.log(props.location.state)
         super(props);
         this.state = {
             profilePic: this.props.actor.profilepic,
@@ -41,13 +40,13 @@ class ActorDetail extends Component {
             profilePic: this.state.profilePic
         });
         // navigate back to rolepage
-        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey])
+        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey, this.props.roleKey])
     }
 
     removeCandidate() {
         this.candidateRef.child(this.props.actor.key).remove();
         // navigate back to rolepage
-        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey])
+        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey, this.props.roleKey])
     }
 
     displayPicture(picture){
@@ -135,7 +134,7 @@ class ActorDetail extends Component {
                 )}
             </div>
             <div style={{display: 'inline-block', float: 'left', width: 45 + '%', marginLeft: 50 + 'px'}}>
-                <p><img className='project-attribute-title' src={this.state.profilePic} alt={this.props.actor.profilepic} style={{cursor: 'pointer', width: '700px'}} onClick={()=>this.displayPicture(this.state.profilePic)}/></p>
+                <img className='project-attribute-title' src={this.state.profilePic} alt={this.props.actor.profilepic} style={{cursor: 'pointer', maxWidth: '700px', maxHeight: '700px'}} onClick={()=>this.displayPicture(this.state.profilePic)}/>
             </div>
             <div class='candidateImages'>
                 {images}

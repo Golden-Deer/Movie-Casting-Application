@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 
 class DisplayActor extends Component {
     constructor(props) {
+        console.log(props.location.state);
         super(props);
 
         this.state = {
@@ -14,7 +15,6 @@ class DisplayActor extends Component {
         this.profileRef = db.database().ref("PROFILE");
         this.pictureRef = db.storage().ref("Actor Pictures");
         var newactors = [];
-        console.log(props.tags)
         this.profileRef.orderByChild('name').on('value', dataSnapshot => {
             dataSnapshot.forEach(childSnapshot => {
                 let actor = childSnapshot.val();
@@ -166,7 +166,7 @@ class DisplayActor extends Component {
             var display = <p class='banner'>No actors found that meet your criteria</p>
         else{
             var display = this.state.records.map(records =>
-                <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px', cursor: 'pointer'}} key={records.name} onClick={() => this.props.history.push('/actor', [this.props.roleName, records, this.props.projectKey, this.props.role, this.props.project])}>
+                <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px', cursor: 'pointer'}} key={records.name} onClick={() => this.props.history.push('/actor', [this.props.roleName, records, this.props.projectKey, this.props.role, this.props.project, this.props.roleKey])}>
                 <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
                 <Card.Body>
                 <Card.Title>{records.name}</Card.Title>

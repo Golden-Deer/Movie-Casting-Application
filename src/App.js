@@ -25,6 +25,7 @@ function App() {
           <Route exact path='/search' component={Search} />
           <Route exact path='/discover' component={Discover} />
           <Route exact path='/project' component={ProjectViewer} />
+          <Route exact path='/' component={Home} />
           <Route exact path='/dashboard' component={Home} />
           <Route exact path='/rolepage' component={RoleViewer} />
           <Route exact path='/about' component={About} />

@@ -75,7 +75,7 @@ const Search = (props) => {
                         <div class="body">
                         {/* <ToggleBar /> */}
                         <br />
-                        <DisplayActor project={props.location.state[0]} roleName={props.location.state[2].name} tags={tags} numActor={count} projectKey={projectKey} role={role}/>
+                        <DisplayActor project={props.location.state[0]} roleName={props.location.state[2].name} tags={tags} numActor={count} projectKey={projectKey} role={role} roleKey={props.location.state[3]}/>
                         </div>
 
                 </div>
