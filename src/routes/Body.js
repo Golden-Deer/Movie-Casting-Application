@@ -76,7 +76,7 @@ const Body = () => {
   }
 
   return (
-    <>
+    <div class='body'>
       <table
         id='projectPopup'
         class='largePopup'
@@ -187,7 +187,7 @@ const Body = () => {
       ) : (
         <></> // implement redirect to about page if user is not logged in
       )}
-    </>
+    </div>
   );
 };
 

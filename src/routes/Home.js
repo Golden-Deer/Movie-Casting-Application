@@ -8,7 +8,7 @@ const Home = () => {
     const history = useHistory();
 
     return (
-            <div class='body' id='main'>
+            <div id='main'>
                 <div className='jumbotron'>
                     <div className='dark-overlay'>
                         <h1 className='main-title'>Golden Cast</h1>

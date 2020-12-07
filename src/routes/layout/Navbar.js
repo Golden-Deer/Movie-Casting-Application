@@ -17,8 +17,8 @@ export const Navbar1 = () => {
       </Navbar.Brand>
       <Nav className='mr-auto'>
         <Nav.Link href='/dashboard'>Projects</Nav.Link>
-        <Nav.Link href='/about'>About Us</Nav.Link>
         <Nav.Link href='/discover'>Discover</Nav.Link>
+        <Nav.Link href='/about'>About Us</Nav.Link>
       </Nav>
       <Account />
     </Navbar>
