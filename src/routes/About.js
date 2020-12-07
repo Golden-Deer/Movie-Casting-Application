@@ -7,7 +7,7 @@ import FilmingWater from '../images/filming-water.jpg';
 
 const About = () => {
   return (
-    <div className='about-page'>
+    <div class='App Fade'>
       <section className='landing1'>
         <div className='dark-overlay'>
           <div className='landing-inner'>

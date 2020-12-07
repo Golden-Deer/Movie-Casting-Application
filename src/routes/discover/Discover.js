@@ -6,20 +6,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 const Discover = () => {
-  const history = useHistory();
-  // const [count, setCount] = useState(6);
-
-  // window.onscroll = function (ev) {
-  //   if (
-  //     Math.ceil(window.innerHeight + window.scrollY) >=
-  //     document.documentElement.scrollHeight
-  //   ) {
-  //     // setCount(count + 6);
-  //   }
-  // };
-
   return (
-    <div>
+    <div className='about-page'>
       <Container>
         <Row>
           <Col>

@@ -577,3 +577,12 @@ header {
   margin-right: auto;
 }
 
+/* Loading/Progress Bar */
+@keyframes FadeAnim {
+  0% {
+     opacity: 0;
+  }
+  100% {
+     opacity: 1;
+  }
+}
