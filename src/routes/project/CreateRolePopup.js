@@ -33,7 +33,7 @@ class CreateRolePopup extends Component {
                 gender: this.props.roleGender,
                 height: this.props.roleHeight,
                 weight: this.props.roleWeight }));
-            this.props.projectRef.child(this.props.projectKey).set(this.props.project);
+            this.props.projectRef.set(this.props.project);
             // reset states
             this.props.setRoleName('');
             this.props.setRoleDescription('');
@@ -63,6 +63,7 @@ class CreateRolePopup extends Component {
                         class='projectInputField'
                         placeholder='Role Name *'
                         form='project_creation_form'
+                        value={this.props.roleName}
                         onChange={(e) => this.props.setRoleName(e.target.value)}
                     />
                 </tr>
@@ -71,6 +72,7 @@ class CreateRolePopup extends Component {
                         class='projectInputField'
                         placeholder='Description'
                         form='project_creation_form'
+                        value={this.props.roleDescription}
                         onChange={(e) => this.props.setRoleDescription(e.target.value)}
                     />
                 </tr>

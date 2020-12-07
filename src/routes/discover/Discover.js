@@ -6,20 +6,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 const Discover = () => {
-  const history = useHistory();
-  // const [count, setCount] = useState(6);
-
-  // window.onscroll = function (ev) {
-  //   if (
-  //     Math.ceil(window.innerHeight + window.scrollY) >=
-  //     document.documentElement.scrollHeight
-  //   ) {
-  //     // setCount(count + 6);
-  //   }
-  // };
-
   return (
-    <div>
+    <div className='about-page'>
       <Container>
         <Row>
           <Col>
@@ -53,7 +41,7 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <h1>Popular Young Actors</h1>
+            <h1>Popular Actors Between Ages 0 to 30</h1>
           </Col>
           <Col>
             <ExploreActor tags={{ age: '0-25' }} numActor={25} />
@@ -61,7 +49,15 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <h1>Tall Actors</h1>
+            <h1>Popular Actors Between Ages 30 to 100</h1>
+          </Col>
+          <Col>
+            <ExploreActor tags={{ age: '50-100' }} numActor={25} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h1>Actors With Height Between 170 and 250 cm</h1>
           </Col>
           <Col>
             <ExploreActor tags={{ height: '170-250' }} numActor={25} />
@@ -69,10 +65,10 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <h1>Short Actors</h1>
+            <h1>Actors With Height Between 50 and 170 cm</h1>
           </Col>
           <Col>
-            <ExploreActor tags={{ height: '100-170' }} numActor={25} />
+            <ExploreActor tags={{ height: '50-170' }} numActor={25} />
           </Col>
         </Row>
       </Container>
