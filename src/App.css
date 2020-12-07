@@ -564,14 +564,14 @@ header {
 }
 
 .body { 
-  max-width: 1150px;
+  max-width: 1290px;
   padding: 10px 10px 10px 10px;
 	margin: 0 auto !important; 
   float: none !important; 
 }
 
 .movieDetail{
-  max-width: 1150px;
+  max-width: 1290px;
   padding: 10px 10px 10px 10px;
   margin-left: auto;
   margin-right: auto;
