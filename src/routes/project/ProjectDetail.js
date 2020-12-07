@@ -12,7 +12,6 @@ import RolePage from "./RolePage";
 
 class ProjectDetail extends Component {
     constructor(props) {
-        console.log(props);
         super(props);
 
         this.state = {
@@ -62,26 +61,30 @@ class ProjectDetail extends Component {
             if (user != null){
                 this.projectRef = db.database().ref('USER').child(user.uid).child('projects').child(this.props.index);
                 this.projectRef.on('value', dataSnapshot => {
-                    var newProject = dataSnapshot.val();
-                    newProject.key = dataSnapshot.key;
-                    this.setState({ project: newProject, projectKey: dataSnapshot.key });
-                    // save roles
-                    this.setState({role: dataSnapshot.val()['roles']});
-                    var role = [];
-                    this.roleRef = db.database().ref('USER').child(user.uid).child('projects').child(dataSnapshot.key).child('roles');
-                    this.roleRef.on('value', data => {
-                        data.forEach(childData =>{
-                            role.push(<Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, dataSnapshot.key, childData.key])}>
-                            <Card.Body>
-                            <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
-                                <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
-                                <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
-                            </Card.Body>
-                            </Card>
-                            );
+                    if (dataSnapshot.val() != null){
+                        var newProject = dataSnapshot.val();
+                        newProject.key = dataSnapshot.key;
+                        this.setState({ project: newProject, projectKey: dataSnapshot.key });
+                        // save roles
+                        this.setState({role: dataSnapshot.val()['roles']});
+                        var role = [];
+                        this.roleRef = db.database().ref('USER').child(user.uid).child('projects').child(this.props.index).child('roles');
+                        this.roleRef.on('value', data => {
+                            data.forEach(childData =>{                                
+                                if (newProject.roles!=undefined && newProject.roles[childData.key]!=undefined){
+                                    role.push(<Card className='roleCard' onClick={() => this.props.history.push('/rolepage', [newProject.roles[childData.key].name, newProject, dataSnapshot.key, childData.key])}>
+                                    <Card.Body>
+                                    <Card.Title><b>{newProject.roles[childData.key].name}</b></Card.Title>
+                                        <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
+                                        <Card.Subtitle>{newProject.roles[childData.key].description}</Card.Subtitle>
+                                    </Card.Body>
+                                    </Card>
+                                    );
+                                }
                             })
-                    })
-                    this.setState({roles: role});
+                        })
+                        this.setState({roles: role});
+                        }
                 });
             }
         });
@@ -151,6 +154,8 @@ class ProjectDetail extends Component {
     }
 
     setRoleName(e){
+        console.log("HERE")
+        console.log(e);
         this.setState({roleName: e});
     }
 
