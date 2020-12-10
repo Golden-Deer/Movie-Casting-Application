@@ -22,6 +22,10 @@ class User {
     signOut() {
         return db.auth().signOut();
     }
+
+    delete() {
+        return db.auth().currentUser.delete().then(console.log('deleted ' + db.auth().currentUser.uid))
+    }
 }
 
 export default new User();
