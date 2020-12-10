@@ -5,29 +5,27 @@ import db from '../base';
 import '../App.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import User from '../controller/User';
+import { useHistory } from 'react-router-dom';
 
 
 
 // The Account component handles login, account, and password recovery popup windows and logistics
 const Account = () => {
+    const history = useHistory();
     const {currentUser} = useContext(AuthContext);
     const [accountEmail, setAccountEmail] = useState('');
     const [firstName, setFirstName] = useState('Your')
     const [lastName, setLastName] = useState('Account')
 
     useEffect(() => {
-    let user = db.auth().currentUser;
-    if (user!=null){
-        db.database().ref('USER/' + user.uid + '/firstName').once('value', dataSnapshot => {
-            setFirstName(dataSnapshot.val())
-        })
-        db.database().ref('USER/' + user.uid + '/lastName').once('value', dataSnapshot => {
-            setLastName(dataSnapshot.val())
-        })
-    }
+        if (User.isSignedIn()){
+            var user = User.getUser().then((user) => {
+            console.log(user.val());
+            setFirstName(user.val().firstName);
+            setLastName(user.val().lastName)});
+        }
     });
-
-    
     
     const viewAccount = () => {
         // user is logged in
@@ -50,9 +48,8 @@ const Account = () => {
     }
 
     function handleLogout() {
-        db.auth().signOut();
-        setFirstName('Your');
-        setLastName('Account');
+        User.signOut();
+        history.push('/');
         closingPopup('accountPopup');
     }
 
