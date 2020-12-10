@@ -311,7 +311,7 @@ class ProjectDetail extends Component {
           <br />
           <Card>
             <Card.Header style={{ fontSize: 22 + 'px' }}>
-              <b>Genere</b>
+              <b>Genre</b>
               <Button
                 variant='outline-info'
                 style={{ float: 'right' }}
