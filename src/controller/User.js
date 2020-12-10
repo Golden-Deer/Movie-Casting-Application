@@ -26,17 +26,21 @@ class User {
     signUp(email, password, data) {
         return db.auth().createUserWithEmailAndPassword(email, password).then(() => {
             console.log('sign up ' + db.auth().currentUser.uid);
-            UserModel.create(db.auth().currentUser.uid, data)}).catch((error) => {
-                console.log(error);
-            });
+            UserModel.create(db.auth().currentUser.uid, data)});
     }
 
-    isSignedUp(email) {
-        return (console.log(db.auth().fetchSignInMethodsForEmail(email).length))
+    async isSignedUp(email) {
+        const list = await db.auth().fetchSignInMethodsForEmail(email);
+        console.log(list.length != 0)
+        return list.length != 0
     }
 
     signIn(email, password){
         return db.auth().signInWithEmailAndPassword(email, password);
+    }
+
+    passwordRecovery(email) {
+        return db.auth().sendPasswordResetEmail(email);
     }
 
     signOut() {

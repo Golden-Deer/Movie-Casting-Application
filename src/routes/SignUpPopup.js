@@ -38,7 +38,6 @@ const SignUpPopup = () => {
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        if (!User.isSignedUp(signUpEmail)) {
             var data = {
                 email: signUpEmail,
                 firstName: firstName,
@@ -48,13 +47,13 @@ const SignUpPopup = () => {
             User.signUp(signUpEmail, signUpPassword, data).then(() => {
                                 closePopup('signUpPopup');
                             }).catch((error) => {
-                                console.log(error);
+                                var errorCode = error.code;
+                                if (errorCode == 'auth/email-already-in-use') {
+                                    setIndicator("This email " + " is already associated with an account");
+                                    setPadding(20);
+                                }
+                                console.log(error.code)
                             });
-        }
-        else {
-            setIndicator("This email " + " is already associated with an account");
-            setPadding(20);
-        }
     }
 
     function login() {
