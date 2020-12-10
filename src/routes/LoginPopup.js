@@ -2,7 +2,8 @@ import db from '../base';
 import {React, useState} from 'react';
 import SignUpPopup from './SignUpPopup';
 import PasswordRecoveryPopup from './passwordRecoveryPopup';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import User from '../controller/User';
 
 const Login = () => {
 
@@ -28,8 +29,7 @@ const handleLogin = (event) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
     try {
-        db.auth()
-            .signInWithEmailAndPassword(email.value, password.value)
+        User.signIn(email.value, password.value)
             .then(() => {
                 closePopup('loginPopup') // close login popup
             })

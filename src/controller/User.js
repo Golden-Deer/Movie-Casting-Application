@@ -19,6 +19,26 @@ class User {
             return user;})
     }
 
+    create(key, data) {
+        UserModel.create(key, data);
+    }
+
+    signUp(email, password, data) {
+        return db.auth().createUserWithEmailAndPassword(email, password).then(() => {
+            console.log('sign up ' + db.auth().currentUser.uid);
+            UserModel.create(db.auth().currentUser.uid, data)}).catch((error) => {
+                console.log(error);
+            });
+    }
+
+    isSignedUp(email) {
+        return (console.log(db.auth().fetchSignInMethodsForEmail(email).length))
+    }
+
+    signIn(email, password){
+        return db.auth().signInWithEmailAndPassword(email, password);
+    }
+
     signOut() {
         return db.auth().signOut();
     }

@@ -1,6 +1,7 @@
 import db from '../base';
 import {React, useState} from 'react';
 import Button from 'react-bootstrap/Button'
+import User from '../controller/User';
 
 const SignUpPopup = () => {
     // sign up states
@@ -37,38 +38,23 @@ const SignUpPopup = () => {
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        db
-            .auth()
-            //check if the account exists
-            .fetchSignInMethodsForEmail(signUpEmail)
-            .then((signInMethods) => {
-                // an empty array means the account doesn't exist
-                if (signInMethods.length == 0) {
-                    db.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-                        .then((user) => {
-                            var user = db.auth().currentUser;
-                            db.database().ref('USER/' + user.uid).set({
-                                email: user.email,
-                                firstName: firstName,
-                                lastName: lastName,
-                                projects: []
-                            }).then(() => {
+        if (!User.isSignedUp(signUpEmail)) {
+            var data = {
+                email: signUpEmail,
+                firstName: firstName,
+                lastName: lastName,
+                projects: []
+            };
+            User.signUp(signUpEmail, signUpPassword, data).then(() => {
                                 closePopup('signUpPopup');
                             }).catch((error) => {
-                                alert(error);
+                                console.log(error);
                             });
-                        })
-                        .catch((error) => {
-                            var errorCode = error.code;
-                            var errorMessage = error.message;
-                            alert(errorCode + errorMessage);
-                        });
-                }
-                else {
-                    setIndicator("This email is already associated with an account");
-                    setPadding(20);
-                }
-            })
+        }
+        else {
+            setIndicator("This email " + " is already associated with an account");
+            setPadding(20);
+        }
     }
 
     function login() {

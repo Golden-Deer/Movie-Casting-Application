@@ -1,7 +1,6 @@
 import { AuthContext } from '../auth/Auth';
 import React, {useContext, useState, useEffect} from 'react';
 import Login from './LoginPopup'
-import db from '../base';
 import '../App.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'

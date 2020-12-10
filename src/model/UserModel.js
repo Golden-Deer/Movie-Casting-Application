@@ -10,8 +10,10 @@ import db from '../base';
 
 const ref = db.database().ref('USER');
 class UserModel {
-    create(data, key) {
-        ref.child(key).set(data);
+    create(key, data) {
+        ref.child(key).set(data).catch((error) => {
+            console.log(error);
+        });
         console.log('creating user ' + key);
         return key;
     }
