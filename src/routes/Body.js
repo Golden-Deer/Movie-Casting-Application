@@ -1,7 +1,7 @@
 import { AuthContext } from '../auth/Auth';
 import React, { useContext, useState } from 'react';
 import firebase from 'firebase';
-import ProjectList from './ListProjects';
+import ProjectList from './ProjectList';
 import Button from 'react-bootstrap/Button';
 
 import { Redirect } from 'react-router';
