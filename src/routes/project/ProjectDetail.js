@@ -216,8 +216,6 @@ class ProjectDetail extends Component {
   }
 
   setRoleName(e) {
-    console.log('HERE');
-    console.log(e);
     this.setState({ roleName: e });
   }
 
