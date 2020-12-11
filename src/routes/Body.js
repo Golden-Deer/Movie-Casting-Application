@@ -25,7 +25,7 @@ const Body = () => {
       director: projectDirector,
       producer: projectProducer,
     };
-    Project.create(data);
+    Project.create(data).then(() => {window.location.reload()})
     // add this project to the project list of this user
     // reset states
     setProjectName('');
@@ -36,8 +36,6 @@ const Body = () => {
     setProjectProducer('');
     // close project popup
     closePopup('projectPopup');
-    alert('project added')
-    setUpdate(!update)
   }
 
   function changeProjectReleaseDate(e) {

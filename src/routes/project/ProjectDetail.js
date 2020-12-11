@@ -7,6 +7,8 @@ import EditProjectPopup from './EditProjectPopup';
 import DeleteProjectPopup from './DeleteProjectPopup';
 import Button from 'react-bootstrap/Button';
 import { Card, CardDeck } from 'react-bootstrap';
+import Project from '../../controller/Project';
+import Role from '../../controller/Role'
 
 
 class ProjectDetail extends Component {
@@ -14,8 +16,8 @@ class ProjectDetail extends Component {
     super(props);
 
     this.state = {
-      project: null,
-      projectKey: '',
+      project: this.props.project,
+      projectKey: this.props.project.key,
       role: null,
       roles: [],
       roleKey: '',
@@ -31,15 +33,7 @@ class ProjectDetail extends Component {
       originalValue: '',
       newValue: '',
       disableSave: true,
-      index: props.location.state[1],
     };
-    var user = firebase.auth().currentUser;
-    if (user != null)
-      this.projectRef = db
-        .database()
-        .ref('USER')
-        .child(user.uid)
-        .child('projects');
 
     // bind functions
     this.updateProject = this.updateProject.bind(this);
@@ -60,74 +54,33 @@ class ProjectDetail extends Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        this.projectRef = db
-          .database()
-          .ref('USER')
-          .child(user.uid)
-          .child('projects')
-          .child(this.props.index);
-        this.projectRef.on('value', (dataSnapshot) => {
-          if (dataSnapshot.val() != null) {
-            var newProject = dataSnapshot.val();
-            newProject.key = dataSnapshot.key;
-            this.setState({
-              project: newProject,
-              projectKey: dataSnapshot.key,
-            });
-            // save roles
-            this.setState({ role: dataSnapshot.val()['roles'] });
-            var role = [];
-            this.roleRef = db
-              .database()
-              .ref('USER')
-              .child(user.uid)
-              .child('projects')
-              .child(this.props.index)
-              .child('roles');
-            this.roleRef.on('value', (data) => {
-              data.forEach((childData) => {
-                if (
-                  newProject.roles != undefined &&
-                  newProject.roles[childData.key] != undefined
-                ) {
-                  role.push(
-                    <Card
-                      className='roleCard'
-                      onClick={() =>
-                        this.props.history.push('/rolepage', [
-                          newProject.roles[childData.key].name,
-                          newProject,
-                          dataSnapshot.key,
-                          childData.key,
-                        ])
-                      }>
-                      <Card.Body>
-                        <Card.Title>
-                          <b>{newProject.roles[childData.key].name}</b>
-                        </Card.Title>
-                        <Card.Subtitle
-                          style={{
-                            fontSize: 0.5 + 'rem',
-                            marginBottom: 1.0 + 'rem',
-                            userSelect: 'none',
-                          }}>
-                          ──────────────────────────
-                        </Card.Subtitle>
-                        <Card.Subtitle>
-                          {newProject.roles[childData.key].description}
-                        </Card.Subtitle>
-                      </Card.Body>
-                    </Card>
-                  );
-                }
-              });
-            });
-            this.setState({ roles: role });
-          }
-        });
-      }
+    var temp = [];
+    Role.getAll().then((datas) => {
+      datas.forEach(data => data.then(role => {
+          temp.push(<Card
+            className='roleCard'
+            onClick={() =>
+              this.props.history.push('/rolepage', [role])
+            }>
+            <Card.Body>
+              <Card.Title>
+                <b>{role.name}</b>
+              </Card.Title>
+              <Card.Subtitle
+                style={{
+                  fontSize: 0.5 + 'rem',
+                  marginBottom: 1.0 + 'rem',
+                  userSelect: 'none',
+                }}>
+                ──────────────────────────
+              </Card.Subtitle>
+              <Card.Subtitle>
+                {role.description}
+              </Card.Subtitle>
+            </Card.Body>
+          </Card>);
+          this.setState({ roles: role });
+      }).catch((error) => console.log(error)))
     });
   }
 

@@ -60,7 +60,7 @@ class ProjectList extends Component{
             datas.forEach(data => data.then(project => {
                 console.log(project)
                 temp.push(<td>
-                    <Card className='movieCard' onClick={() => this.props.history.push('/project', [project.key])}>
+                    <Card className='movieCard' onClick={() => this.props.history.push('/project', [project])}>
                         <Card.Body>
                         <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.0 + 'rem'}}><b>{project['name']}</b></Card.Title>
                         <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>

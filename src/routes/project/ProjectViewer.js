@@ -22,7 +22,7 @@ const ProjectViewer = (props) => {
       <h3 style={{color: 'white'}}>{projectName}</h3>
       </Navbar>
       <br />
-      <ProjectDetail index={props.location.state[1]} projectName={projectName} resetProjectName={resetProjectName}/>
+      <ProjectDetail project={props.location.state[0]} projectName={projectName} resetProjectName={resetProjectName}/>
     </>
   );
 };
