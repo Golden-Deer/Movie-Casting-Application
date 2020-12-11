@@ -13,6 +13,7 @@ import About from './routes/About';
 import ActorProfile from './routes/ActorProfile';
 import RoleViewer from './routes/role/RoleViewer';
 import NotFound from './routes/layout/NotFound';
+import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Navbar />
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
-          <Route exact path='/discover' component={Discover} />
+          <CacheRoute exact path='/discover' component={Discover} />
           <Route exact path='/project' component={ProjectViewer} />
           <Route exact path='/' component={Home} />
           <Route exact path='/dashboard' component={Home} />

@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
-import db from '../base';
 import SignUpPopup from './SignUpPopup';
 import Button from 'react-bootstrap/Button';
+import User from '../controller/User';
 
 const PasswordRecoveryPopup = () => {
   // password recovery state
@@ -17,30 +17,18 @@ const PasswordRecoveryPopup = () => {
 
   function handlePasswordRecovery(event) {
     event.preventDefault();
-    try {
-      db.auth()
-        .fetchSignInMethodsForEmail(recoveryEmail)
-        .then((signInMethods) => {
-          // an empty array means the account doesn't exist
-          if (signInMethods.length == 0) {
-            setIndicator(
-              'No account in our database is associated with this email'
-            );
-          } else {
-            db.auth()
-              .sendPasswordResetEmail(recoveryEmail)
+    User.passwordRecovery(recoveryEmail)
               .then(function () {
                 setIndicator('Email sent');
                 setPadding(30);
-              })
-              .catch(function (error) {
-                setIndicator(error);
-              });
-          }
-        });
-    } catch (error) {
-      alert(error);
-    }
+              }).catch((error) => {
+                var errorCode = error.code;
+                if (errorCode == 'auth/user-not-found') {
+                    setIndicator('No account in our database is associated with this email');
+                    setPadding(20);
+                }
+                console.log(error.code)
+            });
   }
 
   function signUp() {

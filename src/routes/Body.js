@@ -1,10 +1,8 @@
 import { AuthContext } from '../auth/Auth';
 import React, { useContext, useState } from 'react';
-import firebase from 'firebase';
 import ProjectList from './ProjectList';
 import Button from 'react-bootstrap/Button';
-
-import { Redirect } from 'react-router';
+import Project from '../controller/Project';
 
 // The Body component renders the user's projects, or the GC marketing pitch if the user is not logged in
 const Body = () => {
@@ -18,30 +16,16 @@ const Body = () => {
 
   // store project in firebase
   function createProject(e) {
+    var data = {
+      name: projectName,
+      release_date: projectReleaseDate,
+      genre: projectGenre,
+      description: projectDescription,
+      director: projectDirector,
+      producer: projectProducer,
+    };
+    Project.create(data);
     // add this project to the project list of this user
-    firebase
-      .database()
-      .ref('USER/' + firebase.auth().currentUser.uid)
-      .child('projects')
-      .once('value', (dataSnapshot) => {
-        var projects = dataSnapshot.val();
-        if (projects === null) {
-          projects = [];
-        }
-        projects.push({
-          name: projectName,
-          release_date: projectReleaseDate,
-          genre: projectGenre,
-          description: projectDescription,
-          director: projectDirector,
-          producer: projectProducer,
-        });
-        firebase
-          .database()
-          .ref('USER/' + firebase.auth().currentUser.uid)
-          .child('projects')
-          .set(projects);
-      });
     // reset states
     setProjectName('');
     setProjectReleaseDate('');
