@@ -1,33 +1,30 @@
 import { AuthContext } from '../auth/Auth';
 import React, {useContext, useState, useEffect} from 'react';
 import Login from './LoginPopup'
-import db from '../base';
 import '../App.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import User from '../controller/User';
+import { useHistory } from 'react-router-dom';
 
 
 
 // The Account component handles login, account, and password recovery popup windows and logistics
 const Account = () => {
+    const history = useHistory();
     const {currentUser} = useContext(AuthContext);
     const [accountEmail, setAccountEmail] = useState('');
     const [firstName, setFirstName] = useState('Your')
     const [lastName, setLastName] = useState('Account')
 
     useEffect(() => {
-    let user = db.auth().currentUser;
-    if (user!=null){
-        db.database().ref('USER/' + user.uid + '/firstName').once('value', dataSnapshot => {
-            setFirstName(dataSnapshot.val())
-        })
-        db.database().ref('USER/' + user.uid + '/lastName').once('value', dataSnapshot => {
-            setLastName(dataSnapshot.val())
-        })
-    }
+        if (User.isSignedIn()){
+            User.getUser().then((user) => {
+            console.log(user.val());
+            setFirstName(user.val().firstName);
+            setLastName(user.val().lastName)});
+        }
     });
-
-    
     
     const viewAccount = () => {
         // user is logged in
@@ -50,24 +47,20 @@ const Account = () => {
     }
 
     function handleLogout() {
-        db.auth().signOut();
+        User.signOut();
         setFirstName('Your');
         setLastName('Account');
+        history.push('/');
         closingPopup('accountPopup');
     }
 
     function deleteAccount() {
-        if (db.auth().currentUser === null) {
+        if (!User.isSignedIn()) {
             alert("Please log in again to delete account.");
         }
         else {
-            var user = db.auth().currentUser;
-            user.delete().then(() => {
-                db.database().ref('USER/' + user.uid).remove();
-            }).catch((error) => {
-                alert(error);
-            });
-            closingPopup('accountPopup');
+            User.delete();
+            handleLogout();
         }
     }
     
