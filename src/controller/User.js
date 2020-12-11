@@ -62,7 +62,9 @@ class User {
 
     delete() {
         UserModel.delete(db.auth().currentUser.uid);
-        db.auth().currentUser.delete().then(console.log('deleted user ' + db.auth().currentUser.uid));
+        db.auth().currentUser.delete().then(console.log('deleted user ' + db.auth().currentUser.uid)).catch(function(error) {
+            console.log(error);
+          });
     }
 }
 
