@@ -13,7 +13,22 @@ class User {
     isSignedIn() {
         return db.auth().currentUser != null;
     }
-    getUser() {
+
+    addProject(projectID) {
+        UserModel.read(db.auth().currentUser.uid).then((user) => {
+            var data = user.val()
+            console.log(data)
+            if (data.project == undefined) {
+                data.project = [];
+                console.log(data)
+            }
+            data.project.push(projectID);
+            console.log(data);
+            UserModel.update(user.key, data);
+        })
+    }
+
+    get() {
         return UserModel.read(db.auth().currentUser.uid).then((user) => {
             console.log('getting user ' + user)
             return user;})

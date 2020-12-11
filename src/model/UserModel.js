@@ -11,6 +11,7 @@ import db from '../base';
 const ref = db.database().ref('USER');
 class UserModel {
     create(key, data) {
+        data.key = key;
         ref.child(key).set(data).catch((error) => {
             console.log(error);
         });

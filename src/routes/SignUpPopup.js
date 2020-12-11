@@ -1,3 +1,4 @@
+import db from '../base';
 import {React, useState} from 'react';
 import Button from 'react-bootstrap/Button'
 import User from '../controller/User';
@@ -37,23 +38,22 @@ const SignUpPopup = () => {
 
     const handleSignUp = (event) => {
         event.preventDefault();
-        let config = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                signUpEmail,
-                signUpPassword,
-                firstName,
-                lastName,
-                setIndicator,
-                setPadding,
-            })
-          };
-          
-          fetch('http://localhost:8000/signUp', config)
-            .catch(error => console.log(error));
-        // closePopup('signUpPopup')
-        // handleSignUp(event, signUpEmail, signUpPassword, firstName, lastName, closePopup, setIndicator, setPadding);
+            var data = {
+                email: signUpEmail,
+                firstName: firstName,
+                lastName: lastName,
+                projects: []
+            };
+            User.signUp(signUpEmail, signUpPassword, data).then(() => {
+                                closePopup('signUpPopup');
+                            }).catch((error) => {
+                                var errorCode = error.code;
+                                if (errorCode == 'auth/email-already-in-use') {
+                                    setIndicator("This email " + " is already associated with an account");
+                                    setPadding(20);
+                                }
+                                console.log(error.code)
+                            });
     }
 
     function login() {
@@ -161,5 +161,3 @@ const SignUpPopup = () => {
 }
 
 export default SignUpPopup;
-
-

@@ -19,7 +19,7 @@ const Account = () => {
 
     useEffect(() => {
         if (User.isSignedIn()){
-            User.getUser().then((user) => {
+            User.get().then((user) => {
             console.log(user.val());
             setFirstName(user.val().firstName);
             setLastName(user.val().lastName)});

@@ -1,7 +1,7 @@
 import db from '../base';
 
 const ref = db.database().ref('PROJECT');
-class Project {
+class ProjectModel {
     create(data) {
         var key = ref.push().key;
         data.key = key;
@@ -41,4 +41,4 @@ class Project {
     }
 }
 
-export default new Project();
+export default new ProjectModel();
