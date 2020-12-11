@@ -3,12 +3,11 @@ import db from '../../base';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import CreateRolePopup from './CreateRolePopup';
-import EditRolePopup from './EditRolePopup';
 import EditProjectPopup from './EditProjectPopup';
 import DeleteProjectPopup from './DeleteProjectPopup';
 import Button from 'react-bootstrap/Button';
 import { Card, CardDeck } from 'react-bootstrap';
-import RolePage from './RolePage';
+
 
 class ProjectDetail extends Component {
   constructor(props) {
@@ -216,8 +215,6 @@ class ProjectDetail extends Component {
   }
 
   setRoleName(e) {
-    console.log('HERE');
-    console.log(e);
     this.setState({ roleName: e });
   }
 

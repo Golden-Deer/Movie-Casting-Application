@@ -13,10 +13,47 @@ class User {
     isSignedIn() {
         return db.auth().currentUser != null;
     }
-    getUser() {
+
+    addProject(projectID) {
+        return UserModel.read(db.auth().currentUser.uid).then((user) => {
+            var data = user.val()
+            console.log(data)
+            if (data.projects == undefined) {
+                data.projects = [];
+                console.log(data)
+            }
+            data.projects.push(projectID);
+            console.log(data);
+            UserModel.update(user.key, data);
+        })
+    }
+
+    getProjects() {
+        return UserModel.read(db.auth().currentUser.uid).then(user => user.val().projects)
+    }
+
+    get() {
         return UserModel.read(db.auth().currentUser.uid).then((user) => {
             console.log('getting user ' + user)
             return user;})
+    }
+
+    create(key, data) {
+        UserModel.create(key, data);
+    }
+
+    signUp(email, password, data) {
+        return db.auth().createUserWithEmailAndPassword(email, password).then(() => {
+            console.log('sign up ' + db.auth().currentUser.uid);
+            UserModel.create(db.auth().currentUser.uid, data)});
+    }
+
+    signIn(email, password){
+        return db.auth().signInWithEmailAndPassword(email, password);
+    }
+
+    passwordRecovery(email) {
+        return db.auth().sendPasswordResetEmail(email);
     }
 
     signOut() {

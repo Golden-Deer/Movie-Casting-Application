@@ -1,7 +1,6 @@
 import { AuthContext } from '../auth/Auth';
 import React, {useContext, useState, useEffect} from 'react';
 import Login from './LoginPopup'
-import db from '../base';
 import '../App.css';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -20,7 +19,7 @@ const Account = () => {
 
     useEffect(() => {
         if (User.isSignedIn()){
-            User.getUser().then((user) => {
+            User.get().then((user) => {
             console.log('account ' + user.val());
             setFirstName(user.val().firstName);
             setLastName(user.val().lastName)});

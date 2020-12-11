@@ -1,8 +1,7 @@
-import firebase from 'firebase';
 import {React, Component} from 'react';
 import { withRouter } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Project from '../controller/Project';
 
 // Display all of the user's projects
 class ProjectList extends Component{
@@ -21,7 +20,6 @@ class ProjectList extends Component{
             projectProducer: '',
         }
 
-        this.projectRef = firebase.database().ref('USER/' + firebase.auth().currentUser.uid);
         this.mounted = false;
     }
     viewProject(index) {
@@ -41,35 +39,48 @@ class ProjectList extends Component{
         document.getElementById(type).style.visibility = 'hidden';
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        this.renderProjectList();
+        console.log(this.props.update);
+    }
+
+    componentDidUpdate(prevProps) {
+        console.log(this.props.update);
+        if (prevProps.update !== this.props.update) {
+            this.renderProjectList();
+        }
+    }
+
+    renderProjectList(){
         this.mounted = true;
-        this.projectRef.child('projects').on('value', dataSnapshot => {
-            var projects = [];
-            var index = 0;
-            var temp = [];
-            dataSnapshot.forEach(childSnapshot => {
+        var projects = [];
+        var index = 0;
+        var temp = [];
+        Project.getAll().then((datas) => {
+            datas.forEach(data => data.then(project => {
+                console.log(project)
                 temp.push(<td>
-                    <Card className='movieCard' onClick={() => this.props.history.push('/project', [childSnapshot.val(), childSnapshot.key])}>
+                    <Card className='movieCard' onClick={() => this.props.history.push('/project', [project.key])}>
                         <Card.Body>
-                        <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.0 + 'rem'}}><b>{childSnapshot.val()['name']}</b></Card.Title>
+                        <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.0 + 'rem'}}><b>{project['name']}</b></Card.Title>
                         <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
-                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{childSnapshot.val()['release_date']}</Card.Subtitle>
-                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{childSnapshot.val()['genre']}</Card.Subtitle>
+                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{project['release_date']}</Card.Subtitle>
+                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{project['genre']}</Card.Subtitle>
                         </Card.Body>
                     </Card>
                     </td>)
-                projects.push(childSnapshot.val());
+                projects.push(project);
                 index+=1;
                 if (index % 5 == 0){
                     temp.push(<tr></tr>)
                 }
-            })
-            this.setState({projects: projects, test: temp});
-        })
+                this.setState({projects: projects, test: temp});
+                console.log(this.state.projects)
+            }).catch((error) => console.log(error)))
+        }).catch(error => console.log(error))
     }
 
     componentWillUnmount() {
-        this.projectRef.off();
         this.mounted = false;
         document.body.removeEventListener('click', this.deleteProject);
     }
