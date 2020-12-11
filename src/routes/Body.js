@@ -1,6 +1,6 @@
 import { AuthContext } from '../auth/Auth';
 import React, { useContext, useState } from 'react';
-import ProjectList from './ListProjects';
+import ProjectList from './ProjectList';
 import Button from 'react-bootstrap/Button';
 import Project from '../controller/Project';
 

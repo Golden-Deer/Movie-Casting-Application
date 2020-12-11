@@ -9,10 +9,9 @@ import Discover from './routes/discover/Discover';
 import Search from './routes/search/Search';
 import Navbar from './routes/layout/Navbar';
 import ProjectViewer from './routes/project/ProjectViewer';
-import RolePage from './routes/project/RolePage';
 import About from './routes/About';
 import ActorProfile from './routes/ActorProfile';
-import RoleViewer from './routes/project/RoleViewer';
+import RoleViewer from './routes/role/RoleViewer';
 import NotFound from './routes/layout/NotFound';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 

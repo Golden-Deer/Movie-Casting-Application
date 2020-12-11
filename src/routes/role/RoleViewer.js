@@ -7,7 +7,6 @@ import {Navbar, Button} from 'react-bootstrap'
 
 
 const RoleViewer = (props) => {
-    console.log(props.location.state);
     const history = useHistory();
     const [roleName, setRoleName] = useState(props.location.state[0]);
 
