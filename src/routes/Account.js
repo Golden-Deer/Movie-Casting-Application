@@ -20,8 +20,8 @@ const Account = () => {
 
     useEffect(() => {
         if (User.isSignedIn()){
-            var user = User.getUser().then((user) => {
-            console.log(user.val());
+            User.getUser().then((user) => {
+            console.log('account ' + user.val());
             setFirstName(user.val().firstName);
             setLastName(user.val().lastName)});
         }
@@ -49,22 +49,19 @@ const Account = () => {
 
     function handleLogout() {
         User.signOut();
+        setFirstName('Your');
+        setLastName('Account');
         history.push('/');
         closingPopup('accountPopup');
     }
 
     function deleteAccount() {
-        if (db.auth().currentUser === null) {
+        if (!User.isSignedIn()) {
             alert("Please log in again to delete account.");
         }
         else {
-            var user = db.auth().currentUser;
-            user.delete().then(() => {
-                db.database().ref('USER/' + user.uid).remove();
-            }).catch((error) => {
-                alert(error);
-            });
-            closingPopup('accountPopup');
+            User.delete();
+            handleLogout();
         }
     }
     
