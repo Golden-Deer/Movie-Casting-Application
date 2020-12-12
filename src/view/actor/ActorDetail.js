@@ -56,7 +56,8 @@ class ActorDetail extends Component {
             profilePic: this.props.actor.profilepic,
             key: this.props.actor.id
         }
-        Role.inCandidate(this.props.role.key, candidate).then((yesno) => this.setState({added: yesno}))
+        if (this.props.role != 'null')
+            Role.inCandidate(this.props.role.key, candidate).then((yesno) => this.setState({added: yesno}))
     }
 
     render() {
@@ -95,7 +96,7 @@ class ActorDetail extends Component {
                     <p className='project-attribute-description'>{this.props.actor.introduction}</p>
                 </p>
                 
-                {(this.props.projectKey == 'null') ? null : (this.state.added ? 
+                {(this.props.role == 'null') ? null : (this.state.added ? 
                 <Button
                     variant='danger'
                     size='lg'
