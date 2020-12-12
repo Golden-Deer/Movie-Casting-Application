@@ -318,6 +318,10 @@ image.center{
 }
 
 /* About Page (renamed from landing) */
+.about-page {
+  background: #EBEBEB;
+}
+
 .landing1 {
   position: relative;
   background: url("./images/HomePic.png") no-repeat center center/cover;

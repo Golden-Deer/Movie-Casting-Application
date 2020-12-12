@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { Container, Row, Col } from 'react-bootstrap';
-import ActingRed from '../images/acting-red-back.jpg';
+//import ActingRed from '../images/acting-red-back.jpg';
 import FilmingWater from '../images/filming-water.jpg';
 
 const About = () => {
   return (
-    <div class='App Fade'>
+    <div class='App Fade about-page'>
       <section className='landing1'>
         <div className='dark-overlay'>
           <div className='landing-inner'>
