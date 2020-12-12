@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Navbar, Button } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
 import logo from "../../images/logo.png";
-import DisplayActor from "./DisplayActor"
-import ToggleBar from "./ToggleBar"
+import DisplayActor from "./DisplayActor";
 
 const Search = (props) => {
         console.log(props.location.state);
@@ -17,21 +16,18 @@ const Search = (props) => {
                 height: 'unspecified',
                 weight: 'unspecified'
         };
-        //FIXME: var or const?
-        var projectKey = 'unspecified'
+        //FIXME: var or const?0
         var role = 'unspecified'
 
         //if the role is not created, skip the part for searching and set to default
         if(props.location.state != null){
                 tags = {
-                        gender: props.location.state[2].gender,
-                        age: props.location.state[2].age,
-                        height: props.location.state[2].height,
-                        weight: props.location.state[2].weight
-                }; 
-                
-                projectKey = props.location.state[1]
-                role = props.location.state[2]
+                        gender: props.location.state[0].gender,
+                        age: props.location.state[0].age,
+                        height: props.location.state[0].height,
+                        weight: props.location.state[0].weight
+                };
+                role = props.location.state[0]
         }
         
 
@@ -47,7 +43,7 @@ const Search = (props) => {
             <Navbar.Brand>
                 <Button variant="outline-light" onClick={() => history.goBack()}>Back</Button>  
             </Navbar.Brand>
-                <h3 style={{color: 'white'}}>Showing result for {props.location.state[2].name} in {props.location.state[0].name}</h3>
+                <h3 style={{color: 'white'}}>Showing result for {props.location.state[0].name}</h3>
             </Navbar>
      
         } else {
@@ -75,7 +71,7 @@ const Search = (props) => {
                         <div class="body">
                         {/* <ToggleBar /> */}
                         <br />
-                        <DisplayActor project={props.location.state[0]} roleName={props.location.state[2].name} tags={tags} numActor={count} projectKey={projectKey} role={role} roleKey={props.location.state[3]}/>
+                        <DisplayActor role={props.location.state[0]} tags={tags} numActor={count}/>
                         </div>
 
                 </div>

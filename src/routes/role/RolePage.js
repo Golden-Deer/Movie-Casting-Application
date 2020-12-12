@@ -8,27 +8,22 @@ import firebase from "firebase";
 import DeleteRole from './DeleteRole';
 import EditRole from "./EditRole";
 import EditRoleTag from "./EditRoleTag";
+import Role from '../../controller/Role';
 
 class RolePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            role: null,
-            roleName: this.props.roleName,
-            roleKey: '',
-            candidates: null,
-            candidateCards: null,
-            roleDescription: '',
-            roleImage: '',
+            role: this.props.role,
+            roleName: this.props.role.name,
+            roleKey: this.props.role.key,
+            candidates: [],
+            candidateCards: [],
+            roleDescription: this.props.role.description,
             field: '',
             originalValue: '',
             newValue: '',
             disableSave: true
-        }
-
-        var user = db.auth().currentUser;
-        if (user != null) {
-            this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/');
         }
 
         this.editRole = this.editRole.bind(this);
@@ -41,54 +36,25 @@ class RolePage extends Component {
     componentDidMount() {
         // start at top of the page
         window.scrollTo(0, 0)
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user != null){
-                this.profileRef = db.database().ref("PROFILE");
-                this.roleRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.roleKey);
-                console.log(this.props.roleKey);
-                this.roleRef.on('value', dataSnapshot => {
-                    if (dataSnapshot.val()!=null){
-                        var newRole = dataSnapshot.val();
-                        newRole.key = dataSnapshot.key;
-                        this.setState({role: newRole, roleKey: dataSnapshot.key, candidates: dataSnapshot.val()['candidates']});
-                        var candidate = [];
-                        var index = 0;
-                        this.candidateRef = db.database().ref('USER/' + user.uid + '/projects/' + this.props.projectKey + '/roles/').child(dataSnapshot.key).child('candidates');
-                        this.candidateRef.on('value', data => {
-                            data.forEach(childData =>{
-                                if (newRole.candidates!= null && newRole.candidates[childData.key] != null) {
-                                    var actorProfile = null;
-                                    firebase.database().ref(this.profileRef.child(newRole.candidates[childData.key].key))
-                                        .on('value', snapshot => {
-                                            actorProfile = snapshot.val();
-                                            actorProfile.key = snapshot.key;
-                                            actorProfile.profilepic = newRole.candidates[childData.key].profilePic;
-                                        });
-                                    // pass rolename as props as well
-                                    candidate.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
-                                        [dataSnapshot.val().name, actorProfile, this.props.projectKey, newRole, this.props.project, this.props.roleKey])}>
-                                        <Card.Img variant="top" src={newRole.candidates[childData.key].profilePic}/>
-                                        <Card.Body>
-                                            <Card.Title><b>{newRole.candidates[childData.key].name}</b></Card.Title>
-                                        </Card.Body>
-                                    </Card>
-                                    </td>);
-                                    index+=1;
-                                    if (index % 3 == 0){
-                                        candidate.push(<tr></tr>)
-                                    }
-                                }
-                            })
-                        })
-                        this.setState({candidateCards: candidate});
-                    }
-                });
-            }
-        });
-    }
-
-    componentWillUnmount() {
-        this.roleRef.off();
+        Role.get(this.props.role.key).then((role) => {
+            this.setState({role: role.val(), roleName: role.val().name, rolekey: role.val().key});
+        })
+        Role.getCandidates(this.state.roleKey).then((candidates) => {
+            var cards = [];
+            if (candidates == undefined)
+                candidates = []
+            candidates.forEach(candidate => {
+                cards.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
+                [candidate.key, this.state.roleKey])}>
+                <Card.Img variant="top" src={candidate.profilePic}/>
+                <Card.Body>
+                    <Card.Title><b>{candidate.name}</b></Card.Title>
+                </Card.Body>
+            </Card>
+            </td>)
+            this.setState({candidateCards: cards})
+            })
+        })
     }
 
     editRole(field){
@@ -106,10 +72,10 @@ class RolePage extends Component {
     }
 
     updateRole(){
-        let reference = this.roleRef;
-        let updates = {}
-        updates[this.state.field.toLowerCase()] = this.state.newValue;
-        reference.update(updates);
+        var newRole = this.state.role;
+        newRole[this.state.field.toLowerCase()] = this.state.newValue;
+        console.log(newRole)
+        Role.update(this.state.roleKey, newRole);
         this.closePopup('editRole');
         this.closePopup('editRoleTag');
         this.setState({originalValue: '', newValue:''});
@@ -118,11 +84,9 @@ class RolePage extends Component {
     }
 
     deleteRole(){
-        let reference = this.roleRef;
-        reference.remove();
+        Role.delete(this.props.project.key, this.state.roleKey)
         this.closePopup('deleteRole');
-        reference.off();
-        this.props.history.push('/project', [this.props.project, this.props.projectKey]);
+        this.props.history.push('/project', [this.props.project]);
     }
 
     deleteConfirmation(){
@@ -155,7 +119,7 @@ class RolePage extends Component {
                     style={{
                        float: 'right'
                     }}
-                    onClick={()=>{<DeleteRole deleteRole={this.deleteRole()} roleName={this.roleRef.name} closePopup={this.closePopup}/>}}>
+                    onClick={()=>{<DeleteRole deleteRole={this.deleteRole()} roleName={this.state.role.name} closePopup={this.closePopup}/>}}>
                     Delete Role
                 </Button>
 
@@ -214,7 +178,7 @@ class RolePage extends Component {
                     <h2 style={{ display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
-                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role, this.props.roleKey])} style={{ fontSize: 40 + 'px' }}>
+                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.state.role])} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>
@@ -227,7 +191,7 @@ class RolePage extends Component {
                     <h2 style={{ display: 'inline-block' }}>
                         <b>Casting Candidates&nbsp;&nbsp;</b>
                     </h2>
-                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.props.project, this.props.projectKey, this.state.role, this.props.roleKey])} style={{ fontSize: 40 + 'px' }}>
+                    <label class='invisibleButton' onClick={()=> this.props.history.push('/search', [this.state.role])} style={{ fontSize: 40 + 'px' }}>
                         <b>+</b>
                     </label>
                 </tr>

@@ -59,7 +59,7 @@ class ProjectDetail extends Component {
           temp.push(<Card
             className='roleCard'
             onClick={() =>
-              this.props.history.push('/rolepage', [role])
+              this.props.history.push('/rolepage', [role, this.state.project])
             }>
             <Card.Body>
               <Card.Title>

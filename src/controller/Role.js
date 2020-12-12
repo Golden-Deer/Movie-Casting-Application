@@ -18,6 +18,16 @@ class Role {
             return role;})
     }
 
+    getCandidates(key) {
+        return RoleModel.read(key).then((role) => {
+            console.log('getting candidates ' + role.candidates)
+            return role.candidates;})
+    }
+
+    update(key, data) {
+        return RoleModel.update(key, data);
+    }
+
     getAll(projectKey) {
         return Project.getRoles(projectKey).then(myproj => myproj.map(key => RoleModel.read(key).then(data => key = data.val())));
     }
@@ -27,8 +37,9 @@ class Role {
         return Project.addRole(projectKey, key);
     }
 
-    delete() {
-        return db.auth().currentRole.delete().then(console.log('deleted ' + db.auth().currentRole.uid))
+    delete(projectKey, roleKey) {
+        Project.deleteRole(projectKey, roleKey)
+        return RoleModel.delete(roleKey);
     }
 }
 

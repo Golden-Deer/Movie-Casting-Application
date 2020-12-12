@@ -14,7 +14,18 @@ class User {
         return db.auth().currentUser != null;
     }
 
-    addProject(projectID) {
+    deleteProject(projectKey) {
+        return UserModel.read(db.auth().currentUser.uid).then((user) => {
+            var data = user.val()
+            console.log(data)
+            var index = data.projects.indexOf(projectKey)
+            data.projects.splice(index, 1);
+            console.log(data);
+            UserModel.update(user.key, data);
+        })
+    }
+
+    addProject(projectKey) {
         return UserModel.read(db.auth().currentUser.uid).then((user) => {
             var data = user.val()
             console.log(data)
@@ -22,7 +33,7 @@ class User {
                 data.projects = [];
                 console.log(data)
             }
-            data.projects.push(projectID);
+            data.projects.push(projectKey);
             console.log(data);
             UserModel.update(user.key, data);
         })

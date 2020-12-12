@@ -11,12 +11,12 @@ const ActorProfile = (props) => {
     <>
     <Navbar bg="dark" variant="dark" sticky="top">
       <Navbar.Brand>
-        <Button variant="outline-light" onClick={() => history.push('/discover')}>Back</Button>
+        <Button variant="outline-light" onClick={() => history.goBack()}>Back</Button>
       </Navbar.Brand>
       <h3 style={{color: 'white'}}>{props.location.state[1].name}</h3>
       </Navbar>
       <br />
-      <ActorDetail roleName={props.location.state[0]} actor={props.location.state[1]} projectKey={props.location.state[2]} role={props.location.state[3]} project={props.location.state[4]} roleKey={props.location.state[5]}/>
+      <ActorDetail role={props.location.state[0]} actor={props.location.state[1]}/>
     </>
     
   );

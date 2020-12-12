@@ -37,6 +37,18 @@ class Project {
         })
     }
 
+    deleteRole(projectKey, roleKey) {
+        return ProjectModel.read(projectKey).then((project) => {
+            var data = project.val()
+            console.log(data);
+            var index = data.roles.indexOf(roleKey);
+            data.roles.splice(index, 1);
+            console.log(data);
+            ProjectModel.update(projectKey, data);
+            return roleKey;
+        })
+    }
+
     update(key, data) {
         ProjectModel.update(key, data);
     }
@@ -51,6 +63,7 @@ class Project {
     }
 
     delete(key) {
+        User.deleteProject(key);
         return ProjectModel.delete(key);
     }
 }

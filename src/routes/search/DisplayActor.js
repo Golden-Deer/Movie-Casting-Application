@@ -21,18 +21,18 @@ class DisplayActor extends Component {
                 Picture.read(actor.profilepic).getDownloadURL().then((url) => {
                     actor.profilepic = url;
                     newactors.push(actor);
-                    for (const tag in props.tags) {
-                        if (tag === "age" && props.tags[tag] !== 'unspecified') {
-                            newactors = this.filterAge(newactors, props.tags[tag]);
+                    for (const tag in this.props.tags) {
+                        if (tag === "age" && this.props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterAge(newactors, this.props.tags[tag]);
                         }
-                        if (tag === "gender" && props.tags[tag] !== 'unspecified') {
-                            newactors = this.filterGender(newactors, props.tags[tag]);
+                        if (tag === "gender" && this.props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterGender(newactors, this.props.tags[tag]);
                         }
-                        if (tag === "height" && props.tags[tag] !== 'unspecified') {
-                            newactors = this.filterHeight(newactors, props.tags[tag]);
+                        if (tag === "height" && this.props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterHeight(newactors, this.props.tags[tag]);
                         }
-                        if (tag === "weight" && props.tags[tag] !== 'unspecified') {
-                            newactors = this.filterWeight(newactors, props.tags[tag]);
+                        if (tag === "weight" && this.props.tags[tag] !== 'unspecified') {
+                            newactors = this.filterWeight(newactors, this.props.tags[tag]);
                         }
                     }
                     this.setState({ actors: newactors });
@@ -156,16 +156,12 @@ class DisplayActor extends Component {
         }
     }
 
-    componentWillUnmount() {
-        this.profileRef.off();
-    }
-
     render() {
         if (this.state.records.length == 0)
             var display = <p class='banner'>No actors found that meet your criteria</p>
         else{
             var display = this.state.records.map(records =>
-                <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px', cursor: 'pointer'}} key={records.name} onClick={() => this.props.history.push('/actor', [this.props.roleName, records, this.props.projectKey, this.props.role, this.props.project, this.props.roleKey])}>
+                <Card style={{minWidth: '400px', maxWidth: '420px', marginBottom: '20px', cursor: 'pointer'}} key={records.name} onClick={() => this.props.history.push('/actor', [this.props.role, records])}>
                 <Card.Img variant="top" src= {records.profilepic} alt={records.profilepic} />
                 <Card.Body>
                 <Card.Title>{records.name}</Card.Title>

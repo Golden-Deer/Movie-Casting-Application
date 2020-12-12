@@ -8,7 +8,7 @@ import {Navbar, Button} from 'react-bootstrap'
 
 const RoleViewer = (props) => {
     const history = useHistory();
-    const [roleName, setRoleName] = useState(props.location.state[0]);
+    const [roleName, setRoleName] = useState(props.location.state[0].name);
 
     function resetRoleName(value){
         setRoleName(value);
@@ -23,7 +23,7 @@ const RoleViewer = (props) => {
         <h3 style={{color: 'white'}}>{roleName}</h3>
         </Navbar>
         <br />
-        <RolePage roleName={roleName} project={props.location.state[1]} projectKey={props.location.state[2]} roleKey={props.location.state[3]} resetRoleName={resetRoleName}/>
+        <RolePage role={props.location.state[0]} project={props.location.state[1]} resetRoleName={resetRoleName}/>
         </>
     );
 };
