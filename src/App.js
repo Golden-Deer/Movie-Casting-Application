@@ -3,16 +3,16 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import PrivateRoute from './auth/PrivateRoute';
 import { AuthProvider } from './auth/Auth';
-import Home from './routes/Home';
-import passwordRecovery from './routes/passwordRecoveryPopup';
-import Discover from './routes/discover/Discover';
-import Search from './routes/search/Search';
-import Navbar from './routes/layout/Navbar';
-import ProjectViewer from './routes/project/ProjectViewer';
-import About from './routes/About';
-import ActorProfile from './routes/actor/ActorProfile';
-import RoleViewer from './routes/role/RoleViewer';
-import NotFound from './routes/layout/NotFound';
+import Home from './view/Home';
+import passwordRecovery from './view/passwordRecoveryPopup';
+import Discover from './view/discover/Discover';
+import Search from './view/search/Search';
+import Navbar from './view/layout/Navbar';
+import ProjectViewer from './view/project/ProjectViewer';
+import About from './view/About';
+import ActorProfile from './view/actor/ActorProfile';
+import RoleViewer from './view/role/RoleViewer';
+import NotFound from './view/layout/NotFound';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
 
 function App() {
