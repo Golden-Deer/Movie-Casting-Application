@@ -10,7 +10,7 @@ import Search from './routes/search/Search';
 import Navbar from './routes/layout/Navbar';
 import ProjectViewer from './routes/project/ProjectViewer';
 import About from './routes/About';
-import ActorProfile from './routes/ActorProfile';
+import ActorProfile from './routes/actor/ActorProfile';
 import RoleViewer from './routes/role/RoleViewer';
 import NotFound from './routes/layout/NotFound';
 import CacheRoute, { CacheSwitch } from 'react-router-cache-route';
@@ -23,7 +23,7 @@ function App() {
           <Navbar />
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
-          <CacheRoute exact path='/discover' component={Discover} />
+          <Route exact path='/discover' component={Discover} />
           <Route exact path='/project' component={ProjectViewer} />
           <Route exact path='/' component={Home} />
           <Route exact path='/dashboard' component={Home} />

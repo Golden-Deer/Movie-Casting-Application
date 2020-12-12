@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import db from '../../base';
 import { Card, CardDeck } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
+import Profile from "../../model/Profile";
+import Picture from "../../model/Picture";
 
 class DisplayActor extends Component {
     constructor(props) {
@@ -12,14 +13,12 @@ class DisplayActor extends Component {
             actors: [],
             records: []
         };
-        this.profileRef = db.database().ref("PROFILE");
-        this.pictureRef = db.storage().ref("Actor Pictures");
+
         var newactors = [];
-        this.profileRef.orderByChild('name').on('value', dataSnapshot => {
+        Profile.readAll().then(dataSnapshot => {
             dataSnapshot.forEach(childSnapshot => {
                 let actor = childSnapshot.val();
-                actor.key = childSnapshot.key;
-                this.pictureRef.child(actor.profilepic).getDownloadURL().then((url) => {
+                Picture.read(actor.profilepic).getDownloadURL().then((url) => {
                     actor.profilepic = url;
                     newactors.push(actor);
                     for (const tag in props.tags) {
@@ -40,9 +39,9 @@ class DisplayActor extends Component {
                     this.setState({ records: this.state.actors.slice(0, this.props.numActor) });
                 }).catch(function(error) {
                     alert(error);
-                  });
-            });
-        });
+                });
+            })
+        })
     }
 
     filterGender(actors, gender) {
