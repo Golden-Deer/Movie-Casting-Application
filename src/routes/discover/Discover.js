@@ -1,9 +1,8 @@
 import '../../App.js';
-import React, { Component } from 'react';
+import React from 'react';
 import ExploreActor from './ExploreActor';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 
 const Discover = () => {
   return (
@@ -72,21 +71,6 @@ const Discover = () => {
           </Col>
         </Row>
       </Container>
-      {/* <div className='s-navbar'>
-        <h1 onClick={() => history.push('/')}>
-          My Project <a>Showing result for Role1</a>{' '}
-          TODO: change is to new
-        </h1>
-      </div>
-      <div className='s-main'>
-        <div className='s-sidebar'>
-          <h1>Project list</h1>
-          <h2> - Project1</h2>
-          <div id={'mini-project'}>
-            <h2>project</h2>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

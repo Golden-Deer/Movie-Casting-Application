@@ -1,10 +1,10 @@
-import db from "../base";
-import "../App.js";
+import db from "../../base";
+import "../../App.js";
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 import Card from "react-bootstrap/Card";
-import firebase from "firebase";
+import Picture from "../../model/Picture";
 
 class ActorDetail extends Component {
     constructor(props) {
@@ -16,11 +16,10 @@ class ActorDetail extends Component {
         }
 
         this.user = db.auth().currentUser;
-        this.pictureRef = db.storage().ref("Actor Pictures");
         this.candidateRef = null;
         for (var picture of this.props.actor.pictures) {
             var pictures = this.state.pictures;
-            this.pictureRef.child(picture).getDownloadURL().then((url) => {
+            Picture.read(picture).getDownloadURL().then((url) => {
                 pictures.push(url);
                 this.setState({ pictures: pictures });
             }).catch(function (error) {

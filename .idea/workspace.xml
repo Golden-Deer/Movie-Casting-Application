@@ -4,16 +4,13 @@
     <list default="true" id="099ee1e4-f662-4860-8dd4-20df8b877c1f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/Body.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Body.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/ListProjects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/ProjectList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/DeleteRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/role/DeleteRole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/EditRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/role/EditRole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/EditRolePopup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/EditRoleTag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/role/EditRoleTag.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/ProjectDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/project/ProjectDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/RoleList.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/RolePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/role/RolePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/project/RoleViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/role/RoleViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/ActorDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/actor/ActorDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/ActorProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/actor/ActorProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/ProjectList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/ProjectList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/discover/Discover.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/discover/Discover.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/discover/ExploreActor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/discover/ExploreActor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/search/DisplayActor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/search/DisplayActor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,17 +38,20 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/routes/actor" />
       <recent name="$PROJECT_DIR$/src/routes/role" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -74,6 +74,7 @@
       <workItem from="1607057813166" duration="8729000" />
       <workItem from="1607653213179" duration="2169000" />
       <workItem from="1607670433567" duration="3541000" />
+      <workItem from="1607733308705" duration="7495000" />
     </task>
     <servers />
   </component>

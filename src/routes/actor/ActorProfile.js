@@ -1,7 +1,7 @@
-import '../App.js';
+import '../../App.js';
 import React, {useContext} from 'react';
 import { useHistory } from 'react-router-dom';
-import '../App.css';
+import '../../App.css';
 import ActorDetail from './ActorDetail';
 import {Navbar, Button} from 'react-bootstrap'
 
@@ -11,7 +11,7 @@ const ActorProfile = (props) => {
     <>
     <Navbar bg="dark" variant="dark" sticky="top">
       <Navbar.Brand>
-        <Button variant="outline-light" onClick={() => history.goBack()}>Back</Button>  
+        <Button variant="outline-light" onClick={() => history.push('/discover')}>Back</Button>
       </Navbar.Brand>
       <h3 style={{color: 'white'}}>{props.location.state[1].name}</h3>
       </Navbar>

@@ -12,14 +12,8 @@ class Profile {
     }
 
     readAll() {
-        var allData = [];
-        ref.once('value', dataSnapshot => {
-            dataSnapshot.forEach(childSnapshot => {
-                allData[childSnapshot.key] = childSnapshot.val()
-            });
-        });
         console.log('reading all profile data');
-        return allData;
+        return ref.orderByChild('name').once('value');
     }
 }
 

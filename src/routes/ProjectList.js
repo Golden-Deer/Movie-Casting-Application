@@ -22,6 +22,7 @@ class ProjectList extends Component{
 
         this.mounted = false;
     }
+
     viewProject(index) {
         this.setState({projectName: this.state.projects[index]['name']})
         this.setState({projectReleaseDate: this.state.projects[index]['release_date']})
