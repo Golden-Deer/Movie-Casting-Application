@@ -23,7 +23,7 @@ function App() {
           <Navbar />
           <Route exact path='/passwordrecovery' component={passwordRecovery} />
           <Route exact path='/search' component={Search} />
-          <Route exact path='/discover' component={Discover} />
+          <CacheRoute exact path='/discover' component={Discover} />
           <Route exact path='/project' component={ProjectViewer} />
           <Route exact path='/' component={Home} />
           <Route exact path='/dashboard' component={Home} />
