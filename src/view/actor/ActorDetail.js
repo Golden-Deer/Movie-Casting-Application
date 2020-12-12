@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 import Card from "react-bootstrap/Card";
 import Picture from "../../model/Picture";
+import Role from '../../controller/Role'
 
 class ActorDetail extends Component {
     constructor(props) {
@@ -14,9 +15,6 @@ class ActorDetail extends Component {
             pictures: [],
             added: false
         }
-
-        this.user = db.auth().currentUser;
-        this.candidateRef = null;
         for (var picture of this.props.actor.pictures) {
             var pictures = this.state.pictures;
             Picture.read(picture).getDownloadURL().then((url) => {
@@ -26,26 +24,26 @@ class ActorDetail extends Component {
                 alert(error);
             });
         }
-        if (this.user != null) this.candidateRef = db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/');
-        if (this.props.projectKey == 'null') {
-            
-        }
     }
 
     addCandidate() {
-        this.candidateRef.child(this.props.actor.key).set({
+        var candidate = {
             name: this.props.actor.name,
-            key: this.props.actor.key,
-            profilePic: this.state.profilePic
-        });
+            profilePic: this.props.actor.profilepic,
+            key: this.props.actor.id
+        }
+        Role.addCandidate(this.props.role.key, candidate).then(() => window.location.reload());
         // navigate back to rolepage
-        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey, this.props.roleKey])
     }
 
     removeCandidate() {
-        this.candidateRef.child(this.props.actor.key).remove();
+        var candidate = {
+            name: this.props.actor.name,
+            profilePic: this.props.actor.profilepic,
+            key: this.props.actor.id
+        }
+        Role.deleteCandidate(this.props.role.key, candidate).then(() => window.location.reload());
         // navigate back to rolepage
-        this.props.history.push('/rolepage', [this.props.roleName, this.props.project, this.props.projectKey, this.props.roleKey])
     }
 
     displayPicture(picture){
@@ -53,21 +51,12 @@ class ActorDetail extends Component {
     }
 
     componentDidMount() {
-        db.auth().onAuthStateChanged((user) => {
-            if (user != null && this.props.projectKey != 'null') {
-                this.user = user;
-                this.candidateRef = db.database().ref('USER/' + this.user.uid + '/projects/' + this.props.projectKey + '/roles/' + this.props.role.key + '/candidates/');
-                this.candidateRef.on('value', dataSnapshot => {
-                    var added = false;
-                    dataSnapshot.forEach(childSnapshot => {
-                        if (childSnapshot.val().key === this.props.actor.key) {
-                            added = true;
-                        }
-                    })
-                    this.setState({ added: added });
-                });
-            }
-        });
+        var candidate = {
+            name: this.props.actor.name,
+            profilePic: this.props.actor.profilepic,
+            key: this.props.actor.id
+        }
+        Role.inCandidate(this.props.role.key, candidate).then((yesno) => this.setState({added: yesno}))
     }
 
     render() {

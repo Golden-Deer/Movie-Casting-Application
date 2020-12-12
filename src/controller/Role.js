@@ -18,6 +18,47 @@ class Role {
             return role;})
     }
 
+    addCandidate(key, candidate) {
+        return RoleModel.read(key).then((data) => {
+            var role = data.val()
+            console.log(role)
+            if (role.candidates == undefined)
+                role.candidates = []
+            role.candidates.push(candidate)
+            RoleModel.update(key, role);
+            console.log('candidate ' + candidate.key + ' is added to role ' + key);
+            return role;})
+    }
+
+    deleteCandidate(key, candidate) {
+        return RoleModel.read(key).then((data) => {
+            var role = data.val()
+            role.candidates.forEach(cand => {
+                if (cand.key === candidate.key)
+                    role.candidates.splice(role.candidates.indexOf(cand), 1)
+            })
+            RoleModel.update(key, role);
+            console.log(role)
+            console.log('delete candidate ' + candidate.key + ' from role ' + key);
+            return role;})
+    }
+
+    inCandidate(key, candidate) {
+        return RoleModel.read(key).then((data) => {
+            var role = data.val()
+            console.log(role.candidates)
+            console.log(candidate)
+            if (role.candidates == undefined)
+                role.candidates = []
+            var yesno = false;
+            role.candidates.forEach(cand => {
+                if (cand.key === candidate.key)
+                    yesno = true;
+            })
+            console.log('is candidate ' + candidate.key + ' in role ' + key + yesno);
+            return yesno;})
+    }
+
     getCandidates(key) {
         return RoleModel.read(key).then((role) => {
             console.log('getting candidates ' + role.candidates)
