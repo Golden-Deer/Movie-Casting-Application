@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import db from '../../base';
-import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import CreateRolePopup from './CreateRolePopup';
 import EditProjectPopup from './EditProjectPopup';
@@ -57,6 +55,7 @@ class ProjectDetail extends Component {
     var temp = [];
     Role.getAll(this.state.projectKey).then((datas) => {
       datas.forEach(data => data.then(role => {
+        console.log(role)
           temp.push(<Card
             className='roleCard'
             onClick={() =>
@@ -79,7 +78,7 @@ class ProjectDetail extends Component {
               </Card.Subtitle>
             </Card.Body>
           </Card>);
-          this.setState({ roles: role });
+          this.setState({ roles: temp });
       }).catch((error) => console.log(error)))
     });
   }
@@ -308,7 +307,7 @@ class ProjectDetail extends Component {
         </div>
       );
 
-      if (this.state.project.roles == null) {
+      if (this.state.roles.length == 0) {
         roles = (
           <table
             id='roleDisplay'
