@@ -55,7 +55,7 @@ class ProjectDetail extends Component {
 
   componentDidMount() {
     var temp = [];
-    Role.getAll().then((datas) => {
+    Role.getAll(this.state.projectKey).then((datas) => {
       datas.forEach(data => data.then(role => {
           temp.push(<Card
             className='roleCard'
@@ -84,10 +84,6 @@ class ProjectDetail extends Component {
     });
   }
 
-  componentWillUnmount() {
-    this.projectRef.off();
-  }
-
   editProject(field) {
     document.getElementById('editProjectPopup').style.visibility = 'visible';
     document.getElementById('editProjectPopup').style.opacity = 100 + '%';
@@ -100,15 +96,11 @@ class ProjectDetail extends Component {
   }
 
   updateProject() {
-    let reference = firebase
-      .database()
-      .ref('USER/' + firebase.auth().currentUser.uid + '/projects')
-      .child(this.state.index);
     let updates = {};
     updates[
       this.state.field.toLowerCase().replace(' ', '_')
     ] = this.state.newValue;
-    reference.update(updates);
+    console.log(updates)
     if (this.state.field == 'Name')
       this.props.resetProjectName(this.state.newValue);
     this.closePopup('editProjectPopup');
@@ -120,18 +112,9 @@ class ProjectDetail extends Component {
   }
 
   deleteProject() {
-    let reference = firebase
-      .database()
-      .ref(
-        'USER/' +
-          firebase.auth().currentUser.uid +
-          '/projects/' +
-          this.state.index
-      );
-    reference.remove();
+    Project.delete(this.state.projectKey)
     this.closePopup('deleteProjectPopup');
     this.closePopup('editProjectPopup');
-    reference.off();
     this.props.history.push('/');
   }
 

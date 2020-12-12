@@ -19,7 +19,7 @@ class Project {
     }
 
     getRoles(projectKey) {
-        return ProjectModel.read(projectKey).then(project => project.val().roles)
+        return ProjectModel.read(projectKey).then(project => (project.val().roles == undefined) ? [] : project.val().roles == undefined)
     }
 
     addRole(projectKey, roleKey) {
@@ -45,8 +45,8 @@ class Project {
         return User.addProject(key);
     }
 
-    delete() {
-        return db.auth().currentProject.delete().then(console.log('deleted ' + db.auth().currentProject.uid))
+    delete(key) {
+        return db.database().child(key).delete().then(console.log('deleted ' + key))
     }
 }
 

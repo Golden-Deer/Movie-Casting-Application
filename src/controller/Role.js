@@ -18,8 +18,8 @@ class Role {
             return role;})
     }
 
-    getAll() {
-        return Project.getRoles().then(myproj => myproj.map(key => RoleModel.read(key).then(data => key = data.val())));
+    getAll(projectKey) {
+        return Project.getRoles(projectKey).then(myproj => myproj.map(key => RoleModel.read(key).then(data => key = data.val())));
     }
 
     create(projectKey, data) {
