@@ -100,7 +100,11 @@ class ProjectDetail extends Component {
     updates[
       this.state.field.toLowerCase().replace(' ', '_')
     ] = this.state.newValue;
-    console.log(updates)
+    var data = this.state.project;
+    data[this.state.field.toLocaleLowerCase()] = this.state.newValue
+    console.log(data)
+    Project.update(this.state.projectKey, data);
+    this.setState({project: data});
     if (this.state.field == 'Name')
       this.props.resetProjectName(this.state.newValue);
     this.closePopup('editProjectPopup');

@@ -21,7 +21,7 @@ class UserModel {
 
     read(key) {
         return ref.child(key).once('value').then((user) => {
-            console.log('read user ' + user);
+            console.log('read user ' + key);
             return user;})
             .catch(error => console.log(error));
     }

@@ -36,6 +36,10 @@ class Project {
         })
     }
 
+    update(key, data) {
+        ProjectModel.update(key, data);
+    }
+
     getAll() {
         return User.getProjects().then(myproj => myproj.map(key => ProjectModel.read(key).then(data => key = data.val())));
     }
@@ -46,7 +50,7 @@ class Project {
     }
 
     delete(key) {
-        return db.database().child(key).delete().then(console.log('deleted ' + key))
+        return ProjectModel.delete(key);
     }
 }
 

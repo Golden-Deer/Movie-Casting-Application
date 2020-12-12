@@ -34,7 +34,7 @@ class User {
 
     get() {
         return UserModel.read(db.auth().currentUser.uid).then((user) => {
-            console.log('getting user ' + user)
+            console.log('getting user ' + user.key)
             return user;})
     }
 

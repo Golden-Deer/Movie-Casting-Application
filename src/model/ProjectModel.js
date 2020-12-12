@@ -12,7 +12,7 @@ class ProjectModel {
 
     read(key) {
         return ref.child(key).once('value').then((data) => {
-            console.log('read project ' + data);
+            console.log('read project ' + key);
             return data;})
     }
 
