@@ -61,8 +61,8 @@ class Role {
 
     getCandidates(key) {
         return RoleModel.read(key).then((role) => {
-            console.log('getting candidates ' + role.candidates)
-            return role.candidates;})
+            console.log('getting candidates ' + role.val().candidates)
+            return role.val().candidates;})
     }
 
     update(key, data) {

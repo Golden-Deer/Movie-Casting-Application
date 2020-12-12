@@ -9,6 +9,7 @@ import DeleteRole from './DeleteRole';
 import EditRole from "./EditRole";
 import EditRoleTag from "./EditRoleTag";
 import Role from '../../controller/Role';
+import Profile from "../../model/Profile";
 
 class RolePage extends Component {
     constructor(props) {
@@ -41,18 +42,25 @@ class RolePage extends Component {
         })
         Role.getCandidates(this.state.roleKey).then((candidates) => {
             var cards = [];
+            console.log(candidates)
             if (candidates == undefined)
                 candidates = []
             candidates.forEach(candidate => {
-                cards.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
-                [candidate.key, this.state.roleKey])}>
-                <Card.Img variant="top" src={candidate.profilePic}/>
-                <Card.Body>
-                    <Card.Title><b>{candidate.name}</b></Card.Title>
-                </Card.Body>
-            </Card>
-            </td>)
-            this.setState({candidateCards: cards})
+                Profile.read(candidate.key).then((data) => {
+                    var actor = data.val()
+                    actor.profilepic = candidate.profilePic;
+                    console.log(actor.profilepic)
+                    cards.push(<td><Card className='candidateCard' onClick={() => this.props.history.push('/actor',
+                    [this.state.role, actor])}>
+                    <Card.Img variant="top" src={candidate.profilePic}/>
+                    <Card.Body>
+                        <Card.Title><b>{candidate.name}</b></Card.Title>
+                    </Card.Body>
+                </Card>
+                </td>)
+                console.log(actor)
+                }).then(() => 
+                this.setState({candidateCards: cards}))
             })
         })
     }

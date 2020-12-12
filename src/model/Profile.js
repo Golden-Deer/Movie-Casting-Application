@@ -3,12 +3,9 @@ import db from '../base';
 const ref = db.database().ref('PROFILE');
 class Profile {
     read(key) {
-        var data = null;
-        ref.child(key).once('value', dataSnapshot => {
-            data = dataSnapshot.val();
-        });
-        console.log('reading profile ' + key);
-        return data;
+        return ref.child(key).once('value').then((data) => {
+            console.log('read profile ' + key);
+            return data;})
     }
 
     readAll() {
