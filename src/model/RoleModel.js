@@ -12,7 +12,7 @@ class RoleModel {
 
     read(key) {
         return ref.child(key).once('value').then((data) => {
-            console.log('read role ' + data);
+            console.log('read role ' + key);
             return data;})
     }
 

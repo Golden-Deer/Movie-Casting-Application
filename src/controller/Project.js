@@ -19,7 +19,7 @@ class Project {
     }
 
     getRoles(projectKey) {
-        return ProjectModel.read(projectKey).then(project => (project.val().roles == undefined) ? [] : project.val().roles == undefined)
+        return ProjectModel.read(projectKey).then((project) => {return (project.val().roles == undefined) ? [] : project.val().roles })
     }
 
     addRole(projectKey, roleKey) {
@@ -30,9 +30,10 @@ class Project {
                 data.roles = [];
                 console.log(data)
             }
-            data.projects.push(roleKey);
+            data.roles.push(roleKey);
             console.log(data);
             ProjectModel.update(projectKey, data);
+            return roleKey;
         })
     }
 
