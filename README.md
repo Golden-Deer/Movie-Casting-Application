@@ -1,6 +1,6 @@
 # Getting Started with Golden Cast!!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Golden Cast is an online management system to help the casting team better manage a movie project and find the best actor candidates that fit the expectation of the casting team, which will greatly improve the efficient and the quality of the casting process. Instead of collecting thousands of paper resumes from multiple companies and organize them by hand for different roles, Golden Cast will allow the casting teams be able to view, select, and manage all the profiles from the actors online just with a computer.
 
 ## Available Scripts
 
