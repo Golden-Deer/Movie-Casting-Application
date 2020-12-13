@@ -7,7 +7,7 @@ import DeleteRole from './DeleteRole';
 import EditRole from "./EditRole";
 import EditRoleTag from "./EditRoleTag";
 import Role from '../../controller/Role';
-import Profile from "../../model/Profile";
+import Profile from "../../controller/Profile";
 
 class RolePage extends Component {
     constructor(props) {

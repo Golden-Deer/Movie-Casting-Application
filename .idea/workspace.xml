@@ -3,41 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="099ee1e4-f662-4860-8dd4-20df8b877c1f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/User.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/UserModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/UserModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/About.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/About.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/account/Account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Body.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Body.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/account/LoginPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PasswordRecoveryPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/account/PasswordRecoveryPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ProjectList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ProjectList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SignUpPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/account/SignUpPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Picture.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Picture.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/actor/ActorDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/actor/ActorDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/actor/ActorProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/actor/ActorProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/discover/Discover.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/discover/Discover.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/discover/ExploreActor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/discover/ExploreActor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/layout/Landing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/layout/Landing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/layout/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/layout/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/layout/NotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/layout/NotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/project/CreateRolePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/project/CreateRolePopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/project/DeleteProjectPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/project/DeleteProjectPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/project/EditProjectPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/project/EditProjectPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/discover/ExploreActor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/discover/ExploreActors.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/project/ProjectDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/project/ProjectDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/project/ProjectViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/project/ProjectViewer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/role/DeleteRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/role/DeleteRole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/role/EditRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/role/EditRole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/role/EditRoleTag.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/role/EditRoleTag.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/role/RolePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/role/RolePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/role/RoleViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/role/RoleViewer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/search/DisplayActor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/search/DisplayActor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/search/DisplayActor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/search/DisplayActors.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/search/Search.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/search/Search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/search/ToggleBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/search/ToggleBar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +39,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/controller" />
       <recent name="$PROJECT_DIR$/src/view/account" />
       <recent name="$PROJECT_DIR$/src/routes/actor" />
       <recent name="$PROJECT_DIR$/src/routes/role" />
@@ -102,7 +77,7 @@
       <workItem from="1607057813166" duration="8729000" />
       <workItem from="1607653213179" duration="2169000" />
       <workItem from="1607670433567" duration="3541000" />
-      <workItem from="1607733308705" duration="22923000" />
+      <workItem from="1607733308705" duration="31490000" />
     </task>
     <servers />
   </component>

@@ -2,7 +2,7 @@ import "../../App.js";
 import React, {useState} from 'react';
 import {Navbar, Button} from "react-bootstrap"
 import {useHistory} from "react-router-dom";
-import DisplayActor from "./DisplayActor";
+import DisplayActor from "./DisplayActors";
 
 const Search = (props) => {
     console.log(props.location.state);

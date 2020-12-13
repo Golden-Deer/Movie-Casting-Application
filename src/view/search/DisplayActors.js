@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Card, CardDeck} from 'react-bootstrap';
 import {withRouter} from "react-router-dom";
-import Profile from "../../model/Profile";
-import Picture from "../../model/Picture";
+import Profile from "../../controller/Profile";
+import Picture from "../../controller/Picture";
 
-class DisplayActor extends Component {
+class DisplayActors extends Component {
     constructor(props) {
         console.log(props.location.state);
         super(props);
@@ -186,4 +186,4 @@ class DisplayActor extends Component {
 }
 
 
-export default withRouter(DisplayActor);
+export default withRouter(DisplayActors);

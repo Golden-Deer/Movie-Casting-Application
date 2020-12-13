@@ -1,6 +1,6 @@
 import '../../App.js';
 import React from 'react';
-import ExploreActor from './ExploreActor';
+import ExploreActor from './ExploreActors';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Discover = () => {

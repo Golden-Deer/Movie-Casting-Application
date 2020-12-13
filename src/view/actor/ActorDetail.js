@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Picture from '../../model/Picture';
+import Picture from '../../controller/Picture';
 import Role from '../../controller/Role';
 
 class ActorDetail extends Component {

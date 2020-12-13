@@ -370,11 +370,6 @@ class ProjectDetail extends Component {
                     setProject={this.setProject}
                     closePopup={this.closePopup}
                 />
-                {/*      Use EditRole from RolePage instead           */}
-                {/*<EditRolePopup index={this.state.roleKey} project={this.state.project} projectKey={this.state.projectKey}*/}
-                {/*               roleName={this.state.roleName} newRoleName={this.state.newRoleName} roleDescription={this.state.roleDescription}*/}
-                {/*               newRoleDescription={this.state.newRoleDescription} setNewRoleName={this.setNewRoleName} setNewRoleDescription={this.setNewRoleDescription}*/}
-                {/*               setProject={this.setProject} closePopup={this.closePopup}/>*/}
                 {display}
                 {roles}
                 <br/>

@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import {withRouter} from 'react-router-dom';
 import {Card, CardDeck} from 'react-bootstrap';
-import Profile from "../../model/Profile";
-import Picture from "../../model/Picture";
+import Profile from "../../controller/Profile";
+import Picture from "../../controller/Picture";
 
-class ExploreActor extends Component {
+class ExploreActors extends Component {
     constructor(props) {
         super(props);
 
@@ -209,4 +209,4 @@ class ExploreActor extends Component {
     }
 }
 
-export default withRouter(ExploreActor);
+export default withRouter(ExploreActors);
