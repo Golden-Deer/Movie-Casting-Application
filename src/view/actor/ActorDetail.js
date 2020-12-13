@@ -73,11 +73,11 @@ class ActorDetail extends Component {
         var images = [];
         for (var picture of this.state.pictures) {
             images.push(
-                <tr>
+                <td>
                     <Card onClick={this.displayPicture.bind(this, picture)}>
                         <Card.Img variant='top' src={picture} alt={picture}/>
                     </Card>
-                </tr>
+                </td>
             );
         }
         var display = null;
@@ -178,7 +178,7 @@ class ActorDetail extends Component {
                         onClick={() => this.displayPicture(this.state.profilePic)}
                     />
                 </div>
-                <div class='candidateImages'>{images}</div>
+                <div class='candidateImages'><b>More Images</b>{images}</div>
             </div>
         );
 
