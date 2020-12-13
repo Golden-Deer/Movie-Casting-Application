@@ -30,7 +30,7 @@ We provide two testing account for convenience:
     ii. With pre-populated data
         ID: account2@test.com
         Password: 123456789
-Feel Free to create your own account using prefered email and password!\
+Feel Free to create your own account using prefered email and password!
 
 *To test the "Password-Recovery" functionality, the tester need to create an account with his/her own available email to receive the password recorvery confirm email.
 
