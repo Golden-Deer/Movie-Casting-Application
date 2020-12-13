@@ -208,7 +208,7 @@ image.center{
 .candidateImages{
   display: inline-block;
   float: left;
-  width: 8%;
+  width: 30%;
   margin-left: 3rem;
   cursor: pointer;
 }
