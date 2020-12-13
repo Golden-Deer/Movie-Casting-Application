@@ -25,21 +25,21 @@ class ExploreActor extends Component {
                     newactors.push(actor);
                     for (const tag in props.tags) {
                         if (tag === 'age' && props.tags[tag] !== 'unspecified') {
-                          newactors = this.filterAge(newactors, props.tags[tag]);
+                            newactors = this.filterAge(newactors, props.tags[tag]);
                         }
                         if (tag === 'gender' && props.tags[tag] !== 'unspecified') {
-                          newactors = this.filterGender(newactors, props.tags[tag]);
+                            newactors = this.filterGender(newactors, props.tags[tag]);
                         }
                         if (tag === 'height' && props.tags[tag] !== 'unspecified') {
-                          newactors = this.filterHeight(newactors, props.tags[tag]);
+                            newactors = this.filterHeight(newactors, props.tags[tag]);
                         }
                         if (tag === 'weight' && props.tags[tag] !== 'unspecified') {
-                          newactors = this.filterWeight(newactors, props.tags[tag]);
+                            newactors = this.filterWeight(newactors, props.tags[tag]);
                         }
                     }
                     this.setState({actors: newactors});
                     this.setState({
-                      records: this.state.actors.slice(0, this.props.numActor),
+                        records: this.state.actors.slice(0, this.props.numActor),
                     });
                 })
             })

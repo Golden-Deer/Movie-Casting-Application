@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-12-04 07:43:34
- * @LastEditTime: 2020-12-10 02:18:03
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Movie-Casting-Application\src\model\UserModel.js
- */
 import db from '../base';
 
 const ref = db.database().ref('USER');

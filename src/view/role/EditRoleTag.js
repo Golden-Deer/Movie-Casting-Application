@@ -1,11 +1,11 @@
 import {React, Component} from 'react';
 import Button from 'react-bootstrap/Button';
 
-class EditRole extends Component{
-    constructor(props){
+class EditRole extends Component {
+    constructor(props) {
         super(props);
 
-        this.state={
+        this.state = {
             discret: false,
             preset: true,
         }
@@ -16,21 +16,21 @@ class EditRole extends Component{
     }
 
     editField(e, field, original) {
-        if (original == e.target.value )
+        if (original == e.target.value)
             this.props.setNewValue(e, true)
         else
             this.props.setNewValue(e, false)
     }
 
-    selectPreset(){
+    selectPreset() {
         this.setState({preset: true, discrete: false})
     }
 
-    selectDiscrete(){
+    selectDiscrete() {
         this.setState({preset: false, discrete: true})
     }
 
-    render(){
+    render() {
         var options = null;
         if (this.props.field == 'Age') {
             options = [
@@ -80,7 +80,7 @@ class EditRole extends Component{
                 <option value="unspecified">Unspecified</option>,]
         }
 
-        return(
+        return (
             <table id='editRoleTag' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => this.props.closePopup('editRoleTag')}>
@@ -88,28 +88,31 @@ class EditRole extends Component{
                     </p>
                 </tr>
                 <tr class='center'>
-                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                    <p style={{fontSize: 25 + 'px', textAlign: 'center'}}>
                         <b>Update {this.props.field}</b>
                     </p>
                 </tr>
                 <tr class='center'>
                     <td style={{display: 'inline-block', marginRight: 10 + 'px'}}>
-                        <input type="radio" value="MALE" name="option" checked={this.state.preset} onChange={this.selectPreset}/> Preset
+                        <input type="radio" value="MALE" name="option" checked={this.state.preset}
+                               onChange={this.selectPreset}/> Preset
                     </td>
                     <td style={{display: 'inline-block', marginLeft: 10 + 'px'}}>
-                        <input type="radio" value="MALE" name="option" checked={this.state.discrete} onChange={this.selectDiscrete}/> Custom
+                        <input type="radio" value="MALE" name="option" checked={this.state.discrete}
+                               onChange={this.selectDiscrete}/> Custom
                     </td>
                 </tr>
                 <tr class='center'>
-                    {this.state.preset ? 
-                    <select value={this.props.newValue} style={{marginTop: 40 + 'px'}} onChange={(e)=>
-                        this.editField(e, this.props.field, this.props.originalValue)}>
-                        {options}
-                    </select>
-                     :
-                     <input style={{marginTop: 35 + 'px'}} onChange={(e)=> this.editField(e, this.props.field, this.props.originalValue)}></input>
+                    {this.state.preset ?
+                        <select value={this.props.newValue} style={{marginTop: 40 + 'px'}} onChange={(e) =>
+                            this.editField(e, this.props.field, this.props.originalValue)}>
+                            {options}
+                        </select>
+                        :
+                        <input style={{marginTop: 35 + 'px'}}
+                               onChange={(e) => this.editField(e, this.props.field, this.props.originalValue)}></input>
                     }
-                    
+
                 </tr>
                 <tr class='center'>
                     <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
@@ -134,13 +137,14 @@ class EditRole extends Component{
                                 marginTop: 20 + 'px',
                                 marginBottom: 20 + 'px',
                             }}
-                            onClick={()=> this.props.closePopup('editRoleTag')}>
+                            onClick={() => this.props.closePopup('editRoleTag')}>
                             Cancel
                         </Button>
                     </td>
                 </tr>
             </table>
         )
-    }}
+    }
+}
 
 export default EditRole;

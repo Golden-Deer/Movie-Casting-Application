@@ -1,4 +1,4 @@
-import { React, Component } from 'react';
+import {React, Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import Role from '../../controller/Role';
 
@@ -48,18 +48,18 @@ class CreateRolePopup extends Component {
 
     render() {
         return (
-            <table id='rolePopup' class='largePopup' style={{ opacity: 0 + '%', visibility: 'hidden'}}>
+            <table id='rolePopup' class='largePopup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => this.props.closePopup('rolePopup')}>
                         x
                     </p>
                 </tr>
                 <tr class='center'>
-                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                    <p style={{fontSize: 25 + 'px', textAlign: 'center'}}>
                         <b>Create New Role</b>
                     </p>
                 </tr>
-                <tr class='center' style={{ marginTop: 30 + 'px' }}>
+                <tr class='center' style={{marginTop: 30 + 'px'}}>
                     <input
                         class='projectInputField'
                         placeholder='Role Name *'
@@ -68,7 +68,7 @@ class CreateRolePopup extends Component {
                         onChange={(e) => this.props.setRoleName(e.target.value)}
                     />
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                <tr class='center' style={{marginTop: 15 + 'px'}}>
                     <textarea
                         class='projectInputField'
                         placeholder='Description'
@@ -77,12 +77,13 @@ class CreateRolePopup extends Component {
                         onChange={(e) => this.props.setRoleDescription(e.target.value)}
                     />
                 </tr>
-                <tr class='center' style={{ marginTop: 30 + 'px', marginLeft: 70+'px' }}>
+                <tr class='center' style={{marginTop: 30 + 'px', marginLeft: 70 + 'px'}}>
                     <td><label for="age-select">Age Group:</label></td>
-                    <td><select style={{ width: 100 + 'px' }} id='age-select' class='projectInputField'
-                        form='project_creation_form'
-                        onChange={(e) => this.props.setRoleAge(e.target.value)}>
-                        <option selected disabled>Choose here</option>,
+                    <td><select style={{width: 100 + 'px'}} id='age-select' class='projectInputField'
+                                form='project_creation_form'
+                                onChange={(e) => this.props.setRoleAge(e.target.value)}>
+                        <option selected disabled>Choose here</option>
+                        ,
                         <option value='0-10'>Under 10</option>,
                         <option value='10-17'>10-17</option>,
                         <option value="18-25">18-25</option>,
@@ -94,21 +95,23 @@ class CreateRolePopup extends Component {
                         <option value="unspecified">Unspecified</option>
                     </select></td>
                     <td><label for="gender-select">Gender:</label></td>
-                    <td><select style={{ width: 100 + 'px' }} id='gender-select' class='projectInputField'
-                        form='project_creation_form'
-                        onChange={(e) => this.props.setRoleGender(e.target.value)}>
-                        <option selected disabled>Choose here</option>,
+                    <td><select style={{width: 100 + 'px'}} id='gender-select' class='projectInputField'
+                                form='project_creation_form'
+                                onChange={(e) => this.props.setRoleGender(e.target.value)}>
+                        <option selected disabled>Choose here</option>
+                        ,
                         <option value="female">Female</option>,
                         <option value="male">Male</option>,
                         <option value="unspecified">Unspecified</option>
                     </select></td>
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' , marginLeft: 70+'px'}}>
+                <tr class='center' style={{marginTop: 15 + 'px', marginLeft: 70 + 'px'}}>
                     <td><label for="height-select">Height Group (cm):</label></td>
-                    <td><select style={{ width: 180 + 'px' }} id='height-select' class='projectInputField'
-                        form='project_creation_form'
-                        onChange={(e) => this.props.setRoleHeight(e.target.value)}>
-                        <option selected disabled>Choose here</option>,
+                    <td><select style={{width: 180 + 'px'}} id='height-select' class='projectInputField'
+                                form='project_creation_form'
+                                onChange={(e) => this.props.setRoleHeight(e.target.value)}>
+                        <option selected disabled>Choose here</option>
+                        ,
                         <option value="0-140">Below 140cm</option>,
                         <option value="140-149">140cm-149cm</option>,
                         <option value="150-159">150cm-159cm</option>,
@@ -120,12 +123,13 @@ class CreateRolePopup extends Component {
                         <option value="unspecified">Unspecified</option>
                     </select></td>
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' , marginLeft: 70+'px'}}>
+                <tr class='center' style={{marginTop: 15 + 'px', marginLeft: 70 + 'px'}}>
                     <td><label for="weight-select">Weight Group (kg):</label></td>
-                    <td><select style={{ width: 180 + 'px' }} id='weight-select' class='projectInputField'
-                        form='project_creation_form'
-                        onChange={(e) => this.props.setRoleWeight(e.target.value)}>
-                        <option selected disabled>Choose here</option>,
+                    <td><select style={{width: 180 + 'px'}} id='weight-select' class='projectInputField'
+                                form='project_creation_form'
+                                onChange={(e) => this.props.setRoleWeight(e.target.value)}>
+                        <option selected disabled>Choose here</option>
+                        ,
                         <option value="<40">Below 40kg</option>,
                         <option value="40-49">40kg-49kg</option>,
                         <option value="50-59">50kg-59kg</option>,
@@ -138,7 +142,7 @@ class CreateRolePopup extends Component {
                     </select></td>
                 </tr>
                 <tr class='center'>
-                    <label class='center' style={{ fontSize: 12 + 'px' }}>
+                    <label class='center' style={{fontSize: 12 + 'px'}}>
                         Fields with an asterisk are mandatory
                     </label>
                 </tr>
@@ -154,7 +158,7 @@ class CreateRolePopup extends Component {
                         onClick={this.createRole}
                         disabled={this.props.roleName.length < 1}>
                         Create Role
-                        </Button>
+                    </Button>
                 </tr>
             </table>
         );

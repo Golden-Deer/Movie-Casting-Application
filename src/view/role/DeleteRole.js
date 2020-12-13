@@ -1,12 +1,13 @@
 import {React, Component} from 'react';
 import Button from 'react-bootstrap/Button';
 
-class DeleteRole extends Component{
-    constructor(props){
+class DeleteRole extends Component {
+    constructor(props) {
         super(props);
     }
-    render(){
-        return(
+
+    render() {
+        return (
             <table id='deleteRole' class='popup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => this.props.closePopup('deleteRole')}>
@@ -14,12 +15,13 @@ class DeleteRole extends Component{
                     </p>
                 </tr>
                 <tr class='center'>
-                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                    <p style={{fontSize: 25 + 'px', textAlign: 'center'}}>
                         <b>Delete Role Confirmation</b>
                     </p>
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px', padding: 25 + 'px' }}>
-                    <label>Are you sure you want to delete <b>{this.props.roleName}</b>? This operation cannot be undone.</label>
+                <tr class='center' style={{marginTop: 15 + 'px', padding: 25 + 'px'}}>
+                    <label>Are you sure you want to delete <b>{this.props.roleName}</b>? This operation cannot be
+                        undone.</label>
                 </tr>
                 <tr class='center'>
                     <td style={{display: 'inline-block', marginLeft: 10 + 'px', marginRight: 20 + 'px'}}>
@@ -43,7 +45,7 @@ class DeleteRole extends Component{
                                 marginTop: 20 + 'px',
                                 marginBottom: 20 + 'px',
                             }}
-                            onClick={()=> this.props.closePopup('deleteRole')}>
+                            onClick={() => this.props.closePopup('deleteRole')}>
                             Cancel
                         </Button>
                     </td>

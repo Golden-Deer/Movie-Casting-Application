@@ -1,6 +1,6 @@
 import {React, useState} from 'react';
 import Button from 'react-bootstrap/Button'
-import User from '../controller/User';
+import User from '../../controller/User';
 
 const SignUpPopup = () => {
     // sign up states
@@ -37,22 +37,22 @@ const SignUpPopup = () => {
 
     const handleSignUp = (event) => {
         event.preventDefault();
-            var data = {
-                email: signUpEmail,
-                firstName: firstName,
-                lastName: lastName,
-                projects: []
-            };
-            User.signUp(signUpEmail, signUpPassword, data).then(() => {
-                                closePopup('signUpPopup');
-                            }).catch((error) => {
-                                var errorCode = error.code;
-                                if (errorCode == 'auth/email-already-in-use') {
-                                    setIndicator("This email " + " is already associated with an account");
-                                    setPadding(20);
-                                }
-                                console.log(error.code)
-                            });
+        var data = {
+            email: signUpEmail,
+            firstName: firstName,
+            lastName: lastName,
+            projects: []
+        };
+        User.signUp(signUpEmail, signUpPassword, data).then(() => {
+            closePopup('signUpPopup');
+        }).catch((error) => {
+            var errorCode = error.code;
+            if (errorCode == 'auth/email-already-in-use') {
+                setIndicator("This email " + " is already associated with an account");
+                setPadding(20);
+            }
+            console.log(error.code)
+        });
     }
 
     function login() {
@@ -68,21 +68,21 @@ const SignUpPopup = () => {
         setIndicator('');
     }
 
-    return(
+    return (
         <>
-        <form onSubmit={handleSignUp} id='sign_up_form'></form>
-        <table id='signUpPopup' class='extendedPopup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
+            <form onSubmit={handleSignUp} id='sign_up_form'></form>
+            <table id='signUpPopup' class='extendedPopup' style={{opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr class='center'>
                     <p class='closeButton' onClick={() => closePopup('signUpPopup')}>
                         x
                     </p>
                 </tr>
                 <tr class='center'>
-                    <p style={{ fontSize: 25 + 'px', textAlign: 'center' }}>
+                    <p style={{fontSize: 25 + 'px', textAlign: 'center'}}>
                         <b>Sign Up</b>
                     </p>
                 </tr>
-                <tr class='center' style={{ marginTop: 35 + 'px' }}>
+                <tr class='center' style={{marginTop: 35 + 'px'}}>
                     <input
                         class='center'
                         name='email'
@@ -134,7 +134,7 @@ const SignUpPopup = () => {
                 <tr class='center'>
                     <p class='warning'>{indicator}</p>
                 </tr>
-                <tr class='center' style={{ marginTop: [indicatorPadding] + 'px' }}>
+                <tr class='center' style={{marginTop: [indicatorPadding] + 'px'}}>
                     <Button
                         variant='primary'
                         style={{

@@ -6,8 +6,8 @@ import 'pace-js';
 import 'pace-js/themes/blue/pace-theme-minimal.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <App/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );

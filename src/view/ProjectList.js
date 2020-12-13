@@ -1,11 +1,11 @@
 import {React, Component} from 'react';
-import { withRouter } from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import Project from '../controller/Project';
 
 // Display all of the user's projects
-class ProjectList extends Component{
-    constructor(props){
+class ProjectList extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -32,9 +32,9 @@ class ProjectList extends Component{
         this.setState({projectDirector: this.state.projects[index]['director']})
         document.getElementById('editProjectPopup').style.opacity = 100 + '%';
         document.getElementById('editProjectPopup').style.visibility = 'visible'; // show project popup
-        
+
     }
-    
+
     closePopup(type) {
         document.getElementById(type).style.opacity = 0 + '%';
         document.getElementById(type).style.visibility = 'hidden';
@@ -52,7 +52,7 @@ class ProjectList extends Component{
         }
     }
 
-    renderProjectList(){
+    renderProjectList() {
         this.mounted = true;
         var projects = [];
         var index = 0;
@@ -63,16 +63,29 @@ class ProjectList extends Component{
                 temp.push(<td>
                     <Card className='movieCard' onClick={() => this.props.history.push('/project', [project])}>
                         <Card.Body>
-                        <Card.Title style={{fontSize: 1.8 + 'rem', marginBottom: 1.0 + 'rem'}}><b>{project['name']}</b></Card.Title>
-                        <Card.Subtitle style={{fontSize: 0.5 + 'rem', marginBottom: 1.0 + 'rem', userSelect: 'none'}}>──────────────────────────</Card.Subtitle>
-                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{project['release_date']}</Card.Subtitle>
-                        <Card.Subtitle style={{fontSize: 1.1 + 'rem', marginBottom: 0.6 + 'rem'}}>{project['genre']}</Card.Subtitle>
+                            <Card.Title style={{
+                                fontSize: 1.8 + 'rem',
+                                marginBottom: 1.0 + 'rem'
+                            }}><b>{project['name']}</b></Card.Title>
+                            <Card.Subtitle style={{
+                                fontSize: 0.5 + 'rem',
+                                marginBottom: 1.0 + 'rem',
+                                userSelect: 'none'
+                            }}>──────────────────────────</Card.Subtitle>
+                            <Card.Subtitle style={{
+                                fontSize: 1.1 + 'rem',
+                                marginBottom: 0.6 + 'rem'
+                            }}>{project['release_date']}</Card.Subtitle>
+                            <Card.Subtitle style={{
+                                fontSize: 1.1 + 'rem',
+                                marginBottom: 0.6 + 'rem'
+                            }}>{project['genre']}</Card.Subtitle>
                         </Card.Body>
                     </Card>
-                    </td>)
+                </td>)
                 projects.push(project);
-                index+=1;
-                if (index % 5 == 0){
+                index += 1;
+                if (index % 5 == 0) {
                     temp.push(<tr></tr>)
                 }
                 this.setState({projects: projects, test: temp});
@@ -86,16 +99,16 @@ class ProjectList extends Component{
         document.body.removeEventListener('click', this.deleteProject);
     }
 
-    render(){
+    render() {
         var buttons = this.state.test;
         if (buttons.length == 0)
             buttons = <p class='banner'>You don't have any projects :(</p>
         else
             buttons = <table>{buttons}</table>
-            
-        return(
+
+        return (
             <>
-            {buttons}
+                {buttons}
             </>
         )
     }
