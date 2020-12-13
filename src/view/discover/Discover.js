@@ -39,10 +39,10 @@ const Discover = () => {
         </Row>
         <Row>
           <Col>
-            <h1>Popular Actors Between Ages 0 to 30</h1>
+            <h1>Popular Actors Between Ages 0 to 50</h1>
           </Col>
           <Col>
-            <ExploreActor tags={{ age: '0-25' }} numActor={25} />
+            <ExploreActor tags={{ age: '0-50' }} numActor={25} />
           </Col>
         </Row>
         <Row>
