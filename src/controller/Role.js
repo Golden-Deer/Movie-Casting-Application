@@ -7,9 +7,7 @@
  * @FilePath: \Movie-Casting-Application\src\controller\Role.js
  */
 import RoleModel from '../model/RoleModel';
-import db from '../base';
 import Project from './Project'
-import ProjectModel from '../model/ProjectModel';
 
 class Role {
     get(key) {

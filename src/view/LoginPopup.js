@@ -1,7 +1,6 @@
-import db from '../base';
 import {React, useState} from 'react';
 import SignUpPopup from './SignUpPopup';
-import PasswordRecoveryPopup from './passwordRecoveryPopup';
+import PasswordRecoveryPopup from './PasswordRecoveryPopup';
 import Button from 'react-bootstrap/Button';
 import User from '../controller/User';
 

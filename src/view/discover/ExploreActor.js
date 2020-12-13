@@ -1,13 +1,10 @@
-import db from '../../base';
 import '../../App.js';
 import React, {Component} from 'react';
-import Button from 'react-bootstrap/Button';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import {withRouter} from 'react-router-dom';
 import {Card, CardDeck} from 'react-bootstrap';
 import Profile from "../../model/Profile";
 import Picture from "../../model/Picture";
-import {act} from "@testing-library/react";
 
 class ExploreActor extends Component {
     constructor(props) {

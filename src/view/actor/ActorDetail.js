@@ -1,4 +1,3 @@
-import db from '../../base';
 import '../../App.js';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';

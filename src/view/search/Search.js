@@ -1,9 +1,7 @@
-import db from "../../base";
 import "../../App.js";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Navbar, Button } from "react-bootstrap"
 import { useHistory } from "react-router-dom";
-import logo from "../../images/logo.png";
 import DisplayActor from "./DisplayActor";
 
 const Search = (props) => {

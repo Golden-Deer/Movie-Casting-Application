@@ -2,12 +2,9 @@ import { AuthContext } from '../auth/Auth';
 import React, {useContext, useState, useEffect} from 'react';
 import Login from './LoginPopup'
 import '../App.css';
-import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import User from '../controller/User';
 import { useHistory } from 'react-router-dom';
-
-
 
 // The Account component handles login, account, and password recovery popup windows and logistics
 const Account = () => {

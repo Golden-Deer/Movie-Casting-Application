@@ -1,6 +1,6 @@
 import { React, Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import Role from '../../controller/Role'
+import Role from '../../controller/Role';
 
 class CreateRolePopup extends Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class CreateRolePopup extends Component {
 
     render() {
         return (
-            <table id='rolePopup' class='largePopup' style={{ opacity: 0 + '%', visibility: 'hidden' }}>
+            <table id='rolePopup' class='largePopup' style={{ opacity: 0 + '%', visibility: 'hidden'}}>
                 <tr>
                     <p class='closeButton' onClick={() => this.props.closePopup('rolePopup')}>
                         x
@@ -77,7 +77,7 @@ class CreateRolePopup extends Component {
                         onChange={(e) => this.props.setRoleDescription(e.target.value)}
                     />
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                <tr class='center' style={{ marginTop: 30 + 'px', marginLeft: 70+'px' }}>
                     <td><label for="age-select">Age Group:</label></td>
                     <td><select style={{ width: 100 + 'px' }} id='age-select' class='projectInputField'
                         form='project_creation_form'
@@ -103,7 +103,7 @@ class CreateRolePopup extends Component {
                         <option value="unspecified">Unspecified</option>
                     </select></td>
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                <tr class='center' style={{ marginTop: 15 + 'px' , marginLeft: 70+'px'}}>
                     <td><label for="height-select">Height Group (cm):</label></td>
                     <td><select style={{ width: 180 + 'px' }} id='height-select' class='projectInputField'
                         form='project_creation_form'
@@ -120,7 +120,7 @@ class CreateRolePopup extends Component {
                         <option value="unspecified">Unspecified</option>
                     </select></td>
                 </tr>
-                <tr class='center' style={{ marginTop: 15 + 'px' }}>
+                <tr class='center' style={{ marginTop: 15 + 'px' , marginLeft: 70+'px'}}>
                     <td><label for="weight-select">Weight Group (kg):</label></td>
                     <td><select style={{ width: 180 + 'px' }} id='weight-select' class='projectInputField'
                         form='project_creation_form'

@@ -7,9 +7,7 @@
  * @FilePath: \Movie-Casting-Application\src\controller\Project.js
  */
 import ProjectModel from '../model/ProjectModel';
-import db from '../base';
 import User from './User'
-import UserModel from '../model/UserModel';
 
 class Project {
     get(key) {

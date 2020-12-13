@@ -1,7 +1,6 @@
 import '../../App.js';
 import React from 'react';
 import ExploreActor from './ExploreActor';
-import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Discover = () => {

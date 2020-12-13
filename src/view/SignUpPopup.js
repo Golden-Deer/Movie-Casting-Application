@@ -1,4 +1,3 @@
-import db from '../base';
 import {React, useState} from 'react';
 import Button from 'react-bootstrap/Button'
 import User from '../controller/User';

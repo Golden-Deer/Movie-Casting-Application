@@ -1,10 +1,8 @@
-import db from "../../base";
 import "../../App.js";
 import React, {Component} from 'react';
 import { withRouter } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 import { Card, CardDeck } from "react-bootstrap";
-import firebase from "firebase";
 import DeleteRole from './DeleteRole';
 import EditRole from "./EditRole";
 import EditRoleTag from "./EditRoleTag";

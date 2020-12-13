@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { Container, Row, Col } from 'react-bootstrap';
-//import ActingRed from '../images/acting-red-back.jpg';
 import FilmingWater from '../images/filming-water.jpg';
 
+// About Us page
 const About = () => {
   return (
     <div class='App Fade about-page'>
