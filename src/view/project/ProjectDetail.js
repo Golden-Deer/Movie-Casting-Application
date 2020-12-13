@@ -100,7 +100,7 @@ class ProjectDetail extends Component {
       this.state.field.toLowerCase().replace(' ', '_')
     ] = this.state.newValue;
     var data = this.state.project;
-    data[this.state.field.toLocaleLowerCase()] = this.state.newValue
+    data[this.state.field.toLocaleLowerCase().replace(' ', '_')] = this.state.newValue
     console.log(data)
     Project.update(this.state.projectKey, data);
     this.setState({project: data});
